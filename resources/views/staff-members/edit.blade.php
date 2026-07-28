@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <x-field label="Previous Experience" name="experience">
-                    <textarea class="input min-h-32" name="experience" placeholder="Example:&#10;ABC Cleaning Services - 3 years commercial cleaning in Darwin.&#10;Reference: Jane Smith, Supervisor, 0400 000 000.&#10;Location: Darwin CBD offices and schools.">{{ old('experience', $staffMember->experience) }}</textarea>
+                    <textarea class="input min-h-32" name="experience" placeholder="Example:&#10;Three years delivering commercial cleaning across Melbourne.&#10;Reference: Jane Smith, Facilities Manager, 0400 000 000.&#10;Service area: Melbourne CBD and surrounding suburbs.">{{ old('experience', $staffMember->experience) }}</textarea>
                 </x-field>
             </div>
         </x-card>

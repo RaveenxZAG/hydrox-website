@@ -156,7 +156,7 @@ class StaffMember extends Model
     {
         return [
             'public_liability_insurance' => 'Public Liability Insurance',
-            'workers_compensation_insurance' => 'Working with Children Check (Ochre Card)',
+            'workers_compensation_insurance' => 'Victorian Working with Children Check',
             'police_clearance' => 'Police Clearance',
             'driver_licence' => 'Driver Licence',
             'working_rights' => 'Working Rights / VISA or relevant document',

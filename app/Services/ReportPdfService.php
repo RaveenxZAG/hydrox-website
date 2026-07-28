@@ -33,10 +33,10 @@ class ReportPdfService
             'report' => $report,
             'company' => [
                 'name' => config('app.company_name', env('COMPANY_NAME', 'Hydrox Facility Management')),
-                'phone' => env('COMPANY_PHONE', 'Lucky 0430 416 518'),
-                'phone_secondary' => env('COMPANY_PHONE_SECONDARY', 'Baristy 0418 222 477'),
+                'phone' => config('app.company_phone', '0418 222 477'),
+                'phone_secondary' => '',
                 'email' => env('COMPANY_EMAIL', 'admin@hydrox.au'),
-                'address' => env('COMPANY_ADDRESS', 'Darwin, NT'),
+                'address' => config('app.company_address', ''),
                 'logo' => public_path(env('COMPANY_LOGO', 'images/cleaner-the-crow-logo.jpg')),
             ],
         ])->setPaper('a4', 'portrait');

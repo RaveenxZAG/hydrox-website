@@ -39,7 +39,7 @@
             'contractor' => $contractorId ?: null,
             'site' => $siteId ?: null,
         ]);
-        $isSitesSection = request('section') === 'sites';
+        $isSitesSection = false;
     @endphp
 
     <div class="invoice-shell -m-4 min-h-[calc(100vh-5rem)] bg-[#F8FAFC] p-4 font-sans text-slate-950 sm:-m-6 sm:p-6 lg:-m-8 lg:p-8">
@@ -72,7 +72,6 @@
                                 <button class="rounded-lg px-2 py-1 text-sm font-bold text-[#0082c9] hover:bg-[#0082c9]/10">Open</button>
                             </form>
                             <a class="grid h-10 w-10 place-items-center rounded-xl border border-[#E5E7EB] bg-white text-slate-600 transition hover:bg-slate-50" href="{{ route('staff-invoices.index', ['month' => $nextMonth, 'status' => $status, 'search' => $search, 'contractor' => $contractorId ?: null, 'site' => $siteId ?: null]) }}" aria-label="Next month">›</a>
-                            <a class="rounded-xl border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50" href="{{ route('staff-invoices.index', ['month' => $month, 'section' => 'sites']).'#invoice-sites' }}">Sites Setup</a>
                             <button type="button" class="rounded-xl bg-[#0082c9] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#0082c9]">Export</button>
                         </div>
                     </div>

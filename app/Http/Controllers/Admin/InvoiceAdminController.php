@@ -23,7 +23,7 @@ class InvoiceAdminController extends Controller
     public function index(Request $request, InvoicePeriodService $periods, StaffInvoiceReviewService $review): View
     {
         $month = $this->selectedMonth($request);
-        $monthDate = Carbon::createFromFormat('Y-m', $month, 'Australia/Darwin')->startOfMonth();
+        $monthDate = Carbon::createFromFormat('Y-m', $month, 'Australia/Melbourne')->startOfMonth();
         $status = (string) $request->query('status', 'all');
         $search = trim((string) $request->query('search', ''));
         $contractorId = $request->integer('contractor');
@@ -245,7 +245,7 @@ class InvoiceAdminController extends Controller
 
     public function destroy(StaffInvoiceSubmission $invoice): RedirectResponse
     {
-        $month = $invoice->invoice_period?->format('Y-m') ?: now('Australia/Darwin')->subMonthNoOverflow()->format('Y-m');
+        $month = $invoice->invoice_period?->format('Y-m') ?: now('Australia/Melbourne')->subMonthNoOverflow()->format('Y-m');
 
         Storage::disk('local')->delete($invoice->storage_path);
         $invoice->delete();
@@ -336,7 +336,7 @@ class InvoiceAdminController extends Controller
             return $month;
         }
 
-        return now('Australia/Darwin')->subMonthNoOverflow()->format('Y-m');
+        return now('Australia/Melbourne')->subMonthNoOverflow()->format('Y-m');
     }
 
     private function missingInvoiceTables(): array

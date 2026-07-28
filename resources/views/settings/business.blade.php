@@ -60,12 +60,12 @@
         <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950 sm:p-6">
             <div class="border-b border-slate-100 pb-4 dark:border-slate-800">
                 <h2 class="text-lg font-black text-slate-950 dark:text-white">Office Location</h2>
-                <p class="mt-1 text-sm text-slate-500">Address shown on business documents and correspondence.</p>
+                <p class="mt-1 text-sm text-slate-500">No business address is currently set. You can add one here later.</p>
             </div>
 
             <div class="mt-5 grid gap-4 md:grid-cols-2">
                 <x-field label="Address Line 1" name="address_line_1">
-                    <input class="input" name="address_line_1" value="{{ old('address_line_1', $business['address_line_1']) }}" required>
+                    <input class="input" name="address_line_1" value="{{ old('address_line_1', $business['address_line_1']) }}" placeholder="Add later">
                 </x-field>
                 <x-field label="Address Line 2" name="address_line_2">
                     <input class="input" name="address_line_2" value="{{ old('address_line_2', $business['address_line_2']) }}">
@@ -74,16 +74,16 @@
                     <input class="input" name="address_line_3" value="{{ old('address_line_3', $business['address_line_3']) }}">
                 </x-field>
                 <x-field label="City" name="city">
-                    <input class="input" name="city" value="{{ old('city', $business['city']) }}" required>
+                    <input class="input" name="city" value="{{ old('city', $business['city']) }}" placeholder="Add later">
                 </x-field>
                 <x-field label="State" name="state">
-                    <input class="input" name="state" value="{{ old('state', $business['state']) }}" required>
+                    <input class="input" name="state" value="{{ old('state', $business['state']) }}" placeholder="Add later">
                 </x-field>
                 <x-field label="Postcode" name="postcode">
-                    <input class="input" name="postcode" value="{{ old('postcode', $business['postcode']) }}" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required>
+                    <input class="input" name="postcode" value="{{ old('postcode', $business['postcode']) }}" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="Add later">
                 </x-field>
                 <x-field label="Country" name="country">
-                    <input class="input" name="country" value="{{ old('country', $business['country']) }}" required>
+                    <input class="input" name="country" value="{{ old('country', $business['country']) }}" placeholder="Add later">
                 </x-field>
             </div>
         </section>

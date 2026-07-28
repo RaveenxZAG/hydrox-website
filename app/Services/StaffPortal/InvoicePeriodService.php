@@ -8,7 +8,7 @@ class InvoicePeriodService
 {
     public function currentWindow(): array
     {
-        $now = CarbonImmutable::now(config('app.timezone', 'Australia/Darwin'));
+        $now = CarbonImmutable::now(config('app.timezone', 'Australia/Melbourne'));
         $period = $now->startOfMonth()->subMonth();
         $opens = $now->startOfMonth();
         $closes = $now->startOfMonth()->addDays(6)->endOfDay();

@@ -52,7 +52,7 @@
                 <dl class="grid gap-4 text-sm md:grid-cols-2">
                     <div><dt class="font-semibold text-slate-500">Insurance Expiry</dt><dd>{{ $onboarding->insurance_expiry?->format('d M Y') ?: 'Not listed' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Public Liability Insurance</dt><dd>{{ $onboarding->public_liability_insurance ? 'Uploaded' : 'Missing' }}</dd></div>
-                    <div><dt class="font-semibold text-slate-500">Working with Children Check (Ochre Card)</dt><dd>{{ $onboarding->workers_compensation_insurance ? 'Uploaded' : 'Missing' }}</dd></div>
+                    <div><dt class="font-semibold text-slate-500">Victorian Working with Children Check</dt><dd>{{ $onboarding->workers_compensation_insurance ? 'Uploaded' : 'Missing' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Police Clearance</dt><dd>{{ $onboarding->police_clearance ? 'Uploaded' : 'Missing' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Driver Licence</dt><dd>{{ $onboarding->driver_licence ? 'Uploaded' : 'Missing' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Working Rights / VISA or relevant document</dt><dd>{{ $onboarding->working_rights ? 'Uploaded' : 'Missing' }}</dd></div>

@@ -81,7 +81,7 @@
                 <textarea class="input min-h-24" name="available_hours" required placeholder="Example:&#10;Monday: 8am - 5pm&#10;Tuesday: 8am - 5pm&#10;Wednesday: Not available&#10;Saturday: 9am - 1pm">{{ old('available_hours', $onboarding->available_hours) }}</textarea>
             </x-field>
             <x-field class="md:col-span-2" label="Previous Experience" name="experience">
-                <textarea class="input min-h-32" name="experience" placeholder="Example:&#10;ABC Cleaning Services - 3 years commercial cleaning in Darwin.&#10;Reference: Jane Smith, Supervisor, 0400 000 000.&#10;Location: Darwin CBD offices and schools.">{{ old('experience', $onboarding->experience) }}</textarea>
+                <textarea class="input min-h-32" name="experience" placeholder="Example:&#10;Three years delivering commercial cleaning across Melbourne.&#10;Reference: Jane Smith, Facilities Manager, 0400 000 000.&#10;Service area: Melbourne CBD and surrounding suburbs.">{{ old('experience', $onboarding->experience) }}</textarea>
             </x-field>
         </section>
 

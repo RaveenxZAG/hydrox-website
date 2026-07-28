@@ -376,7 +376,7 @@
                             <form method="POST" action="{{ route('staff-invoices.paid', $invoice) }}" class="mt-5 grid gap-3 rounded-2xl border border-green-200 bg-green-50 p-4">
                                 @csrf
                                 <p class="font-bold text-green-900">Mark Paid</p>
-                                <input class="rounded-xl border-green-200 text-sm shadow-sm focus:border-green-500 focus:ring-green-500" type="date" name="paid_at" value="{{ now('Australia/Darwin')->toDateString() }}" required>
+                                <input class="rounded-xl border-green-200 text-sm shadow-sm focus:border-green-500 focus:ring-green-500" type="date" name="paid_at" value="{{ now('Australia/Melbourne')->toDateString() }}" required>
                                 <input class="rounded-xl border-green-200 text-sm shadow-sm focus:border-green-500 focus:ring-green-500" type="number" step="0.01" min="0" name="approved_total" value="{{ $invoice->approved_total ?? $invoice->total_amount }}" required>
                                 <button class="rounded-xl bg-green-600 px-4 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-green-700">Mark Paid and Create Remittance</button>
                             </form>

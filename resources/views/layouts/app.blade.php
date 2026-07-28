@@ -30,8 +30,8 @@
         ];
         $invoiceMonthKey = preg_match('/^\d{4}-\d{2}$/', (string) request('month'))
             ? (string) request('month')
-            : now('Australia/Darwin')->subMonthNoOverflow()->format('Y-m');
-        $invoiceMonthDate = \Carbon\Carbon::createFromFormat('Y-m', $invoiceMonthKey, 'Australia/Darwin')->startOfMonth();
+            : now('Australia/Melbourne')->subMonthNoOverflow()->format('Y-m');
+        $invoiceMonthDate = \Carbon\Carbon::createFromFormat('Y-m', $invoiceMonthKey, 'Australia/Melbourne')->startOfMonth();
 
         if (\Illuminate\Support\Facades\Schema::hasTable('staff_invoice_submissions')) {
             $invoiceCounts['pending_review'] = \App\Models\StaffInvoiceSubmission::query()
@@ -178,16 +178,15 @@
                     </div>
                 </div>
 
-                <div x-data="{ open: {{ request()->routeIs('staff-invoices.*') || request()->routeIs('site-assignments.*') ? 'true' : 'false' }} }" class="mt-1">
+                <div x-data="{ open: {{ request()->routeIs('staff-invoices.*') ? 'true' : 'false' }} }" class="mt-1">
                     @php
-                        $invoiceActive = request()->routeIs('staff-invoices.*') || request()->routeIs('site-assignments.*');
+                        $invoiceActive = request()->routeIs('staff-invoices.*');
                         $invoiceStatus = request('status');
-                        $invoiceSection = request('section');
                         $invoiceLinks = [
                             [
                                 'label' => 'All Work Logs',
                                 'href' => route('staff-invoices.index', ['month' => $invoiceMonthKey]),
-                                'active' => $invoiceActive && blank($invoiceStatus) && $invoiceSection !== 'sites',
+                                'active' => $invoiceActive && blank($invoiceStatus),
                                 'count' => null,
                                 'badge' => 'bg-slate-100 text-slate-600 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700',
                             ],
@@ -220,16 +219,6 @@
                                 'badge' => 'bg-rose-50 text-rose-700 ring-1 ring-rose-100 dark:bg-rose-950 dark:text-rose-200 dark:ring-rose-900',
                             ],
                         ];
-                        $invoiceSetupLink = [
-                            'label' => 'Sites Setup',
-                            'href' => route('staff-invoices.index', ['month' => $invoiceMonthKey, 'section' => 'sites']).'#invoice-sites',
-                            'active' => $invoiceActive && $invoiceSection === 'sites',
-                        ];
-                        $siteAssignLink = [
-                            'label' => 'Site Assign',
-                            'href' => route('site-assignments.index'),
-                            'active' => request()->routeIs('site-assignments.*'),
-                        ];
                     @endphp
                     <button type="button" class="group relative flex h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-semibold transition {{ $invoiceActive ? 'bg-[#0082c9]/10 text-slate-950 shadow-sm ring-1 ring-[#0082c9]/15 dark:text-white dark:ring-[#0082c9]/25' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white' }}" @click="open = !open" :aria-expanded="open">
                         @if ($invoiceActive)
@@ -257,18 +246,6 @@
                                 @endif
                             </a>
                         @endforeach
-                        <a href="{{ $invoiceSetupLink['href'] }}" class="relative flex h-8 items-center rounded-lg px-3 text-[13px] font-semibold transition {{ $invoiceSetupLink['active'] ? 'bg-[#0082c9]/8 text-[#0082c9] dark:text-cyan-300' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white' }}">
-                            @if ($invoiceSetupLink['active'])
-                                <span class="absolute -left-[17px] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-[#0082c9]"></span>
-                            @endif
-                            <span class="truncate">{{ $invoiceSetupLink['label'] }}</span>
-                        </a>
-                        <a href="{{ $siteAssignLink['href'] }}" class="relative flex h-8 items-center rounded-lg px-3 text-[13px] font-semibold transition {{ $siteAssignLink['active'] ? 'bg-[#0082c9]/8 text-[#0082c9] dark:text-cyan-300' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white' }}">
-                            @if ($siteAssignLink['active'])
-                                <span class="absolute -left-[17px] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-[#0082c9]"></span>
-                            @endif
-                            <span class="truncate">{{ $siteAssignLink['label'] }}</span>
-                        </a>
                     </div>
                 </div>
 

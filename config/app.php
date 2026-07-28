@@ -5,7 +5,7 @@ return [
     'env' => env('APP_ENV', 'production'),
     'debug' => (bool) env('APP_DEBUG', false),
     'url' => env('APP_URL', 'http://localhost'),
-    'timezone' => env('APP_TIMEZONE', 'Australia/Darwin'),
+    'timezone' => env('APP_TIMEZONE', 'Australia/Melbourne'),
     'locale' => env('APP_LOCALE', 'en'),
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_AU'),
@@ -15,6 +15,6 @@ return [
     'maintenance' => ['driver' => env('APP_MAINTENANCE_DRIVER', 'file'), 'store' => env('APP_MAINTENANCE_STORE', 'database')],
     'company_name' => env('COMPANY_NAME', 'Hydrox Facility Management'),
     'company_email' => env('COMPANY_EMAIL', 'admin@hydrox.au'),
-    'company_phone' => env('COMPANY_PHONE', '+61 418 222 477'),
-    'company_address' => env('COMPANY_ADDRESS', 'Melbourne, Victoria'),
+    'company_phone' => env('COMPANY_PHONE', '0418 222 477'),
+    'company_address' => env('COMPANY_ADDRESS', ''),
 ];

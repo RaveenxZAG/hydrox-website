@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\InvoiceAdminController;
 use App\Http\Controllers\Admin\ProfileChangeRequestController;
-use App\Http\Controllers\Admin\SiteAssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
@@ -60,9 +59,6 @@ Route::middleware(['auth'])->group(function (): void {
     Route::delete('staff-members/{staffMember}/documents/{field}', [StaffMemberController::class, 'deleteDocument'])->name('staff-members.documents.destroy');
     Route::resource('staff-members', StaffMemberController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
     Route::get('staff-invoices', [InvoiceAdminController::class, 'index'])->name('staff-invoices.index');
-    Route::post('staff-invoices/sites', [InvoiceAdminController::class, 'storeSite'])->name('staff-invoices.sites.store');
-    Route::patch('staff-invoices/sites/{site}', [InvoiceAdminController::class, 'updateSite'])->name('staff-invoices.sites.update');
-    Route::delete('staff-invoices/sites/{site}', [InvoiceAdminController::class, 'destroySite'])->name('staff-invoices.sites.destroy');
     Route::get('staff-invoices/{invoice}/review', [InvoiceAdminController::class, 'showReview'])->name('staff-invoices.review');
     Route::get('staff-invoices/{invoice}/download', [InvoiceAdminController::class, 'download'])->name('staff-invoices.download');
     Route::get('staff-invoices/{invoice}/remittance', [InvoiceAdminController::class, 'downloadRemittance'])->name('staff-invoices.remittance');
@@ -72,9 +68,6 @@ Route::middleware(['auth'])->group(function (): void {
     Route::post('staff-invoices/{invoice}/paid', [InvoiceAdminController::class, 'markPaid'])->name('staff-invoices.paid');
     Route::post('staff-invoices/{invoice}/remittance/send', [InvoiceAdminController::class, 'sendRemittance'])->name('staff-invoices.remittance.send');
     Route::post('staff-invoices/work-logs/{workLog}/approve', [InvoiceAdminController::class, 'approveWorkLog'])->name('staff-invoices.work-logs.approve');
-    Route::get('site-assignments', [SiteAssignmentController::class, 'index'])->name('site-assignments.index');
-    Route::get('site-assignments/{site}', [SiteAssignmentController::class, 'show'])->name('site-assignments.show');
-    Route::put('site-assignments/shifts/{shift}', [SiteAssignmentController::class, 'update'])->name('site-assignments.update');
     Route::get('staff-profile-changes', [ProfileChangeRequestController::class, 'index'])->name('staff-profile-changes.index');
     Route::get('staff-profile-changes/{profileChange}/documents/{field}', [ProfileChangeRequestController::class, 'document'])->name('staff-profile-changes.documents.show');
     Route::get('staff-profile-changes/{profileChange}/documents/{field}/download', [ProfileChangeRequestController::class, 'downloadDocument'])->name('staff-profile-changes.documents.download');

@@ -25,8 +25,8 @@ class SubcontractorOnboarding extends Model
 
     public const MANDATORY_DOCUMENTS = [
         'public_liability_insurance' => 'Public Liability Insurance',
-        'workers_compensation_insurance' => 'Working with Children Check (Ochre Card)',
-        'police_clearance' => 'Police Clearance',
+        'workers_compensation_insurance' => 'Victorian Working with Children Check',
+        'police_clearance' => 'National Police Check',
         'driver_licence' => 'Driver Licence',
         'working_rights' => 'Working Rights / VISA or relevant document',
     ];
@@ -132,6 +132,13 @@ class SubcontractorOnboarding extends Model
     public static function skillOptions(): array
     {
         return [
+            'Office & Commercial Cleaning',
+            'Retail Cleaning',
+            'Medical & Infection Control Cleaning',
+            'School Cleaning',
+            'Industrial & Warehouse Cleaning',
+            'Residential Cleaning',
+            'NDIS & DVA Cleaning',
             'Strip & Seal',
             'High-Speed Floor Burnishing',
             'Carpet Steam Cleaning',
@@ -140,7 +147,6 @@ class SubcontractorOnboarding extends Model
             'Biohazard Cleaning',
             'Infection Control Cleaning',
             'Builders Final Cleans',
-            'Warehouse Cleaning',
             'Gardening',
             'Graffiti Removal',
             'Solar Panel Cleaning',

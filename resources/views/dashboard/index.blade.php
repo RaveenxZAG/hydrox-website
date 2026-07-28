@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 @section('actions')
-    <a class="btn-primary" href="{{ route('bookings.index') }}">View Bookings</a>
+    <a class="btn-secondary" href="{{ route('bookings.index') }}">View Bookings</a>
 @endsection
 
 @section('content')
