@@ -8,5 +8,6 @@ deployment:
     - '/bin/bash -lc "if ! /bin/grep -q \"^APP_KEY=base64:\" .env; then php artisan key:generate --force; fi"'
     - '/bin/bash -lc "if /bin/grep -q \"^DB_CONNECTION=sqlite\" .env; then /usr/bin/touch database/database.sqlite; fi"'
     - /bin/bash -lc "php artisan migrate --force"
+    - /bin/bash -lc "php artisan db:seed --force"
     - /bin/bash -lc "php artisan storage:link || true"
     - /bin/bash -lc "php artisan optimize"

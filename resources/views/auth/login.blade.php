@@ -13,8 +13,8 @@
 
             <header class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-5 sm:px-8 lg:px-12">
                 <a class="flex items-center gap-4" href="https://hydrox.au">
-                    <span class="grid h-12 w-32 place-items-center rounded-2xl bg-white px-3 shadow-xl shadow-black/10">
-                        <img class="h-full w-full object-contain" src="{{ asset('images/hydrox-logo.svg') }}" alt="Hydrox Facility Management">
+                    <span class="grid h-12 w-36 place-items-center">
+                        <img class="h-full w-full object-contain drop-shadow-[0_8px_20px_rgba(0,130,201,0.3)]" src="{{ asset('images/hydrox-logo.svg') }}" alt="Hydrox Facility Management">
                     </span>
                     <span class="hidden sm:block">
                         <span class="block text-sm font-black tracking-tight">Hydrox Facility Management</span>
@@ -66,8 +66,8 @@
                         <p class="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-white/45">Workflow</p>
                         <p class="mt-1 text-xl font-black">Review every request</p>
                     </div>
-                    <div class="absolute left-[34%] top-[34%] grid h-36 w-64 place-items-center rounded-[2rem] border border-white/70 bg-white px-6 shadow-[0_0_80px_rgba(17,211,148,0.25)]">
-                        <img class="h-full w-full object-contain" src="{{ asset('images/hydrox-logo.svg') }}" alt="Hydrox Facility Management">
+                    <div class="absolute left-[34%] top-[34%] grid h-36 w-64 place-items-center rounded-[2rem] border border-[#39aee9]/25 bg-[#06142d]/85 px-6 shadow-[0_0_80px_rgba(17,211,148,0.2)] backdrop-blur-xl">
+                        <img class="h-full w-full object-contain drop-shadow-[0_10px_30px_rgba(0,130,201,0.35)]" src="{{ asset('images/hydrox-logo.svg') }}" alt="Hydrox Facility Management">
                     </div>
                 </div>
             </div>
