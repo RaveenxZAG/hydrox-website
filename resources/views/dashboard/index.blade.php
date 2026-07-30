@@ -14,7 +14,7 @@
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         @foreach ([
-            'New Bookings' => $stats['new_bookings'],
+            'Processing Requests' => $stats['new_bookings'],
             'Upcoming Bookings' => $stats['upcoming_bookings'],
             'Confirmed Bookings' => $stats['confirmed_bookings'],
             'Active Subcontractors' => $stats['active_subcontractors'],

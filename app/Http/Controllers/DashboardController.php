@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
         return view('dashboard.index', [
             'stats' => [
-                'new_bookings' => Booking::where('status', 'new')->count(),
+                'new_bookings' => Booking::whereIn('status', ['processing', 'new'])->count(),
                 'upcoming_bookings' => Booking::whereNotIn('status', ['completed', 'cancelled'])
                     ->whereDate('preferred_date', '>=', today())
                     ->count(),

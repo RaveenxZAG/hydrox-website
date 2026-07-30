@@ -12,7 +12,7 @@
             <input class="input" name="search" value="{{ request('search') }}" placeholder="Search bookings">
             <select class="input" name="status">
                 <option value="">All statuses</option>
-                @foreach (['new', 'contacted', 'quoted', 'confirmed', 'completed', 'cancelled'] as $status)
+                @foreach (['uploading', 'processing', 'contacted', 'quoted', 'confirmed', 'completed', 'cancelled'] as $status)
                     <option value="{{ $status }}" @selected(request('status') === $status)>{{ str($status)->headline() }}</option>
                 @endforeach
             </select>
@@ -41,7 +41,12 @@
                                 <p class="font-semibold">{{ $booking->customer_name }}</p>
                                 <p class="text-xs text-slate-500">{{ $booking->phone }} · {{ $booking->email }}</p>
                             </td>
-                            <td class="px-4 py-4">{{ $booking->service }}</td>
+                            <td class="px-4 py-4">
+                                <p>{{ collect($booking->services ?: [$booking->service])->join(', ') }}</p>
+                                @if ($booking->extras)
+                                    <p class="mt-1 text-xs text-slate-500">+ {{ count($booking->extras) }} extras</p>
+                                @endif
+                            </td>
                             <td class="whitespace-nowrap px-4 py-4">{{ $booking->preferred_date?->format('d M Y') ?: 'Flexible' }}</td>
                             <td class="px-4 py-4"><span class="badge bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">{{ str($booking->status)->headline() }}</span></td>
                             <td class="px-4 py-4 text-right"><a class="font-bold text-[#0082c9]" href="{{ route('bookings.show', $booking) }}">View</a></td>

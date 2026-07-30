@@ -45,12 +45,20 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 Route::post('/api/bookings', [BookingController::class, 'storeFromWebsite'])
     ->middleware('throttle:60,1')
     ->name('api.bookings.store');
+Route::post('/api/bookings/{booking:reference}/photos', [BookingController::class, 'uploadPhoto'])
+    ->middleware('throttle:120,1')
+    ->name('api.bookings.photos.store');
+Route::post('/api/bookings/{booking:reference}/finalize', [BookingController::class, 'finalize'])
+    ->middleware('throttle:60,1')
+    ->name('api.bookings.finalize');
 
 Route::middleware(['auth'])->group(function (): void {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
     Route::patch('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
+    Route::get('/bookings/{booking}/photos/{photo}', [BookingController::class, 'photo'])->name('bookings.photos.show');
+    Route::post('/bookings/{booking}/emails/resend', [BookingController::class, 'resendEmails'])->name('bookings.emails.resend');
     Route::get('/notifications/{notification}/open', [NotificationController::class, 'open'])->name('notifications.open');
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
     Route::get('/media/{path}', [MediaController::class, 'show'])->where('path', '.*')->name('media.show');

@@ -1,0 +1,33 @@
+.hydrox-booking [hidden] {
+    display: none !important;
+}
+
+.hydrox-booking {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+.hydrox-booking .hydrox-booking__shell {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.hydrox-booking .hydrox-booking__back,
+.hydrox-booking .hydrox-booking__next,
+.hydrox-booking .hydrox-booking__submit {
+    border: 1px solid #ccd9e2 !important;
+    background: #ffffff !important;
+    color: #0f2038 !important;
+    box-shadow: none !important;
+}
+
+.hydrox-booking .hydrox-booking__back:hover,
+.hydrox-booking .hydrox-booking__next:hover,
+.hydrox-booking .hydrox-booking__submit:hover {
+    border-color: #0082c9 !important;
+    background: #f7fbfd !important;
+    color: #006fae !important;
+}
