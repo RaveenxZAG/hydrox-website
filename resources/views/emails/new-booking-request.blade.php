@@ -4,12 +4,12 @@
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:30px 15px;background:#eef4f7">
     <tr><td align="center">
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;border-radius:20px;background:#fff">
-            <tr><td style="padding:30px;background:#06162f;color:#fff">
-                <div style="margin:0 0 22px">
+            <tr><td align="center" style="padding:30px;background:#06162f;color:#fff;text-align:center">
+                <div style="margin:0 auto 22px;text-align:center">
                     <img src="{{ asset('images/hydrox-email-logo.png') }}"
                          width="210"
                          alt="Hydrox Facility Management"
-                         style="display:block;width:210px;max-width:70%;height:auto;border:0;background:#ffffff;border-radius:12px;padding:9px 13px">
+                         style="display:block;width:210px;max-width:70%;height:auto;border:0;margin:0 auto">
                 </div>
                 <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#72efd0">NEW WEBSITE REQUEST</div>
                 <h1 style="margin:10px 0 4px">{{ $booking->reference }}</h1>
