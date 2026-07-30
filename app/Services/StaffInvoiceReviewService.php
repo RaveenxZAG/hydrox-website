@@ -657,7 +657,7 @@ class StaffInvoiceReviewService
             })
             ->values();
 
-        $logoPath = public_path('images/hydrox-email-logo.png');
+        $logoPath = public_path('images/hydrox-email-logo-transparent.png');
         $logoDataUri = File::exists($logoPath)
             ? 'data:'.File::mimeType($logoPath).';base64,'.base64_encode(File::get($logoPath))
             : null;
