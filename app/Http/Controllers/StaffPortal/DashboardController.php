@@ -81,7 +81,7 @@ class DashboardController extends Controller
         $path = storage_path('app/temp/work-log-template-'.$staff->id.'-'.$window['period']->format('Y-m').'.xlsx');
         $spreadsheets->createTemplate($sites, $path);
 
-        return response()->download($path, 'Cleaner_The_Crow_'.$window['period']->format('Y-m').'_Work_Log_Template.xlsx')->deleteFileAfterSend(true);
+        return response()->download($path, 'Hydrox_'.$window['period']->format('Y-m').'_Work_Log_Template.xlsx')->deleteFileAfterSend(true);
     }
 
     public function uploadInvoice(Request $request, InvoicePeriodService $periods, SystemNotificationService $notifications, StaffInvoiceReviewService $review): RedirectResponse

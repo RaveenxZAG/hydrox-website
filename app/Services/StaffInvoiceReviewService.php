@@ -657,7 +657,7 @@ class StaffInvoiceReviewService
             })
             ->values();
 
-        $logoPath = public_path('images/cleaner-the-crow-logo.jpg');
+        $logoPath = public_path('images/hydrox-email-logo.png');
         $logoDataUri = File::exists($logoPath)
             ? 'data:'.File::mimeType($logoPath).';base64,'.base64_encode(File::get($logoPath))
             : null;
@@ -700,7 +700,7 @@ class StaffInvoiceReviewService
 
     private function remittanceFilename(StaffInvoiceSubmission $invoice): string
     {
-        return 'Cleaner-The-Crow-Remittance-'.$invoice->invoice_period->format('F-Y').'.pdf';
+        return 'Hydrox-Remittance-'.$invoice->invoice_period->format('F-Y').'.pdf';
     }
 
     private function remittanceWorkCode(StaffInvoiceWorkLog $log): string

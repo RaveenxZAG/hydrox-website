@@ -37,7 +37,7 @@ class ReportPdfService
                 'phone_secondary' => '',
                 'email' => env('COMPANY_EMAIL', 'admin@hydrox.au'),
                 'address' => config('app.company_address', ''),
-                'logo' => public_path(env('COMPANY_LOGO', 'images/cleaner-the-crow-logo.jpg')),
+                'logo' => public_path(env('COMPANY_LOGO', 'images/hydrox-logo.svg')),
             ],
         ])->setPaper('a4', 'portrait');
 

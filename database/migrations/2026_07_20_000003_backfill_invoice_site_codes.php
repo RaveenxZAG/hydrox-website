@@ -23,7 +23,7 @@ return new class extends Migration
             ->each(function ($site) use (&$next): void {
                 DB::table('invoice_sites')
                     ->where('id', $site->id)
-                    ->update(['site_code' => 'CTC'.str_pad((string) $next, 3, '0', STR_PAD_LEFT)]);
+                    ->update(['site_code' => 'HYD'.str_pad((string) $next, 3, '0', STR_PAD_LEFT)]);
 
                 $next++;
             });

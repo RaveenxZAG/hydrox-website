@@ -618,9 +618,9 @@ class StaffInvoiceSpreadsheetService
         $rows .= '<row r="23" ht="28" customHeight="1">'.$this->cell('A23', 'QUICK EXAMPLES', 3).'</row>';
         $rows .= '<row r="24" ht="25" customHeight="1">'.$this->cell('A24', 'Work Type', 1).$this->cell('C24', 'Example Date', 1).$this->cell('E24', 'Site Code / Job Code', 1).$this->cell('G24', 'What this means', 1).'</row>';
         $examples = [
-            25 => ['Regular Site', '01 Jul 2026', 'CTC001', 'Normal rostered site cleaning'],
+            25 => ['Regular Site', '01 Jul 2026', 'HYD001', 'Normal rostered site cleaning'],
             26 => ['Additional Work', '05 Jul 2026', 'Job #2304', 'Bond clean, gardening or event work'],
-            27 => ['Regular Site', '10 Jul 2026', 'CTC014', 'Approved commercial site'],
+            27 => ['Regular Site', '10 Jul 2026', 'HYD014', 'Approved commercial site'],
             28 => ['Additional Work', '12 Jul 2026', 'Job #474', 'Casual work reference'],
         ];
         foreach ($examples as $row => [$type, $date, $code, $meaning]) {

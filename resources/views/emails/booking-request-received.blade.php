@@ -5,6 +5,12 @@
     <tr><td align="center">
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;overflow:hidden;border-radius:22px;background:#fff">
             <tr><td style="padding:34px;background:linear-gradient(120deg,#06162f,#07527d);color:#fff">
+                <div style="margin:0 0 24px">
+                    <img src="{{ asset('images/hydrox-email-logo.png') }}"
+                         width="220"
+                         alt="Hydrox Facility Management"
+                         style="display:block;width:220px;max-width:70%;height:auto;border:0;background:#ffffff;border-radius:12px;padding:10px 14px">
+                </div>
                 <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#72efd0">HYDROX FACILITY MANAGEMENT</div>
                 <h1 style="margin:12px 0 8px;font-size:30px">Your request is being reviewed</h1>
                 <p style="margin:0;color:#d9e9f2;line-height:1.6">Thanks {{ $booking->customer_name }}. We have safely received your booking request.</p>

@@ -115,7 +115,7 @@
                         @csrf
                         <input type="hidden" name="validation_mode" value="auto">
                         <div class="grid gap-3 xl:grid-cols-[7rem_minmax(16rem,1fr)_9rem_11rem_10rem_auto]">
-                            <input class="rounded-xl border-[#E5E7EB] text-sm font-bold uppercase shadow-sm focus:border-[#0082c9] focus:ring-[#0082c9]" name="site_code" placeholder="{{ $nextSiteCode ?? 'CTC001' }}">
+                            <input class="rounded-xl border-[#E5E7EB] text-sm font-bold uppercase shadow-sm focus:border-[#0082c9] focus:ring-[#0082c9]" name="site_code" placeholder="{{ $nextSiteCode ?? 'HYD001' }}">
                             <input class="rounded-xl border-[#E5E7EB] text-sm shadow-sm focus:border-[#0082c9] focus:ring-[#0082c9]" name="name" placeholder="Site name" required>
                             <select class="rounded-xl border-[#E5E7EB] text-sm shadow-sm focus:border-[#0082c9] focus:ring-[#0082c9]" name="recurring_pattern" x-model="pattern">
                                 @foreach ($patterns as $value => $label)

@@ -358,7 +358,7 @@ class InvoiceAdminController extends Controller
     {
         $siteId = $request->route('site')?->id;
         $data = $request->validate([
-            'site_code' => ['nullable', 'string', 'max:20', 'regex:/^CTC\d+$/i', 'unique:invoice_sites,site_code'.($siteId ? ','.$siteId : '')],
+            'site_code' => ['nullable', 'string', 'max:20', 'regex:/^HYD\d+$/i', 'unique:invoice_sites,site_code'.($siteId ? ','.$siteId : '')],
             'name' => [$updating ? 'sometimes' : 'required', 'string', 'max:255'],
             'active' => ['nullable', 'boolean'],
             'recurring_pattern' => ['nullable', 'in:weekly,fortnightly'],

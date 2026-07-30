@@ -1,5 +1,5 @@
 {
-    "name": "ctc/cleaning-management-system",
+    "name": "hydrox/facility-management-portal",
     "type": "project",
     "description": "Commercial and residential cleaning management system built with Laravel 12.",
     "require": {

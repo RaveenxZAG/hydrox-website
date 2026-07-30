@@ -1,4 +1,5 @@
 {
+    "name": "hydrox-portal",
     "private": true,
     "type": "module",
     "scripts": {

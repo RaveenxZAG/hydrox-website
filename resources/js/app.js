@@ -620,7 +620,7 @@ const formDraftKey = (form) => {
     const action = form.getAttribute('action') || window.location.pathname;
     const method = form.querySelector('input[name="_method"]')?.value || form.getAttribute('method') || 'GET';
 
-    return `ctc-form-draft:${method.toUpperCase()}:${action}`;
+    return `hydrox-form-draft:${method.toUpperCase()}:${action}`;
 };
 
 const saveFormDraft = (form, key) => {

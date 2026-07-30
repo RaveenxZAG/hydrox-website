@@ -50,7 +50,7 @@
                 <table data-light-email role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:760px; background:#ffffff !important; color:#07142e !important; border-radius:18px; overflow:hidden; box-shadow:0 18px 45px rgba(15, 35, 55, 0.12);">
                     <tr>
                         <td align="center" style="padding:28px 24px 24px;">
-                            <img src="{{ $logoSrc ?? asset('images/cleaner-the-crow-logo.jpg') }}" width="210" alt="Hydrox Facility Management" style="display:block; max-width:210px; height:auto; border:0; outline:none; text-decoration:none;">
+                            <img src="{{ $logoSrc ?? asset('images/hydrox-email-logo.png') }}" width="210" alt="Hydrox Facility Management" style="display:block; max-width:210px; height:auto; border:0; outline:none; text-decoration:none;">
                         </td>
                     </tr>
 

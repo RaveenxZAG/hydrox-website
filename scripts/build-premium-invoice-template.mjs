@@ -3,7 +3,7 @@ import path from "node:path";
 import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
 const outputDir = path.resolve("outputs/staff-invoice-template");
-const outputPath = path.join(outputDir, "Cleaner The Crow - Monthly Subcontractor Work Log Template.xlsx");
+const outputPath = path.join(outputDir, "Hydrox - Monthly Subcontractor Work Log Template.xlsx");
 
 const workbook = Workbook.create();
 const workLog = workbook.worksheets.add("Work Log");
@@ -81,7 +81,7 @@ setWidths(workLog, [14, 18, 16, 20, 12, 14, 14, 34, 3, 22, 20, 20, 34]);
 setWidths(guide, [5, 30, 82, 24]);
 
 workLog.freezePanes.freezeRows(1);
-workLog.getRange("A1:H1").values = [["Date", "Work Type", "Site Code", "ServiceM8 Job Code", "Hours", "Hourly Rate", "Amount", "Notes"]];
+workLog.getRange("A1:H1").values = [["Date", "Work Type", "Site Code", "Work Reference", "Hours", "Hourly Rate", "Amount", "Notes"]];
 formatHeader(workLog.getRange("A1:H1"));
 workLog.getRange("A2:H101").format.borders = {
   insideHorizontal: { style: "thin", color: brand.line },
@@ -96,7 +96,7 @@ workLog.getRange("H2:H101").format.wrapText = true;
 workLog.getRange("A2:H101").format.rowHeight = 26;
 
 workLog.getRange("J1:M2").merge();
-workLog.getRange("J1:M2").values = [["Cleaner The Crow\nMonthly Subcontractor Work Log Template"]];
+workLog.getRange("J1:M2").values = [["Hydrox Facility Management\nMonthly Subcontractor Work Log Template"]];
 workLog.getRange("J1:M2").format.fill.color = brand.navy;
 workLog.getRange("J1:M2").format.font.color = "#FFFFFF";
 workLog.getRange("J1:M2").format.font.bold = true;
@@ -109,8 +109,8 @@ sectionHeader(workLog.getRange("J4:M4"), "Before You Upload");
 workLog.getRange("J5:M9").merge();
 workLog.getRange("J5:M9").values = [[
   "1. Use one workbook for one month only.\n" +
-  "2. Roster-based cleaning sites must use Regular Site and a CTC site code.\n" +
-  "3. Casual jobs must use Other Job and the ServiceM8 job code.\n" +
+  "2. Roster-based cleaning sites must use Regular Site and a Hydrox site code.\n" +
+  "3. Casual jobs must use Other Job and the supplied work reference.\n" +
   "4. Enter hours and hourly rate; amount calculates automatically.\n" +
   "5. If unsure whether the work is a site or job, ask admin before uploading."
 ]];
@@ -144,10 +144,10 @@ workLog.getRange("K16").format.font.color = brand.green;
 
 sectionHeader(workLog.getRange("J18:M18"), "Quick Examples");
 workLog.getRange("J19:M22").values = [
-  ["Regular Site", "2026-07-01", "CTC001", "Roster-based cleaning site"],
+  ["Regular Site", "2026-07-01", "HYD001", "Roster-based cleaning site"],
   ["Other Job", "2026-07-05", "Job #2304", "Bond cleaning / gardening / event job"],
-  ["Regular Site", "2026-07-10", "CTC014", "Regular school, office or commercial site"],
-  ["Other Job", "2026-07-12", "Job #474", "Casual job from ServiceM8"],
+  ["Regular Site", "2026-07-10", "HYD014", "Regular school, office or commercial site"],
+  ["Other Job", "2026-07-12", "Job #474", "Casual job reference"],
 ];
 lightBox(workLog.getRange("J19:M22"));
 workLog.getRange("J19:M22").format.font.color = brand.navy;
@@ -157,7 +157,7 @@ workLog.getRange("B2:B101").dataValidation = { rule: { type: "list", values: ["R
 workLog.getRange("A2:H101").format.fill.color = "#FFFFFF";
 
 guide.getRange("A1:D2").merge();
-guide.getRange("A1:D2").values = [["Cleaner The Crow Subcontractor Work Log Guide"]];
+guide.getRange("A1:D2").values = [["Hydrox Facility Management Subcontractor Work Log Guide"]];
 guide.getRange("A1:D2").format.fill.color = brand.navy;
 guide.getRange("A1:D2").format.font.color = "#FFFFFF";
 guide.getRange("A1:D2").format.font.bold = true;
@@ -165,7 +165,7 @@ guide.getRange("A1:D2").format.font.size = 20;
 guide.getRange("A1:D2").format.verticalAlignment = "center";
 
 guide.getRange("B4:C4").merge();
-guide.getRange("B4:C4").values = [["Use this file to claim monthly work completed for Cleaner The Crow. The portal already knows your name, ABN, work log month and profile details."]];
+guide.getRange("B4:C4").values = [["Use this file to claim monthly work completed for Hydrox Facility Management. The portal already knows your name, ABN, work log month and profile details."]];
 guide.getRange("B4:C4").format.wrapText = true;
 guide.getRange("B4:C4").format.font.color = brand.muted;
 
@@ -173,9 +173,9 @@ guide.getRange("B6:C6").merge();
 sectionHeader(guide.getRange("B6:C6"), "How To Fill The Work Log");
 guide.getRange("B7:C14").values = [
   ["Date", "The date you completed the work. Use dates inside the work log month only."],
-  ["Work Type", "Choose Regular Site for normal site work. Choose Other Job for ServiceM8 or special jobs."],
-  ["Site Code", "For roster-based cleaning sites, select Regular Site and enter the CTC site code, for example CTC001."],
-  ["ServiceM8 Job Code", "For casual jobs, select Other Job and enter the ServiceM8 job code, for example Job #2304."],
+  ["Work Type", "Choose Regular Site for normal site work. Choose Other Job for casual or special jobs."],
+  ["Site Code", "For roster-based cleaning sites, select Regular Site and enter the Hydrox site code, for example HYD001."],
+  ["Work Reference", "For casual jobs, select Other Job and enter the supplied work reference, for example Job #2304."],
   ["Hours", "Enter the hours you are claiming for that row."],
   ["Hourly Rate", "Enter the hourly rate you are claiming for that row."],
   ["Amount", "This calculates automatically from Hours x Hourly Rate."],
@@ -191,9 +191,9 @@ guide.getRange("B17:C17").format.fill.color = brand.red;
 guide.getRange("B17:C17").format.font.color = "#FFFFFF";
 guide.getRange("B17:C17").format.borders = { preset: "outside", style: "thin", color: brand.red };
 guide.getRange("B18:C27").values = [
-  ["Regular Site", "Use this only for roster-based cleaning sites. You must add the CTC site code."],
-  ["Other Job", "Use this only for casual jobs such as bond cleaning, gardening, events, steam cleaning or one-time ServiceM8 jobs."],
-  ["ServiceM8 Code", "In the ServiceM8 app, open/touch the assigned job. The job code is shown at the top, for example Job #2304."],
+  ["Regular Site", "Use this only for roster-based cleaning sites. You must add the Hydrox site code."],
+  ["Other Job", "Use this only for casual jobs such as bond cleaning, gardening, events, steam cleaning or one-time jobs."],
+  ["Work Reference", "Use the job or work reference supplied with the assignment, for example Job #2304."],
   ["Temporary Jobs", "Write down the job code or take a screenshot before signing out, because one-time job details may disappear from the app after sign-out."],
   ["Do Not Mix Codes", "Do not add a job code for regular cleaning sites. Do not add a site code for casual jobs."],
   ["Ask Admin", "If you are not sure whether the work is a regular site or a casual job, ask admin before submitting."],

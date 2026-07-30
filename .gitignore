@@ -11,9 +11,6 @@
 /public/build
 /public/hot
 /public/storage
-/public/images/cleaner-the-crow-logo.jpg
-/public/images/ctc-logo.svg
-
 /database/*.sqlite
 /database/*.sqlite-*
 

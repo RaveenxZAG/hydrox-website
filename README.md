@@ -92,7 +92,7 @@ Never commit the real `.env` file. Keep production secrets only in the hosting c
 Recommended VentraIP cPanel deployment flow:
 
 1. Create a MySQL database and database user in cPanel.
-2. Upload or pull the repository into a directory outside `public_html`, for example `~/ctc-portal`.
+2. Upload or pull the repository into a directory outside `public_html`, for example `~/hydrox-portal`.
 3. Point the domain document root to the Laravel `public` directory, or place only the contents of `public` in `public_html` and adjust paths carefully.
 4. Create a production `.env` file on the server using `.env.example` as the template.
 5. Run Composer install for production:

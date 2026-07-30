@@ -190,10 +190,10 @@ class InvoiceSite extends Model
         $lastNumber = static::query()
             ->whereNotNull('site_code')
             ->pluck('site_code')
-            ->map(fn (string $code): int => (int) Str::of($code)->match('/CTC(\d+)/i')->toString())
+            ->map(fn (string $code): int => (int) Str::of($code)->match('/HYD(\d+)/i')->toString())
             ->max() ?: 0;
 
-        return 'CTC'.str_pad((string) ($lastNumber + 1), 3, '0', STR_PAD_LEFT);
+        return 'HYD'.str_pad((string) ($lastNumber + 1), 3, '0', STR_PAD_LEFT);
     }
 
     private function hoursForMonth(CarbonInterface $month, string $column): float
