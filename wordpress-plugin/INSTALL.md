@@ -25,18 +25,20 @@ HYDROX_BOOKING_TOKEN=use-the-same-private-random-token-as-wordpress
 
 After changing the production `.env`, clear and rebuild the Laravel configuration cache.
 
-Configure production SMTP so both booking emails are delivered:
+For Microsoft 365, configure a Microsoft Entra application with the Microsoft Graph
+application permission `Mail.Send`, grant admin consent, and add these values to the
+Portal `.env`:
 
 ```env
-MAIL_MAILER=smtp
-MAIL_HOST=your-mail-server
-MAIL_PORT=587
-MAIL_USERNAME=admin@hydrox.au
-MAIL_PASSWORD=your-mailbox-password
-MAIL_SCHEME=tls
-MAIL_FROM_ADDRESS=admin@hydrox.au
-MAIL_FROM_NAME="Hydrox Facility Management"
+MICROSOFT_GRAPH_TENANT_ID=your-tenant-id
+MICROSOFT_GRAPH_CLIENT_ID=your-application-client-id
+MICROSOFT_GRAPH_CLIENT_SECRET=your-client-secret-value
+MICROSOFT_GRAPH_SENDER=admin@hydrox.au
 ```
+
+Use the client secret **value**, not the secret ID. After editing `.env`, clear the
+Portal configuration cache. Microsoft Graph is separate from the FluentSMTP
+connection used by WordPress.
 
 Because photos upload sequentially, WordPress only needs to accept one 10 MB image at a time. Set PHP `upload_max_filesize` above 10 MB and `post_max_size` above 12 MB.
 

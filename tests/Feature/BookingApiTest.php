@@ -5,9 +5,12 @@ namespace Tests\Feature;
 use App\Models\Booking;
 use App\Mail\BookingRequestReceived;
 use App\Mail\NewBookingRequest;
+use App\Services\MicrosoftGraphMailService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -77,6 +80,12 @@ class BookingApiTest extends TestCase
         Storage::fake('local');
         Mail::fake();
         config(['services.hydrox_booking.token' => 'test-token']);
+        config([
+            'services.microsoft_graph.tenant_id' => null,
+            'services.microsoft_graph.client_id' => null,
+            'services.microsoft_graph.client_secret' => null,
+            'services.microsoft_graph.sender' => null,
+        ]);
 
         $booking = Booking::create([
             'reference' => 'HYD-20260728-ABCDE',
@@ -111,6 +120,35 @@ class BookingApiTest extends TestCase
         $this->assertSame('processing', $booking->fresh()->status);
         Mail::assertSent(BookingRequestReceived::class, fn ($mail) => $mail->hasTo('customer@example.com'));
         Mail::assertSent(NewBookingRequest::class, 1);
+    }
+
+    public function test_microsoft_graph_can_send_portal_email_with_application_credentials(): void
+    {
+        Cache::forget('microsoft-graph-mail-token');
+        config([
+            'services.microsoft_graph.tenant_id' => 'tenant-id',
+            'services.microsoft_graph.client_id' => 'client-id',
+            'services.microsoft_graph.client_secret' => 'client-secret',
+            'services.microsoft_graph.sender' => 'admin@hydrox.au',
+        ]);
+
+        Http::fake([
+            'https://login.microsoftonline.com/*' => Http::response([
+                'access_token' => 'test-access-token',
+                'expires_in' => 3600,
+            ]),
+            'https://graph.microsoft.com/*' => Http::response(null, 202),
+        ]);
+
+        app(MicrosoftGraphMailService::class)->send(
+            'customer@example.com',
+            'Hydrox test email',
+            '<p>Hydrox test message</p>'
+        );
+
+        Http::assertSent(fn ($request) => str_contains($request->url(), '/sendMail')
+            && $request->hasHeader('Authorization', 'Bearer test-access-token')
+            && $request['message']['toRecipients'][0]['emailAddress']['address'] === 'customer@example.com');
     }
 
     public function test_a_twenty_first_photo_is_rejected(): void
