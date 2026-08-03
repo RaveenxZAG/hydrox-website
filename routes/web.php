@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\InvoiceAdminController;
 use App\Http\Controllers\Admin\ProfileChangeRequestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CompanyProfileEmailController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceTemplateController;
 use App\Http\Controllers\MediaController;
@@ -59,6 +60,8 @@ Route::middleware(['auth'])->group(function (): void {
     Route::patch('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
     Route::get('/bookings/{booking}/photos/{photo}', [BookingController::class, 'photo'])->name('bookings.photos.show');
     Route::post('/bookings/{booking}/emails/resend', [BookingController::class, 'resendEmails'])->name('bookings.emails.resend');
+    Route::get('/emails/new', [CompanyProfileEmailController::class, 'create'])->name('emails.create');
+    Route::post('/emails/new', [CompanyProfileEmailController::class, 'store'])->name('emails.store');
     Route::get('/notifications/{notification}/open', [NotificationController::class, 'open'])->name('notifications.open');
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
     Route::get('/media/{path}', [MediaController::class, 'show'])->where('path', '.*')->name('media.show');

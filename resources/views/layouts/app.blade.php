@@ -74,6 +74,7 @@
             $icons = [
                 'dashboard' => '<path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9.5V20h5v-5h3v5h5V9.5"/>',
                 'bookings' => '<path d="M7 3v3M17 3v3M4 9h16"/><rect x="4" y="5" width="16" height="16" rx="2"/><path d="m8 14 2.5 2.5L16 11"/>',
+                'email' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',
                 'staff' => '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
                 'invoices' => '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/><path d="M9 9h1"/>',
                 'jobs' => '<path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><path d="m3.5 6 1 1 2-2"/><path d="m3.5 12 1 1 2-2"/><path d="m3.5 18 1 1 2-2"/>',
@@ -147,6 +148,30 @@
                             <span class="truncate">{{ $item['label'] }}</span>
                         </a>
                     @endforeach
+                </div>
+
+                <div x-data="{ open: {{ request()->routeIs('emails.*') ? 'true' : 'false' }} }" class="mt-1">
+                    @php $emailActive = request()->routeIs('emails.*'); @endphp
+                    <button type="button" class="group relative flex h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-semibold transition {{ $emailActive ? 'bg-[#0082c9]/10 text-slate-950 shadow-sm ring-1 ring-[#0082c9]/15 dark:text-white dark:ring-[#0082c9]/25' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white' }}" @click="open = !open" :aria-expanded="open">
+                        @if ($emailActive)
+                            <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-[#0082c9]"></span>
+                        @endif
+                        <span class="grid h-7 w-7 shrink-0 place-items-center rounded-lg {{ $emailActive ? 'bg-white text-[#0082c9] shadow-sm dark:bg-slate-900 dark:text-cyan-300' : 'bg-slate-100 text-slate-500 group-hover:text-[#0082c9] dark:bg-slate-900 dark:text-slate-400' }}">
+                            {!! $sidebarIcon('email') !!}
+                        </span>
+                        <span class="min-w-0 flex-1 truncate">Email</span>
+                        <span class="grid h-5 w-5 place-items-center rounded-md text-slate-400 transition-transform duration-200" :class="open ? 'rotate-90 text-[#0082c9]' : ''">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    </button>
+                    <div x-show="open" x-cloak class="ml-[26px] mt-1 grid gap-0.5 border-l border-slate-200 pl-4 dark:border-slate-800">
+                        <a href="{{ route('emails.create') }}" class="relative flex h-8 items-center rounded-lg px-3 text-[13px] font-semibold transition {{ $emailActive ? 'bg-[#0082c9]/8 text-[#0082c9] dark:text-cyan-300' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white' }}">
+                            @if ($emailActive)
+                                <span class="absolute -left-[17px] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-[#0082c9]"></span>
+                            @endif
+                            <span class="truncate">Send new email</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div x-data="{ open: {{ request()->routeIs('subcontractor-onboardings.*') || request()->routeIs('staff-members.*') || request()->routeIs('staff-profile-changes.*') ? 'true' : 'false' }} }" class="mt-1">
