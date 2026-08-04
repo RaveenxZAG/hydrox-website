@@ -9,15 +9,15 @@
         <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
                 <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#0082c9]">Settings</p>
-                <h2 class="mt-1 text-2xl font-black tracking-tight text-slate-950 dark:text-white">Company profile</h2>
-                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Manage the company identity, contact details, operating hours, and office address.</p>
+                <h2 class="mt-1 text-2xl font-black tracking-tight text-slate-950">Company profile</h2>
+                <p class="mt-1 text-sm text-slate-500">Manage the company identity, contact details, operating hours, and office address.</p>
             </div>
             <button class="btn-primary">Save Business Information</button>
         </div>
 
-        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950 sm:p-6">
-            <div class="border-b border-slate-100 pb-4 dark:border-slate-800">
-                <h2 class="text-lg font-black text-slate-950 dark:text-white">Company Details</h2>
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="border-b border-slate-100 pb-4">
+                <h2 class="text-lg font-black text-slate-950">Company Details</h2>
                 <p class="mt-1 text-sm text-slate-500">Primary business and accounts contact information.</p>
             </div>
 
@@ -57,9 +57,9 @@
             </div>
         </section>
 
-        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950 sm:p-6">
-            <div class="border-b border-slate-100 pb-4 dark:border-slate-800">
-                <h2 class="text-lg font-black text-slate-950 dark:text-white">Office Location</h2>
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="border-b border-slate-100 pb-4">
+                <h2 class="text-lg font-black text-slate-950">Office Location</h2>
                 <p class="mt-1 text-sm text-slate-500">No business address is currently set. You can add one here later.</p>
             </div>
 

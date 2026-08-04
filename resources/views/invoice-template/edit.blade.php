@@ -33,7 +33,7 @@
             <form method="POST" action="{{ route('invoice-template.update') }}" enctype="multipart/form-data" class="grid gap-4">
                 @csrf
                 <x-field label="Work Log Template File" name="template">
-                    <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-cyan-700" type="file" name="template" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv" required>
+                    <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-[#eaf6fc] file:px-3 file:py-2 file:text-[#006da9]" type="file" name="template" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv" required>
                 </x-field>
                 <button class="btn-primary w-fit">Upload Template</button>
             </form>

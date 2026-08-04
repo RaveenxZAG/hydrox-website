@@ -62,7 +62,7 @@
                                         <p style="margin:0 0 12px; font-size:16px; font-weight:bold; color:#7dd8f0;">Application approved</p>
                                         <h1 style="margin:0; font-size:36px; line-height:1.08; letter-spacing:-0.5px;">Welcome to<br>Hydrox Facility Management!</h1>
                                         <p style="margin:18px 0 0; max-width:410px; font-size:18px; line-height:1.55; color:#e8f6ff;">Hi {{ $firstName }}, we are excited to have you on board and look forward to working with you.</p>
-                                        <div style="margin-top:26px; width:62px; height:4px; border-radius:999px; background:#0ea5c6;"></div>
+                                        <div style="margin-top:26px; width:62px; height:4px; border-radius:999px; background:#0082c9;"></div>
                                     </td>
                                 </tr>
                             </table>
@@ -90,7 +90,7 @@
                                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#ffffff !important; border:1px solid #d9e7f1; border-radius:14px; color:#07142e !important;">
                                                 <tr>
                                                     <td align="center" style="padding:20px 12px 18px;">
-                                                        <div style="display:inline-block; width:34px; height:34px; border-radius:999px; background:#0d7ee8; color:#ffffff; font-size:16px; line-height:34px; font-weight:bold;">{{ $number }}</div>
+                                                        <div style="display:inline-block; width:34px; height:34px; border-radius:999px; background:#0082c9; color:#ffffff; font-size:16px; line-height:34px; font-weight:bold;">{{ $number }}</div>
                                                         <h3 style="margin:14px 0 8px; font-size:15px; line-height:1.25; color:#07142e !important;">{{ $title }}</h3>
                                                         <p style="margin:0; font-size:12px; line-height:1.55; color:#334155;">{{ $copy }}</p>
                                                     </td>
@@ -115,7 +115,7 @@
                         <td style="padding:32px 38px 36px;">
                             <h2 style="margin:0 0 8px; font-size:22px; color:#07142e !important;">Welcome to Hydrox Facility Management.</h2>
                             <p style="margin:0 0 24px; font-size:16px; line-height:1.6; color:#334155;">We look forward to achieving great things together.</p>
-                            <p style="margin:0; font-size:15px; line-height:1.6; color:#334155;">Kind regards,<br><strong style="color:#0d6fe8;">Hydrox Facility Management Administration Team</strong></p>
+                            <p style="margin:0; font-size:15px; line-height:1.6; color:#334155;">Kind regards,<br><strong style="color:#0082c9;">Hydrox Facility Management Administration Team</strong></p>
                         </td>
                     </tr>
 
@@ -130,8 +130,8 @@
                                     </td>
                                     <td align="right" style="font-size:14px; line-height:1.7;">
                                         <strong>Need Help?</strong><br>
-                                        <a href="mailto:{{ $supportEmail }}" style="color:#79d8ff; text-decoration:none;">{{ $supportEmail }}</a><br>
-                                        <a href="tel:{{ preg_replace('/\s+/', '', $supportPhone) }}" style="color:#79d8ff; text-decoration:none;">{{ $supportPhone }}</a>
+                                        <a href="mailto:{{ $supportEmail }}" style="color:#79c5e9; text-decoration:none;">{{ $supportEmail }}</a><br>
+                                        <a href="tel:{{ preg_replace('/\s+/', '', $supportPhone) }}" style="color:#79c5e9; text-decoration:none;">{{ $supportPhone }}</a>
                                     </td>
                                 </tr>
                             </table>

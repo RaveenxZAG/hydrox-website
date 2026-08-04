@@ -7,7 +7,7 @@
             <h1 class="mt-4 text-2xl font-black">Enter Verification Code</h1>
             <p class="mt-2 text-sm leading-6 text-slate-500">The code expires after 5 minutes. If it does not work, request a new code.</p>
             @if (app()->environment('local') && session('staff_otp_test_code'))
-                <p class="mt-4 rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-bold text-cyan-800">
+                <p class="mt-4 rounded-xl border border-[#b8dff3] bg-[#eaf6fc] px-4 py-3 text-sm font-bold text-[#07527d]">
                     Local test code: {{ session('staff_otp_test_code') }}
                 </p>
             @endif

@@ -38,13 +38,13 @@
                     </div>
                     <h1 class="mt-6 text-5xl font-black leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
                         Bookings, organised.<br>
-                        <span class="bg-gradient-to-r from-[#39aee9] via-[#31d3bc] to-[#7bea9b] bg-clip-text text-transparent">Operations, in control.</span>
+                        <span class="text-[#39aee9]">Operations, in control.</span>
                     </h1>
                     <p class="mt-7 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
                         A secure workspace for receiving, reviewing and managing Hydrox service bookings from one clear dashboard.
                     </p>
                     <div class="mt-8">
-                        <button type="button" class="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#0082c9] to-[#11d394] px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-cyan-950/30 transition hover:-translate-y-0.5 hover:shadow-2xl" data-admin-login-open>
+                        <button type="button" class="inline-flex items-center gap-3 rounded-full bg-[#0082c9] px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-[#061b35]/30 transition hover:-translate-y-0.5 hover:bg-[#006da9] hover:shadow-2xl" data-admin-login-open>
                             Sign in to the portal
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
@@ -61,7 +61,7 @@
                         <p class="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-white/45">New enquiries</p>
                         <p class="mt-1 text-xl font-black">Bookings in one place</p>
                     </div>
-                    <div class="absolute bottom-10 right-0 w-72 rotate-3 rounded-[2rem] border border-white/15 bg-gradient-to-br from-white/15 to-white/[0.04] p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
+                    <div class="absolute bottom-10 right-0 w-72 rotate-3 rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
                         <div class="grid h-12 w-12 place-items-center rounded-2xl bg-[#11d394]/15 text-[#76edbf]"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v13H4V7a2 2 0 0 1 2-2Zm3 8h2m3 0h2m-7 4h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
                         <p class="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-white/45">Workflow</p>
                         <p class="mt-1 text-xl font-black">Review every request</p>
@@ -89,10 +89,10 @@
                 </a>
 
                 <a class="group rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_18px_60px_rgba(15,37,62,0.08)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(15,37,62,0.12)]" href="{{ route('subcontractor-onboardings.create') }}">
-                    <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#e8fbf4] text-[#079c70]"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><path d="M8 4h8M9 2h6v4H9zM7 4H5a2 2 0 0 0-2 2v15h12l6-6V6a2 2 0 0 0-2-2h-2M7 10h10M7 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"><path d="M8 4h8M9 2h6v4H9zM7 4H5a2 2 0 0 0-2 2v15h12l6-6V6a2 2 0 0 0-2-2h-2M7 10h10M7 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     <h3 class="mt-5 text-xl font-black tracking-tight">Work with Hydrox</h3>
                     <p class="mt-2 text-sm leading-6 text-slate-500">Send your business, insurance and availability details securely.</p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#079c70]">Start application <span class="transition group-hover:translate-x-1">→</span></span>
+                    <span class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#0082c9]">Start application <span class="transition group-hover:translate-x-1">→</span></span>
                 </a>
             </div>
 
@@ -145,7 +145,7 @@
                         <input class="input rounded-xl" type="password" name="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore required>
                     </x-field>
                     <label class="flex items-center gap-2.5 text-sm font-semibold text-slate-600"><input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="remember"> Keep me signed in</label>
-                    <button class="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#0082c9] to-[#11b985] px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-cyan-900/20 transition hover:-translate-y-0.5 hover:shadow-xl">
+                    <button class="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-[#0082c9] px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-[#0b2a4a]/20 transition hover:-translate-y-0.5 hover:bg-[#006da9] hover:shadow-xl">
                         Sign in securely
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     </button>

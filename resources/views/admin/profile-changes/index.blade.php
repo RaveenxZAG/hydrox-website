@@ -104,15 +104,15 @@
                                             ? $staff?->documentName($field)
                                             : $staff?->{$field};
                                     @endphp
-                                    <div class="mb-3 rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-900">
+                                    <div class="mb-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
                                         <p class="font-semibold">{{ $formatField($field) }}</p>
-                                        <div class="mt-2 grid gap-2 text-xs text-slate-600 dark:text-slate-300 md:grid-cols-2">
+                                        <div class="mt-2 grid gap-2 text-xs text-slate-600 md:grid-cols-2">
                                             <p><span class="font-semibold text-slate-500">Current:</span> {{ $formatValue($currentValue, $field) }}</p>
                                             <div>
                                                 <p><span class="font-semibold text-slate-500">Requested:</span> {{ $formatValue($requestedValue, $field) }}</p>
                                                 @if (is_array($requestedValue) && filled($requestedValue['path'] ?? null))
                                                     <div class="mt-2 flex flex-wrap gap-2">
-                                                        <a class="inline-flex items-center rounded-lg border border-cyan-200 bg-white px-3 py-1.5 text-xs font-bold text-cyan-700 shadow-sm hover:bg-cyan-50" href="{{ route('staff-profile-changes.documents.show', [$request, $field]) }}" target="_blank" rel="noopener">
+                                                        <a class="inline-flex items-center rounded-lg border border-[#b8dff3] bg-white px-3 py-1.5 text-xs font-bold text-[#006da9] shadow-sm hover:bg-[#eaf6fc]" href="{{ route('staff-profile-changes.documents.show', [$request, $field]) }}" target="_blank" rel="noopener">
                                                             View document
                                                         </a>
                                                         <a class="inline-flex items-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm hover:bg-slate-50" href="{{ route('staff-profile-changes.documents.download', [$request, $field]) }}">
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                 @empty
-                                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+                                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-500">
                                         No changed information found in this request.
                                     </div>
                                 @endforelse

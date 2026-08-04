@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <style>
         @page { margin: 28px 30px 46px; }
-        body { color: #172033; font-family: DejaVu Sans, sans-serif; font-size: 11px; line-height: 1.45; }
+        body { color: #10243a; font-family: DejaVu Sans, sans-serif; font-size: 11px; line-height: 1.45; }
         h1, h2, h3 { margin: 0; }
-        h1 { color: #111827; font-size: 25px; line-height: 1.18; }
-        h2 { border-bottom: 1px solid #d9e2ec; color: #0f766e; font-size: 14px; margin-bottom: 10px; padding-bottom: 6px; text-transform: uppercase; }
+        h1 { color: #061b35; font-size: 25px; line-height: 1.18; }
+        h2 { border-bottom: 1px solid #dbe6ed; color: #0082c9; font-size: 14px; margin-bottom: 10px; padding-bottom: 6px; text-transform: uppercase; }
         h3 { font-size: 12px; margin-bottom: 6px; }
         table { border-collapse: collapse; width: 100%; }
         th, td { border-bottom: 1px solid #e5e7eb; padding: 7px 6px; text-align: left; vertical-align: top; }
         th { background: #f8fafc; color: #475569; font-size: 10px; text-transform: uppercase; }
         .header { background: #f8fafc; border: 1px solid #d9e2ec; border-radius: 12px; margin-bottom: 20px; overflow: hidden; padding: 18px 18px 14px; }
-        .header-accent { background: #0891b2; height: 4px; margin: -18px -18px 16px; }
+        .header-accent { background: #0082c9; height: 4px; margin: -18px -18px 16px; }
         .brand-logo { background: #fff; border: 1px solid #d9e2ec; border-radius: 10px; height: 86px; object-fit: contain; padding: 5px; width: 86px; }
         .brand-cell { border: 0; width: 100px; }
-        .title-kicker { color: #0891b2; font-size: 10px; font-weight: bold; letter-spacing: 1.2px; margin-bottom: 5px; text-transform: uppercase; }
+        .title-kicker { color: #0082c9; font-size: 10px; font-weight: bold; letter-spacing: 1.2px; margin-bottom: 5px; text-transform: uppercase; }
         .contact-line { color: #475569; font-size: 10px; margin-top: 8px; }
         .meta-strip { background: #fff; border: 1px solid #d9e2ec; border-radius: 9px; margin-top: 14px; padding: 7px 10px; }
         .meta-strip table { table-layout: fixed; }
@@ -27,13 +27,13 @@
         .grid { width: 100%; }
         .grid td { border: 0; padding: 4px 8px 4px 0; width: 50%; }
         .section { margin-bottom: 16px; page-break-inside: avoid; }
-        .pill { background: #ecfeff; border: 1px solid #bae6fd; border-radius: 12px; color: #155e75; display: inline-block; margin: 2px; padding: 4px 8px; }
-        .video-section { background: #ecfeff; border: 1px solid #67e8f9; border-radius: 8px; margin-bottom: 16px; padding: 10px; page-break-inside: avoid; }
-        .video-section h2 { border-bottom: 0; color: #155e75; margin-bottom: 8px; padding-bottom: 0; }
-        .video-link-row { border-top: 1px solid #bae6fd; padding: 8px 0; }
+        .pill { background: #eaf6fc; border: 1px solid #b8dff3; border-radius: 12px; color: #07527d; display: inline-block; margin: 2px; padding: 4px 8px; }
+        .video-section { background: #eaf6fc; border: 1px solid #b8dff3; border-radius: 8px; margin-bottom: 16px; padding: 10px; page-break-inside: avoid; }
+        .video-section h2 { border-bottom: 0; color: #07527d; margin-bottom: 8px; padding-bottom: 0; }
+        .video-link-row { border-top: 1px solid #b8dff3; padding: 8px 0; }
         .video-link-row:first-of-type { border-top: 0; padding-top: 0; }
         .area { border: 1px solid #d9e2ec; border-radius: 8px; margin-bottom: 14px; padding: 10px; page-break-inside: avoid; }
-        .video-button { background: #0891b2; border-radius: 6px; color: #fff; display: inline-block; font-size: 10px; font-weight: bold; padding: 7px 10px; text-decoration: none; }
+        .video-button { background: #0082c9; border-radius: 6px; color: #fff; display: inline-block; font-size: 10px; font-weight: bold; padding: 7px 10px; text-decoration: none; }
         .video-url { color: #64748b; font-size: 8px; margin-top: 4px; word-break: break-all; }
         .photos { table-layout: fixed; }
         .photos td { border: 0; padding: 6px; width: 50%; }

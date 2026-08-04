@@ -12,7 +12,7 @@
 @php
     $fullWidthAuthPage = View::hasSection('auth-full-width');
 @endphp
-<body class="{{ $fullWidthAuthPage ? 'min-h-screen bg-[#F8FAFC] text-slate-950' : 'min-h-screen bg-slate-100 text-slate-950' }}">
+<body class="hydrox-theme min-h-screen bg-[#eef3f6] text-[#10243a]">
     @php
         $flashMessages = collect([
             session('status') ? ['type' => 'success', 'message' => session('status')] : null,

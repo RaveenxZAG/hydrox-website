@@ -179,7 +179,7 @@
                                             <td class="px-5 py-4 text-slate-700">{{ $log->site_name }}</td>
                                             <td class="px-5 py-4">
                                                 @if ($log->shift_label)
-                                                    <span class="inline-flex rounded-full bg-cyan-50 px-2.5 py-1 text-xs font-bold text-[#0082c9] ring-1 ring-cyan-100">{{ $log->shift_label }}</span>
+                                                    <span class="inline-flex rounded-full bg-[#eaf6fc] px-2.5 py-1 text-xs font-bold text-[#0082c9] ring-1 ring-[#d4edf9]">{{ $log->shift_label }}</span>
                                                 @else
                                                     <span class="text-xs font-semibold text-slate-400">Legacy template</span>
                                                 @endif

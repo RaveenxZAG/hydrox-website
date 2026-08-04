@@ -20,22 +20,22 @@
                     <h2 class="text-xl font-bold">{{ $staffMember->fullName() }}</h2>
                     <p class="mt-1 text-sm text-slate-500">{{ $staffMember->email ?: 'Missing email' }} · {{ $staffMember->mobile ?: 'Missing mobile' }}</p>
                     @if ($onboarding)
-                        <a class="mt-3 inline-flex text-sm font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">View original subcontractor onboarding</a>
+                        <a class="mt-3 inline-flex text-sm font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">View original subcontractor onboarding</a>
                     @endif
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <span class="badge {{ $staffMember->staff_status === 'active' ? 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200' }}">{{ ucfirst($staffMember->staff_status ?: 'active') }}</span>
-                    <span class="badge {{ $staffMember->invoicing_enabled ? 'bg-cyan-50 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200' }}">Invoicing {{ $staffMember->invoicing_enabled ? 'Enabled' : 'Disabled' }}</span>
+                    <span class="badge {{ $staffMember->staff_status === 'active' ? 'bg-emerald-50 text-emerald-800' : 'bg-slate-100 text-slate-700' }}">{{ ucfirst($staffMember->staff_status ?: 'active') }}</span>
+                    <span class="badge {{ $staffMember->invoicing_enabled ? 'bg-[#eaf6fc] text-[#07527d]' : 'bg-slate-100 text-slate-700' }}">Invoicing {{ $staffMember->invoicing_enabled ? 'Enabled' : 'Disabled' }}</span>
                     @if ($staffMember->missingInfoCount() === 0)
-                        <span class="badge bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">Profile complete</span>
+                        <span class="badge bg-emerald-50 text-emerald-800">Profile complete</span>
                     @else
-                        <span class="badge bg-rose-50 text-rose-800 dark:bg-rose-950 dark:text-rose-200">{{ $staffMember->missingInfoCount() }} missing</span>
+                        <span class="badge bg-rose-50 text-rose-800">{{ $staffMember->missingInfoCount() }} missing</span>
                     @endif
                 </div>
             </div>
 
             @if ($missing)
-                <div class="mt-5 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+                <div class="mt-5 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
                     <p class="font-semibold">Missing information</p>
                     <p class="mt-1">{{ implode(', ', $missing) }}</p>
                 </div>
@@ -83,7 +83,7 @@
                         <dd class="mt-2 flex flex-wrap gap-2">
                             @php $skills = \Illuminate\Support\Arr::wrap($staffMember->skills); @endphp
                             @forelse ($skills as $skill)
-                                <span class="rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-xs font-bold text-cyan-800 dark:border-cyan-900 dark:bg-cyan-950 dark:text-cyan-200">{{ $skill }}</span>
+                                <span class="rounded-full border border-[#b8dff3] bg-[#eaf6fc] px-3 py-1 text-xs font-bold text-[#07527d]">{{ $skill }}</span>
                             @empty
                                 <span>Missing</span>
                             @endforelse
@@ -138,7 +138,7 @@
                         $current = $document?->currentVersion;
                         $staffHasDocument = (bool) $current || filled($staffMember->{$field});
                     @endphp
-                    <div class="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
+                    <div class="rounded-lg border border-slate-200 p-4">
                         <p class="font-semibold">{{ $label }}</p>
                         <p class="mt-1 text-sm {{ $staffHasDocument ? 'text-emerald-700' : 'text-rose-700' }}">{{ $staffHasDocument ? 'Uploaded' : 'Missing' }}</p>
                         @if ($staffHasDocument)
@@ -155,9 +155,9 @@
                             <p class="mt-2 break-all text-xs text-slate-500">{{ $current?->original_filename ?: $staffMember->documentName($field) }}</p>
                         @endif
                         @if ($document && $document->versions->isNotEmpty())
-                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-cyan-700">History ({{ $document->versions->count() }})</summary>
+                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-[#006da9]">History ({{ $document->versions->count() }})</summary>
                                 <div class="mt-2 grid gap-2">@foreach ($document->versions as $version)
-                                    <div class="rounded border border-slate-200 p-2 text-xs"><p>v{{ $version->version_number }} · {{ $version->review_status }}{{ $version->archived_at ? ' · Archived' : '' }}</p><a class="font-semibold text-cyan-700" href="{{ route('subcontractor-document-versions.download', $version) }}">{{ $version->original_filename }}</a></div>
+                                    <div class="rounded border border-slate-200 p-2 text-xs"><p>v{{ $version->version_number }} · {{ $version->review_status }}{{ $version->archived_at ? ' · Archived' : '' }}</p><a class="font-semibold text-[#006da9]" href="{{ route('subcontractor-document-versions.download', $version) }}">{{ $version->original_filename }}</a></div>
                                 @endforeach</div>
                             </details>
                         @endif
@@ -168,14 +168,14 @@
 
         <x-card>
             <h2 class="mb-4 text-lg font-bold">Notes</h2>
-            <p class="whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">{{ $staffMember->notes ?: 'No notes recorded.' }}</p>
+            <p class="whitespace-pre-line text-sm text-slate-600">{{ $staffMember->notes ?: 'No notes recorded.' }}</p>
         </x-card>
 
-        <x-card class="border-red-200 bg-red-50/60 dark:border-red-900 dark:bg-red-950/30">
+        <x-card class="border-red-200 bg-red-50/60">
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
-                    <h2 class="text-base font-bold text-red-900 dark:text-red-100">Delete Subcontractor</h2>
-                    <p class="mt-1 text-sm text-red-700 dark:text-red-200">
+                    <h2 class="text-base font-bold text-red-900">Delete Subcontractor</h2>
+                    <p class="mt-1 text-sm text-red-700">
                         Permanently deletes this subcontractor profile, portal access, and saved files. This cannot be recovered.
                     </p>
                 </div>

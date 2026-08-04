@@ -11,13 +11,13 @@
                          alt="Hydrox Facility Management"
                          style="display:block;width:220px;max-width:70%;height:auto;border:0;margin:0 auto">
                 </div>
-                <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#72efd0">HYDROX FACILITY MANAGEMENT</div>
+                <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#11d394">HYDROX FACILITY MANAGEMENT</div>
                 <h1 style="margin:12px 0 8px;font-size:30px">Your request is being reviewed</h1>
                 <p style="margin:0;color:#d9e9f2;line-height:1.6">Thanks {{ $booking->customer_name }}. We have safely received your booking request.</p>
             </td></tr>
             <tr><td style="padding:32px">
-                <div style="padding:20px;border:1px solid #b9eadd;border-radius:16px;background:#ecfff9;text-align:center">
-                    <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#08745a">BOOKING REQUEST CODE</div>
+                <div style="padding:20px;border:1px solid #b8dff3;border-radius:16px;background:#eaf6fc;text-align:center">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#07527d">BOOKING REQUEST CODE</div>
                     <div style="margin-top:7px;font-size:25px;font-weight:800;color:#06162f">{{ $booking->reference }}</div>
                 </div>
                 <p style="margin:24px 0 10px;line-height:1.7"><strong>This is a booking request only. It is not yet confirmed.</strong></p>

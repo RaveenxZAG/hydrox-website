@@ -11,7 +11,7 @@
                          alt="Hydrox Facility Management"
                          style="display:block;width:210px;max-width:70%;height:auto;border:0;margin:0 auto">
                 </div>
-                <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#72efd0">NEW WEBSITE REQUEST</div>
+                <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:#11d394">NEW WEBSITE REQUEST</div>
                 <h1 style="margin:10px 0 4px">{{ $booking->reference }}</h1>
                 <p style="margin:0;color:#d9e9f2">{{ $booking->customer_name }} · {{ $booking->phone }}</p>
             </td></tr>

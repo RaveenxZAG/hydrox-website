@@ -9,7 +9,7 @@
             <div class="mb-5">
                 <h2 class="text-lg font-bold">{{ $staffMember->fullName() }}</h2>
                 <div class="mt-2">
-                    <span class="badge bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">Hydrox subcontractor profile</span>
+                    <span class="badge bg-slate-100 text-slate-700">Hydrox subcontractor profile</span>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                 </x-field>
                 <label class="flex items-center gap-3 pt-2 text-sm font-medium">
                     <input type="hidden" name="gst_registered" value="0">
-                    <input class="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered', $staffMember->gst_registered))>
+                    <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered', $staffMember->gst_registered))>
                     GST registered
                 </label>
                 <x-field label="Insurance Expiry" name="insurance_expiry">
@@ -98,22 +98,22 @@
                 </x-field>
                 <label class="flex items-center gap-3 pt-2 text-sm font-medium">
                     <input type="hidden" name="active" value="0">
-                    <input class="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" type="checkbox" name="active" value="1" @checked(old('active', $staffMember->active))>
+                    <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="active" value="1" @checked(old('active', $staffMember->active))>
                     Active
                 </label>
                 <label class="flex items-center gap-3 pt-2 text-sm font-medium">
                     <input type="hidden" name="portal_access_enabled" value="0">
-                    <input class="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" type="checkbox" name="portal_access_enabled" value="1" @checked(old('portal_access_enabled', $staffMember->portal_access_enabled ?? true))>
+                    <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="portal_access_enabled" value="1" @checked(old('portal_access_enabled', $staffMember->portal_access_enabled ?? true))>
                     Subcontractor portal access enabled
                 </label>
                 <label class="flex items-center gap-3 pt-2 text-sm font-medium">
                     <input type="hidden" name="invoicing_enabled" value="0">
-                    <input class="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" type="checkbox" name="invoicing_enabled" value="1" @checked(old('invoicing_enabled', $staffMember->invoicing_enabled ?? true))>
+                    <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="invoicing_enabled" value="1" @checked(old('invoicing_enabled', $staffMember->invoicing_enabled ?? true))>
                     Invoicing enabled
                 </label>
                 <label class="flex items-center gap-3 pt-2 text-sm font-medium">
                     <input type="hidden" name="show_on_schedule" value="0">
-                    <input class="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" type="checkbox" name="show_on_schedule" value="1" @checked(old('show_on_schedule', $staffMember->show_on_schedule))>
+                    <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="show_on_schedule" value="1" @checked(old('show_on_schedule', $staffMember->show_on_schedule))>
                     Show on schedule
                 </label>
                 <x-field class="md:col-span-2" label="Notes" name="notes">
@@ -132,7 +132,7 @@
                         @foreach (\App\Models\SubcontractorOnboarding::skillOptions() as $skill)
                             <label class="cursor-pointer">
                                 <input class="peer sr-only" type="checkbox" name="skills[]" value="{{ $skill }}" @checked(in_array($skill, $selectedSkills, true))>
-                                <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-cyan-500 peer-checked:bg-cyan-50 peer-checked:text-cyan-800 hover:border-cyan-200 hover:bg-cyan-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300">
+                                <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-[#0082c9] peer-checked:bg-[#eaf6fc] peer-checked:text-[#07527d] hover:border-[#b8dff3] hover:bg-[#eaf6fc]">
                                     {{ $skill }}
                                 </span>
                             </label>
@@ -152,7 +152,7 @@
                 @foreach ($staffMember->documentFields() as $field => $label)
                     @php $currentVersion = $staffMember->currentDocumentsByCategory()->get($field)?->currentVersion; @endphp
                     <x-field :label="$label" :name="$field">
-                        <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-cyan-700" type="file" name="{{ $field }}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*">
+                        <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-[#eaf6fc] file:px-3 file:py-2 file:text-[#006da9]" type="file" name="{{ $field }}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*">
                         @if ($currentVersion || $staffMember->{$field})
                             <p class="mt-2 text-xs text-slate-500">Current file: {{ $currentVersion?->original_filename ?: $staffMember->documentName($field) }}</p>
                         @else

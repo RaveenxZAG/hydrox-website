@@ -5,21 +5,6 @@ import SignaturePad from 'signature_pad';
 window.Alpine = Alpine;
 window.SignaturePad = SignaturePad;
 
-Alpine.data('themeToggle', () => ({
-    dark: localStorage.theme === 'dark',
-    init() {
-        this.apply();
-    },
-    toggle() {
-        this.dark = !this.dark;
-        localStorage.theme = this.dark ? 'dark' : 'light';
-        this.apply();
-    },
-    apply() {
-        document.documentElement.classList.toggle('dark', this.dark);
-    },
-}));
-
 Alpine.data('reportBuilder', (existing = {}) => ({
     areas: existing.areas?.length ? existing.areas : [{ area_name: '', description: '', completion_notes: '', photo_notes: '', video_url: '' }],
     issues: existing.issues?.length ? existing.issues : [{ issue_type: '', description: '', severity: 'Low', recommendation: '' }],
@@ -305,7 +290,7 @@ Alpine.data('reportBuilder', (existing = {}) => ({
         target.innerHTML = '';
         (this.fileSelections[key] ?? []).forEach((item, index) => {
             const frame = document.createElement('div');
-            frame.className = 'relative h-24 w-24 overflow-hidden rounded-lg ring-1 ring-slate-200 dark:ring-slate-700';
+            frame.className = 'relative h-24 w-24 overflow-hidden rounded-lg ring-1 ring-slate-200 ';
 
             const img = document.createElement('img');
             img.src = item.previewUrl || item.url;

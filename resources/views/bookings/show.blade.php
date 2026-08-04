@@ -47,7 +47,7 @@
             @if ($booking->photos->isNotEmpty())
                 <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
                     @foreach ($booking->photos as $photo)
-                        <a class="group overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900"
+                        <a class="group overflow-hidden rounded-xl border border-slate-200 bg-slate-50"
                            href="{{ route('bookings.photos.show', [$booking, $photo]) }}" target="_blank" rel="noopener">
                             @if (in_array($photo->mime_type, ['image/heic', 'image/heif'], true))
                                 <div class="grid aspect-square place-items-center p-4 text-center text-xs font-bold text-slate-500">Open phone photo</div>
@@ -68,7 +68,7 @@
         @if ($booking->notes)
             <x-card>
                 <h2 class="text-lg font-black">Customer notes</h2>
-                <p class="mt-4 whitespace-pre-line text-sm leading-6 text-slate-600 dark:text-slate-300">{{ $booking->notes }}</p>
+                <p class="mt-4 whitespace-pre-line text-sm leading-6 text-slate-600">{{ $booking->notes }}</p>
             </x-card>
         @endif
         </div>
@@ -91,7 +91,7 @@
                 <button class="btn-primary">Save changes</button>
             </form>
 
-            <div class="mt-6 border-t border-slate-200 pt-5 dark:border-slate-800">
+            <div class="mt-6 border-t border-slate-200 pt-5">
                 <h3 class="text-sm font-black">Email delivery</h3>
                 <dl class="mt-3 grid gap-2 text-sm">
                     <div class="flex justify-between gap-3"><dt class="text-slate-500">Customer receipt</dt><dd class="font-semibold">{{ $booking->customer_email_sent_at ? 'Sent '.$booking->customer_email_sent_at->format('d M, g:i a') : 'Not sent' }}</dd></div>

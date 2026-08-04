@@ -2,7 +2,7 @@
 @section('content')
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-            <p class="text-sm font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-300">Subcontractor Onboarding</p>
+            <p class="text-sm font-semibold uppercase tracking-wide text-[#006da9]">Subcontractor Onboarding</p>
             <h1 class="text-2xl font-bold">Edit Details</h1>
         </div>
         <a class="btn-secondary" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">Back to Review</a>
@@ -21,7 +21,7 @@
                     @endforeach
                 </select>
             </x-field>
-            <label class="flex items-center gap-3 pt-7 text-sm font-medium"><input type="hidden" name="gst_registered" value="0"><input class="rounded border-slate-300 text-cyan-600" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered', $onboarding->gst_registered))> GST registered</label>
+            <label class="flex items-center gap-3 pt-7 text-sm font-medium"><input type="hidden" name="gst_registered" value="0"><input class="rounded border-slate-300 text-[#0082c9]" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered', $onboarding->gst_registered))> GST registered</label>
             <x-field label="Legal Business Name (if applicable)" name="legal_business_name"><input class="input" name="legal_business_name" value="{{ old('legal_business_name', $onboarding->legal_business_name) }}"></x-field>
             <x-field label="Trading Name (if applicable)" name="trading_name"><input class="input" name="trading_name" value="{{ old('trading_name', $onboarding->trading_name) }}"></x-field>
             <x-field label="ABN" name="abn"><input class="input" name="abn" value="{{ old('abn', $onboarding->abn) }}" inputmode="numeric" pattern="[0-9]*" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required></x-field>
@@ -50,19 +50,19 @@
             <x-field label="Insurance Expiry (if applicable)" name="insurance_expiry"><input class="input" type="date" name="insurance_expiry" value="{{ old('insurance_expiry', $onboarding->insurance_expiry?->format('Y-m-d')) }}"></x-field>
             @foreach ($onboarding->documentFields() as $field => $label)
                 @php $currentVersion = $onboarding->currentDocumentsByCategory()->get($field)?->currentVersion; @endphp
-                <div class="grid gap-2 rounded-lg border border-slate-200 p-4 dark:border-slate-700">
+                <div class="grid gap-2 rounded-lg border border-slate-200 p-4">
                     <p class="text-sm font-semibold">{{ $label }}</p>
                     @if ($field === 'uploaded_certificates')
                         <p class="text-xs text-slate-500">Upload new certificates to replace the current certificate set.</p>
                         @if ($onboarding->uploaded_certificates)
-                            <a class="text-sm font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Current certificates available</a>
+                            <a class="text-sm font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Current certificates available</a>
                         @else
                             <p class="text-sm text-slate-500">No current certificates.</p>
                         @endif
                         <input class="input" type="file" name="uploaded_certificates[]" multiple>
                     @else
                         @if ($currentVersion || $onboarding->{$field})
-                            <a class="text-sm font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Download current file</a>
+                            <a class="text-sm font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Download current file</a>
                         @else
                             <p class="text-sm text-slate-500">No current file.</p>
                         @endif
@@ -82,7 +82,7 @@
                     @foreach (\App\Models\SubcontractorOnboarding::skillOptions() as $skill)
                         <label class="cursor-pointer">
                             <input class="peer sr-only" type="checkbox" name="skills[]" value="{{ $skill }}" @checked(in_array($skill, $selectedSkills, true))>
-                            <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-cyan-500 peer-checked:bg-cyan-50 peer-checked:text-cyan-800 hover:border-cyan-200 hover:bg-cyan-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300">
+                            <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-[#0082c9] peer-checked:bg-[#eaf6fc] peer-checked:text-[#07527d] hover:border-[#b8dff3] hover:bg-[#eaf6fc]">
                                 {{ $skill }}
                             </span>
                         </label>

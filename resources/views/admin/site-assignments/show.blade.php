@@ -21,7 +21,7 @@
                 <a class="mr-1 inline-flex items-center gap-1 text-xs font-bold text-[#0082c9] hover:underline" href="{{ route('site-assignments.index') }}">← All Sites</a>
                 <span class="rounded-md bg-[#0082c9]/10 px-2 py-1 text-xs font-black text-[#0082c9]">{{ $site->site_code }}</span>
                 <h2 class="min-w-0 flex-1 truncate text-xl font-black">{{ $site->name }}</h2>
-                <span class="rounded-full bg-cyan-50 px-3 py-1 text-xs font-bold text-cyan-700">{{ $site->shifts->count() }} shifts</span>
+                <span class="rounded-full bg-[#eaf6fc] px-3 py-1 text-xs font-bold text-[#006da9]">{{ $site->shifts->count() }} shifts</span>
             </div>
             <p class="mt-1 text-sm text-slate-500">Open a shift to view or change its assigned subcontractors.</p>
         </section>
@@ -45,8 +45,8 @@
                                 ->values();
                         @endphp
                         <div x-data="{ open: false, search: '' }">
-                            <button type="button" class="group flex w-full items-center gap-3 px-4 py-2.5 text-left transition hover:bg-cyan-50/60" @click="open = ! open" :aria-expanded="open">
-                                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-cyan-50 text-[#0082c9]">
+                            <button type="button" class="group flex w-full items-center gap-3 px-4 py-2.5 text-left transition hover:bg-[#eaf6fc]/60" @click="open = ! open" :aria-expanded="open">
+                                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#eaf6fc] text-[#0082c9]">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3v3m8-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </span>
                                 <span class="min-w-0 flex-1">
@@ -70,7 +70,7 @@
                                 <div class="mt-2 grid max-h-64 gap-1 overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 sm:grid-cols-2">
                                     @forelse ($staffMembers as $member)
                                         @php $searchText = str($member->fullName().' '.$member->email.' '.$member->mobile)->lower(); @endphp
-                                        <label class="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2 hover:bg-cyan-50" data-search="{{ $searchText }}" x-show="search.trim() === '' || $el.dataset.search.includes(search.toLowerCase().trim())">
+                                        <label class="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2 hover:bg-[#eaf6fc]" data-search="{{ $searchText }}" x-show="search.trim() === '' || $el.dataset.search.includes(search.toLowerCase().trim())">
                                             <span class="min-w-0"><span class="block truncate text-sm font-bold">{{ $member->fullName() }}</span><span class="block truncate text-xs text-slate-500">{{ $member->email ?: $member->mobile ?: 'No contact recorded' }}</span></span>
                                             <input class="rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="staff_ids[]" value="{{ $member->id }}" @checked(in_array($member->id, $assignedIds, true))>
                                         </label>
@@ -90,7 +90,7 @@
 
         <section x-data="{ open: false }" class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <button type="button" class="flex w-full items-center gap-3 px-4 py-2.5 text-left transition hover:bg-slate-50" @click="open = ! open" :aria-expanded="open">
-                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-cyan-50 text-[#0082c9]">
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#eaf6fc] text-[#0082c9]">
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 17H9m10-1.8c-.9-1-1.5-1.5-1.5-4.2a5.5 5.5 0 0 0-11 0c0 2.7-.6 3.2-1.5 4.2-.4.4-.1 1.1.5 1.1h13c.6 0 .9-.7.5-1.1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 20a2.2 2.2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                 </span>
                 <span class="min-w-0 flex-1">

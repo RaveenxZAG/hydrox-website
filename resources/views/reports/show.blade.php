@@ -23,15 +23,15 @@
                 <div><dt class="text-slate-500">Status</dt><dd>{{ $report->status }}</dd></div>
             </div>
             <div class="mt-6 grid gap-4 md:grid-cols-2">
-                <div><h3 class="font-semibold">Work Summary</h3><p class="mt-2 whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">{{ $report->work_summary ?: 'Not recorded.' }}</p></div>
-                <div><h3 class="font-semibold">Recommendations</h3><p class="mt-2 whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">{{ $report->recommendations ?: 'Not recorded.' }}</p></div>
+                <div><h3 class="font-semibold">Work Summary</h3><p class="mt-2 whitespace-pre-line text-sm text-slate-600">{{ $report->work_summary ?: 'Not recorded.' }}</p></div>
+                <div><h3 class="font-semibold">Recommendations</h3><p class="mt-2 whitespace-pre-line text-sm text-slate-600">{{ $report->recommendations ?: 'Not recorded.' }}</p></div>
             </div>
         </x-card>
         <x-card>
             <h2 class="font-bold">Checklist</h2>
             <div class="mt-4 grid gap-2 text-sm">
                 @forelse ($report->checklist ?? [] as $item)
-                    <span class="rounded-lg bg-emerald-50 px-3 py-2 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">{{ $item }}</span>
+                    <span class="rounded-lg bg-[#eaf6fc] px-3 py-2 text-[#07527d]">{{ $item }}</span>
                 @empty
                     <span class="text-sm text-slate-500">No checklist items selected.</span>
                 @endforelse
@@ -62,7 +62,7 @@
                 <div><dt class="text-slate-500">Signed Date</dt><dd>{{ $report->technician_signed_at?->format('d M Y H:i') ?: $report->completion_date?->format('d M Y') }}</dd></div>
             </dl>
             @if ($report->technician_signature_path)
-                <div class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-950">
+                <div class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-2">
                     <img class="h-28 w-full rounded-md object-contain" src="{{ route('media.show', ['path' => $report->technician_signature_path]) }}" alt="Prepared by signature">
                 </div>
             @endif
@@ -83,7 +83,7 @@
                     @if ($issue->photos->isNotEmpty())
                         <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                             @foreach ($issue->photos as $photo)
-                                <div class="rounded-lg border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-950">
+                                <div class="rounded-lg border border-slate-200 bg-slate-50 p-2">
                                     <img class="h-32 w-full rounded-md object-contain" src="{{ route('media.show', ['path' => $photo->path]) }}" alt="{{ $issue->issue_type }} issue photo">
                                 </div>
                             @endforeach
@@ -108,7 +108,7 @@
                             <h3 class="mb-3 font-semibold">{{ $label }}</h3>
                             <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                                 @forelse ($photos as $photo)
-                                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-2 dark:border-slate-800 dark:bg-slate-950">
+                                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-2">
                                         <img class="h-36 w-full rounded-md object-contain" src="{{ route('media.show', ['path' => $photo->path]) }}" alt="{{ $area->area_name }} {{ strtolower($label) }} photo">
                                     </div>
                                 @empty
@@ -119,14 +119,14 @@
                     @endforeach
                 </div>
                 @if ($area->photo_notes)
-                    <p class="mt-4 break-words whitespace-pre-line text-sm text-slate-600 dark:text-slate-300"><strong>Photo Notes:</strong> {{ $area->photo_notes }}</p>
+                    <p class="mt-4 break-words whitespace-pre-line text-sm text-slate-600"><strong>Photo Notes:</strong> {{ $area->photo_notes }}</p>
                 @endif
                 @if ($area->video_url)
-                    <a class="mt-4 inline-flex rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 dark:border-slate-700 dark:text-cyan-300 dark:hover:bg-slate-800" href="{{ $area->video_url }}" target="_blank" rel="noopener">
+                    <a class="mt-4 inline-flex rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-[#006da9] hover:bg-[#eaf6fc]" href="{{ $area->video_url }}" target="_blank" rel="noopener">
                         Open Videos
                     </a>
                 @endif
-                <p class="mt-4 break-words whitespace-pre-line text-sm text-slate-600 dark:text-slate-300"><strong>Completion Notes:</strong> {{ $area->completion_notes ?: 'Not recorded.' }}</p>
+                <p class="mt-4 break-words whitespace-pre-line text-sm text-slate-600"><strong>Completion Notes:</strong> {{ $area->completion_notes ?: 'Not recorded.' }}</p>
             </x-card>
         @endforeach
     </div>
@@ -134,7 +134,7 @@
     @if ($report->internal_notes)
         <x-card class="mt-6">
             <h2 class="text-lg font-bold">Internal Notes</h2>
-            <p class="mt-4 whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">{{ $report->internal_notes }}</p>
+            <p class="mt-4 whitespace-pre-line text-sm text-slate-600">{{ $report->internal_notes }}</p>
         </x-card>
     @endif
 @endsection

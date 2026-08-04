@@ -12,8 +12,8 @@
             ->join('');
         $initials = $initials !== '' ? $initials : str($fullName)->substr(0, 2)->upper()->toString();
 
-        $inputClass = 'block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-cyan-100';
-        $fileClass = 'block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-50 file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-cyan-100';
+        $inputClass = 'block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-[#d4edf9]';
+        $fileClass = 'block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-[#eaf6fc] file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-[#d4edf9]';
         $errorClass = fn (string $field): string => $errors->has($field) || $errors->has($field.'.*') ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-100' : '';
         $formValue = fn (string $field, mixed $default = null): mixed => $errors->any() ? old($field, $default) : $default;
         $uploadLimits = $uploadLimits ?? [
@@ -80,7 +80,7 @@
 
                 <div class="mt-5 grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_12px_34px_rgba(15,23,42,0.05)] sm:grid-cols-3">
                     <div class="flex items-center gap-3 rounded-2xl bg-slate-50 p-3">
-                        <span class="grid h-10 w-10 place-items-center rounded-2xl bg-cyan-50 text-[#0082c9]">
+                        <span class="grid h-10 w-10 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M20 21a8 8 0 1 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -136,7 +136,7 @@
 
                     <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
                         <div class="flex items-start gap-4">
-                            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cyan-50 text-[#0082c9]">
+                            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -184,7 +184,7 @@
 
                     <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
                         <div class="flex items-start gap-4">
-                            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M3 7h18v12H3zM3 11h18M7 15h4M16 15h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -203,7 +203,7 @@
                                     @foreach (\App\Models\SubcontractorOnboarding::skillOptions() as $skill)
                                         <label class="cursor-pointer">
                                             <input class="peer sr-only" type="checkbox" name="skills[]" value="{{ $skill }}" @checked(in_array($skill, $selectedSkills, true))>
-                                            <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 shadow-sm transition peer-checked:border-[#0082c9] peer-checked:bg-cyan-50 peer-checked:text-[#0082c9] hover:border-cyan-200 hover:bg-cyan-50">
+                                            <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 shadow-sm transition peer-checked:border-[#0082c9] peer-checked:bg-[#eaf6fc] peer-checked:text-[#0082c9] hover:border-[#b8dff3] hover:bg-[#eaf6fc]">
                                                 {{ $skill }}
                                             </span>
                                         </label>
@@ -257,7 +257,7 @@
                                 </label>
                             @endforeach
                         </div>
-                        <div id="staff-profile-selected-files" class="mt-5 hidden rounded-2xl border border-cyan-100 bg-cyan-50 p-4 text-sm text-cyan-950"></div>
+                        <div id="staff-profile-selected-files" class="mt-5 hidden rounded-2xl border border-[#d4edf9] bg-[#eaf6fc] p-4 text-sm text-[#061b35]"></div>
                     </section>
 
                     <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
@@ -338,7 +338,7 @@
                 const item = document.createElement('li');
                 const size = document.createElement('span');
 
-                size.className = 'font-semibold text-cyan-700';
+                size.className = 'font-semibold text-[#006da9]';
                 size.textContent = ` (${formatBytes(file.size)})`;
 
                 item.textContent = file.name;

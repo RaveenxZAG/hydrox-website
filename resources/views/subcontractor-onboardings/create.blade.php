@@ -1,19 +1,19 @@
 @extends('layouts.auth')
 @section('auth-full-width', true)
 @section('content')
-    <div class="min-h-screen bg-[radial-gradient(circle_at_85%_0%,rgba(17,211,148,0.2),transparent_28%),linear-gradient(180deg,#06142d_0,#0a2546_22rem,#f4f8fb_22rem)] px-4 py-8 sm:px-6 lg:px-8" x-data="onboardingSubmit">
+    <div class="min-h-screen bg-[#eef3f6] px-4 py-8 sm:px-6 lg:px-8" x-data="onboardingSubmit">
         <div class="mx-auto max-w-6xl">
         <div x-show="submitting" x-cloak class="fixed inset-0 z-50 grid place-items-center bg-slate-950/70 px-4 backdrop-blur-sm">
             <div class="w-full max-w-md rounded-3xl border border-white/20 bg-white p-6 shadow-2xl">
                 <div class="mb-4 flex items-center gap-3">
-                    <div class="h-10 w-10 animate-spin rounded-full border-4 border-cyan-100 border-t-cyan-600"></div>
+                    <div class="h-10 w-10 animate-spin rounded-full border-4 border-[#d4edf9] border-t-[#0082c9]"></div>
                     <div>
                         <h2 class="text-lg font-bold text-slate-950">Submitting onboarding</h2>
                         <p class="text-sm text-slate-500" x-text="submitMessage"></p>
                     </div>
                 </div>
                 <div class="h-3 overflow-hidden rounded-full bg-slate-100">
-                    <div class="h-full rounded-full bg-cyan-600 transition-all duration-500 ease-out" :style="`width: ${progress}%`"></div>
+                    <div class="h-full rounded-full bg-[#0082c9] transition-all duration-500 ease-out" :style="`width: ${progress}%`"></div>
                 </div>
                 <div class="mt-3 flex items-center justify-between text-xs font-semibold text-slate-500">
                     <span>Uploading documents and saving application</span>
@@ -42,7 +42,7 @@
             <form method="POST" action="{{ route('subcontractor-onboardings.store') }}" enctype="multipart/form-data" class="grid gap-8 p-6 sm:p-9" @submit="startSubmit">
                 @csrf
 
-                <div class="rounded-2xl border border-[#11d394]/25 bg-[#e8fbf4] px-5 py-4 text-sm text-[#075d48]">
+                <div class="rounded-2xl border border-[#b8dff3] bg-[#eaf6fc] px-5 py-4 text-sm text-[#0b2a4a]">
                     <p class="font-black">For independent subcontractors and cleaning businesses</p>
                     <p class="mt-1 leading-6">Use this form if you operate under an ABN and want to provide cleaning or facility services for Hydrox in Melbourne. This is not an employee application form.</p>
                 </div>
@@ -53,7 +53,7 @@
                     <x-field label="Trading Name (if applicable)" name="trading_name"><input class="input" name="trading_name" value="{{ old('trading_name') }}" placeholder="Business or trading name"></x-field>
                     <x-field label="ABN" name="abn"><input class="input" name="abn" value="{{ old('abn') }}" placeholder="11-digit Australian Business Number" inputmode="numeric" pattern="[0-9]*" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required></x-field>
                     <x-field label="Business Structure" name="business_structure"><input class="input" name="business_structure" value="{{ old('business_structure') }}" placeholder="Sole trader, company, partnership" required></x-field>
-                    <label class="flex items-center gap-3 pt-7 text-sm font-medium"><input type="hidden" name="gst_registered" value="0"><input class="rounded border-slate-300 text-cyan-600" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered'))> GST registered</label>
+                    <label class="flex items-center gap-3 pt-7 text-sm font-medium"><input type="hidden" name="gst_registered" value="0"><input class="rounded border-slate-300 text-[#0082c9]" type="checkbox" name="gst_registered" value="1" @checked(old('gst_registered'))> GST registered</label>
                     <x-field label="Primary Contact (if different)" name="contact_person"><input class="input" name="contact_person" value="{{ old('contact_person') }}" placeholder="Name of your operations contact"></x-field>
                     <x-field label="First Name" name="first_name"><input class="input" name="first_name" value="{{ old('first_name') }}" placeholder="Given name" required></x-field>
                     <x-field label="Last Name" name="last_name"><input class="input" name="last_name" value="{{ old('last_name') }}" placeholder="Family name" required></x-field>
@@ -73,7 +73,7 @@
                             @endforeach
                         </select>
                     </x-field>
-                    <div class="md:col-span-2 rounded-2xl border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950" x-show="residency === 'Australian Citizen'" x-cloak>
+                    <div class="md:col-span-2 rounded-2xl border border-[#b8dff3] bg-[#eaf6fc] p-4 text-sm text-[#061b35]" x-show="residency === 'Australian Citizen'" x-cloak>
                         <p class="font-bold">Upload any one Australian citizenship document</p>
                         <div class="mt-3 grid gap-4 md:grid-cols-3">
                             <x-field label="Australian Passport" name="australian_passport"><input class="input" type="file" name="australian_passport" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></x-field>
@@ -122,7 +122,7 @@
                             @foreach (\App\Models\SubcontractorOnboarding::skillOptions() as $skill)
                                 <label class="cursor-pointer">
                                     <input class="peer sr-only" type="checkbox" name="skills[]" value="{{ $skill }}" @checked(in_array($skill, $selectedSkills, true))>
-                                    <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-cyan-500 peer-checked:bg-cyan-50 peer-checked:text-cyan-800 hover:border-cyan-200 hover:bg-cyan-50">
+                                    <span class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 shadow-sm transition peer-checked:border-[#0082c9] peer-checked:bg-[#eaf6fc] peer-checked:text-[#07527d] hover:border-[#b8dff3] hover:bg-[#eaf6fc]">
                                         {{ $skill }}
                                     </span>
                                 </label>
@@ -144,12 +144,12 @@
                     <x-field class="md:col-span-2" label="Additional Information (if applicable)" name="notes"><textarea class="input min-h-24" name="notes" placeholder="Tell us about your crew size, vehicles, equipment, licences or site-access requirements">{{ old('notes') }}</textarea></x-field>
                 </div>
 
-                <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0082c9] to-[#11d394] px-7 py-4 text-sm font-black text-white shadow-xl shadow-cyan-900/20 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto" :disabled="submitting">
+                <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-[#0082c9] px-7 py-4 text-sm font-black text-white shadow-xl shadow-[#0b2a4a]/20 transition hover:-translate-y-0.5 hover:bg-[#006da9] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto" :disabled="submitting">
                     <span x-text="submitting ? 'Submitting application...' : 'Submit subcontractor application'">Submit subcontractor application</span>
                 </button>
             </form>
         </section>
-        <p class="py-6 text-center text-xs text-white/65 sm:text-slate-500">Hydrox Facility Management · Professional cleaning and facility services across Melbourne</p>
+        <p class="py-6 text-center text-xs text-slate-500">Hydrox Facility Management · Professional cleaning and facility services across Melbourne</p>
         </div>
     </div>
 @endsection

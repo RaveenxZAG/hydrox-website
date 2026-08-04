@@ -31,7 +31,7 @@
                 <form method="POST" action="{{ route('staff-portal.invoices.store') }}" enctype="multipart/form-data" class="mt-5 grid gap-4">
                     @csrf
                     <x-field label="Work Log File" name="invoice_file">
-                        <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-cyan-700" type="file" name="invoice_file" accept="application/pdf,.pdf" required>
+                        <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-[#eaf6fc] file:px-3 file:py-2 file:text-[#006da9]" type="file" name="invoice_file" accept="application/pdf,.pdf" required>
                     </x-field>
                     <x-field label="Claimed Total Amount" name="total_amount">
                         <input class="input" type="number" step="0.01" min="0" name="total_amount" required>
@@ -40,7 +40,7 @@
                         <input class="input" name="invoice_reference">
                     </x-field>
                     <label class="flex gap-3 text-sm font-medium">
-                        <input class="mt-1 rounded border-slate-300 text-cyan-600" type="checkbox" name="confirm" value="1" required>
+                        <input class="mt-1 rounded border-slate-300 text-[#0082c9]" type="checkbox" name="confirm" value="1" required>
                         I confirm the work log information is correct.
                     </label>
                     <button class="btn-primary">Submit Work Log</button>

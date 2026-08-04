@@ -2,95 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --hydrox-navy-950: #041426;
+    --hydrox-navy-900: #061b35;
+    --hydrox-navy-800: #0b2a4a;
+    --hydrox-blue: #0082c9;
+    --hydrox-blue-dark: #006da9;
+    --hydrox-blue-soft: #eaf6fc;
+    --hydrox-mint: #11d394;
+    --hydrox-mint-soft: #eafbf5;
+    --hydrox-surface: #ffffff;
+    --hydrox-canvas: #eef3f6;
+    --hydrox-border: #dbe6ed;
+    --hydrox-text: #10243a;
+    --hydrox-muted: #607386;
+}
+
 @layer base {
     [x-cloak] {
         display: none !important;
     }
 
     body {
-        @apply bg-slate-100 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+        background: var(--hydrox-canvas);
+        color: var(--hydrox-text);
+        @apply antialiased;
+    }
+
+    ::selection {
+        background: rgba(0, 130, 201, 0.2);
+        color: var(--hydrox-navy-950);
+    }
+
+    :focus-visible {
+        outline: 3px solid rgba(0, 130, 201, 0.28);
+        outline-offset: 2px;
     }
 }
 
 @layer components {
     .panel {
-        @apply rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900;
+        border-color: var(--hydrox-border);
+        background: var(--hydrox-surface);
+        box-shadow: 0 12px 35px rgba(6, 27, 53, 0.06);
+        @apply rounded-2xl border;
     }
 
     .input {
-        @apply w-full rounded-lg border-slate-300 bg-white text-sm text-slate-900 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
+        border-color: var(--hydrox-border);
+        color: var(--hydrox-text);
+        @apply w-full rounded-xl bg-white text-sm shadow-sm focus:border-[#0082c9] focus:ring-[#0082c9];
     }
 
     .label {
-        @apply text-sm font-medium text-slate-700 dark:text-slate-300;
+        color: var(--hydrox-text);
+        @apply text-sm font-semibold;
     }
 
     .btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold shadow-sm transition;
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-bold shadow-sm transition;
     }
 
     .btn-primary {
-        @apply btn bg-cyan-600 text-white hover:bg-cyan-700;
+        background: var(--hydrox-blue);
+        @apply btn text-white hover:bg-[#006da9];
     }
 
     .btn-secondary {
-        @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
+        border-color: var(--hydrox-border);
+        color: var(--hydrox-navy-800);
+        @apply btn border bg-white hover:border-[#0082c9]/30 hover:bg-[#eaf6fc];
     }
 
     .badge {
         @apply rounded-full px-2.5 py-1 text-xs font-semibold;
     }
 
-    .dark .invoice-shell {
-        background-color: #020617 !important;
-        color: #e2e8f0 !important;
+    .hydrox-brand-rail {
+        background: linear-gradient(90deg, var(--hydrox-blue) 0%, var(--hydrox-blue) 72%, var(--hydrox-mint) 100%);
     }
 
-    .dark .invoice-shell section,
-    .dark .invoice-shell form,
-    .dark .invoice-shell table,
-    .dark .invoice-shell .bg-white {
-        background-color: #0f172a !important;
-        border-color: #1e293b !important;
+    .hydrox-hero {
+        background:
+            radial-gradient(circle at 88% 5%, rgba(17, 211, 148, 0.16), transparent 24rem),
+            linear-gradient(135deg, var(--hydrox-navy-950), var(--hydrox-navy-800));
+        box-shadow: 0 22px 55px rgba(6, 27, 53, 0.18);
     }
 
-    .dark .invoice-shell .bg-\[\#F8FAFC\],
-    .dark .invoice-shell thead {
-        background-color: #111827 !important;
+    .hydrox-card {
+        border: 1px solid var(--hydrox-border);
+        background: var(--hydrox-surface);
+        box-shadow: 0 14px 38px rgba(6, 27, 53, 0.065);
+        @apply rounded-2xl;
     }
 
-    .dark .invoice-shell tbody,
-    .dark .invoice-shell tr {
-        background-color: transparent !important;
+    .hydrox-icon {
+        background: var(--hydrox-blue-soft);
+        color: var(--hydrox-blue);
     }
 
-    .dark .invoice-shell tr:hover {
-        background-color: rgba(30, 41, 59, 0.65) !important;
+    .hydrox-kicker {
+        color: var(--hydrox-blue);
+        @apply text-xs font-black uppercase tracking-[0.18em];
     }
 
-    .dark .invoice-shell input,
-    .dark .invoice-shell select,
-    .dark .invoice-shell textarea {
-        background-color: #020617 !important;
-        border-color: #334155 !important;
-        color: #e2e8f0 !important;
+    .hydrox-theme a:not(.btn):focus-visible,
+    .hydrox-theme button:focus-visible,
+    .hydrox-theme input:focus-visible,
+    .hydrox-theme select:focus-visible,
+    .hydrox-theme textarea:focus-visible {
+        outline-color: rgba(0, 130, 201, 0.45);
     }
 
-    .dark .invoice-shell .text-slate-950,
-    .dark .invoice-shell .text-slate-900,
-    .dark .invoice-shell .text-slate-800,
-    .dark .invoice-shell .text-slate-700 {
-        color: #e2e8f0 !important;
-    }
-
-    .dark .invoice-shell .text-slate-600,
-    .dark .invoice-shell .text-slate-500,
-    .dark .invoice-shell .text-slate-400 {
-        color: #94a3b8 !important;
-    }
-
-    .dark .invoice-shell .border-\[\#E5E7EB\],
-    .dark .invoice-shell .divide-\[\#E5E7EB\] > :not([hidden]) ~ :not([hidden]) {
-        border-color: #1e293b !important;
-    }
 }

@@ -12,17 +12,17 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead class="text-xs uppercase text-slate-500"><tr><th class="py-3">Report</th><th>Client</th><th>Job</th><th>Date</th><th>Status</th><th></th></tr></thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                <tbody class="divide-y divide-slate-200">
                     @foreach ($reports as $report)
                         <tr>
                             <td class="py-3 font-semibold">{{ $report->report_number }}</td>
                             <td>{{ $report->job?->customer?->customer_name ?: 'Missing client' }}</td>
                             <td>{{ $report->job?->job_number ?: 'Missing job' }}</td>
                             <td>{{ $report->completion_date?->format('d M Y') }}</td>
-                            <td><span class="badge bg-cyan-50 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-200">{{ $report->status }}</span></td>
+                            <td><span class="badge bg-[#eaf6fc] text-[#006da9]">{{ $report->status }}</span></td>
                             <td class="text-right">
                                 <div class="flex items-center justify-end gap-3">
-                                    <a class="font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('reports.show', $report) }}">View</a>
+                                    <a class="font-semibold text-[#006da9]" href="{{ route('reports.show', $report) }}">View</a>
                                     <form method="POST" action="{{ route('reports.destroy', $report) }}" onsubmit="return confirm('Delete report {{ addslashes($report->report_number) }}?') && confirm('Please confirm again. This delete action cannot be undone.');">
                                         @csrf
                                         @method('DELETE')

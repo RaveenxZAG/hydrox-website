@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-[0_12px_34px_rgba(15,23,42,0.06)]">
-                    <span class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-[#0082c9]">
+                    <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -129,7 +129,7 @@
                     </div>
 
                     @if ($invoicingEnabled)
-                        <a class="inline-flex items-center gap-2 rounded-xl border border-[#0082c9] bg-white px-4 py-2.5 text-sm font-black text-[#0082c9] shadow-sm transition hover:bg-cyan-50" href="{{ route('staff-portal.invoices.template') }}">
+                        <a class="inline-flex items-center gap-2 rounded-xl border border-[#0082c9] bg-white px-4 py-2.5 text-sm font-black text-[#0082c9] shadow-sm transition hover:bg-[#eaf6fc]" href="{{ route('staff-portal.invoices.template') }}">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -140,7 +140,7 @@
 
                 <div class="mt-8 grid gap-4 lg:grid-cols-3">
                     <div class="flex items-start gap-4">
-                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-cyan-50 text-[#0082c9]">
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#eaf6fc] text-[#0082c9]">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-cyan-50 text-[#0082c9]">
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#eaf6fc] text-[#0082c9]">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 6v6l4 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-cyan-50 text-[#0082c9]">
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#eaf6fc] text-[#0082c9]">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M8 11V7a4 4 0 1 1 8 0v4M6 11h12v10H6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -225,7 +225,7 @@
                                     @csrf
                                     <label class="grid gap-2 text-sm font-bold text-slate-800">
                                         Corrected Excel work log
-                                        <input class="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-50 file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-cyan-100" type="file" name="invoice_file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
+                                        <input class="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-[#eaf6fc] file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-[#d4edf9]" type="file" name="invoice_file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
                                     </label>
                                     <label class="flex gap-3 text-sm font-semibold text-slate-700">
                                         <input class="mt-1 rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="confirm" value="1" required>
@@ -286,7 +286,7 @@
                                 </div>
                                 <label class="mx-auto grid w-full max-w-2xl gap-2 text-sm font-bold text-slate-800">
                                     Excel work log file
-                                    <input class="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-cyan-50 file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-cyan-100" type="file" name="invoice_file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
+                                    <input class="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-[#eaf6fc] file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#0082c9] focus:border-[#0082c9] focus:outline-none focus:ring-4 focus:ring-[#d4edf9]" type="file" name="invoice_file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
                                 </label>
                                 <label class="mx-auto flex max-w-2xl gap-3 text-sm font-semibold text-slate-700">
                                     <input class="mt-1 rounded border-slate-300 text-[#0082c9] focus:ring-[#0082c9]" type="checkbox" name="confirm" value="1" required>
@@ -344,7 +344,7 @@
             <section class="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] sm:p-7">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-[#0082c9]">
+                        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M14 2v6h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -375,7 +375,7 @@
                     @forelse ($invoices as $invoice)
                         <div class="mb-3 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-slate-300 hover:bg-slate-50">
                             <div class="flex min-w-0 items-center gap-4">
-                                <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-cyan-50 text-[#0082c9]">
+                                <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#eaf6fc] text-[#0082c9]">
                                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -405,7 +405,7 @@
                     @empty
                         <div class="grid min-h-[240px] place-items-center rounded-3xl bg-slate-50 px-6 py-10 text-center">
                             <div>
-                                <span class="mx-auto grid h-24 w-24 place-items-center rounded-3xl border border-cyan-100 bg-white text-[#0082c9] shadow-sm">
+                                <span class="mx-auto grid h-24 w-24 place-items-center rounded-3xl border border-[#d4edf9] bg-white text-[#0082c9] shadow-sm">
                                     <svg class="h-12 w-12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                         <path d="M4 20h16M5 20V8l4-4h6l4 4v12M9 4v5h6V4M8 14h8M8 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>

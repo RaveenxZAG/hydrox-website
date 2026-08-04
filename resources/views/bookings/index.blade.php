@@ -23,7 +23,7 @@
     <x-card>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
-                <thead class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500 dark:border-slate-800">
+                <thead class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
                     <tr>
                         <th class="px-4 py-3">Reference</th>
                         <th class="px-4 py-3">Customer</th>
@@ -33,9 +33,9 @@
                         <th class="px-4 py-3"></th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody class="divide-y divide-slate-100">
                     @forelse ($bookings as $booking)
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900">
+                        <tr class="hover:bg-slate-50">
                             <td class="whitespace-nowrap px-4 py-4 font-bold text-[#0082c9]">{{ $booking->reference }}</td>
                             <td class="px-4 py-4">
                                 <p class="font-semibold">{{ $booking->customer_name }}</p>
@@ -48,7 +48,7 @@
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-4 py-4">{{ $booking->preferred_date?->format('d M Y') ?: 'Flexible' }}</td>
-                            <td class="px-4 py-4"><span class="badge bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">{{ str($booking->status)->headline() }}</span></td>
+                            <td class="px-4 py-4"><span class="badge bg-slate-100 text-slate-700">{{ str($booking->status)->headline() }}</span></td>
                             <td class="px-4 py-4 text-right"><a class="font-bold text-[#0082c9]" href="{{ route('bookings.show', $booking) }}">View</a></td>
                         </tr>
                     @empty

@@ -12,7 +12,7 @@
     <x-card>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
-                <thead class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500 dark:border-slate-800">
+                <thead class="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
                     <tr>
                         <th class="py-3 pr-4">Business</th>
                         <th class="py-3 pr-4">Contact</th>
@@ -22,7 +22,7 @@
                         <th class="py-3 text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody class="divide-y divide-slate-100">
                     @forelse ($onboardings as $onboarding)
                         <tr>
                             <td class="py-3 pr-4 font-semibold">{{ $onboarding->legal_business_name ?: $onboarding->full_name }}</td>
@@ -30,7 +30,7 @@
                             <td class="py-3 pr-4">{{ $onboarding->email }}</td>
                             <td class="py-3 pr-4"><span class="badge {{ $onboarding->statusBadgeClass() }}">{{ $onboarding->status }}</span></td>
                             <td class="py-3 pr-4">{{ $onboarding->submitted_at?->format('d M Y') ?: $onboarding->created_at->format('d M Y') }}</td>
-                            <td class="py-3 text-right"><a class="font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">Review</a></td>
+                            <td class="py-3 text-right"><a class="font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">Review</a></td>
                         </tr>
                     @empty
                         <tr><td class="py-6 text-slate-500" colspan="6">No subcontractor onboardings yet.</td></tr>

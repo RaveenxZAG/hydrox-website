@@ -16,7 +16,7 @@
             </div>
             <div class="mt-5 grid gap-2 sm:grid-cols-4">
                 @foreach (['Submitted', 'Pending Review', 'Approved', 'Active'] as $step)
-                    <div class="rounded-lg border px-3 py-2 text-sm {{ in_array($step, ['Submitted', 'Pending Review'], true) || $onboarding->status === $step || ($step === 'Active' && $onboarding->status === 'Active') ? 'border-cyan-200 bg-cyan-50 text-cyan-800' : 'border-slate-200 text-slate-500' }}">{{ $step }}</div>
+                    <div class="rounded-lg border px-3 py-2 text-sm {{ in_array($step, ['Submitted', 'Pending Review'], true) || $onboarding->status === $step || ($step === 'Active' && $onboarding->status === 'Active') ? 'border-[#b8dff3] bg-[#eaf6fc] text-[#07527d]' : 'border-slate-200 text-slate-500' }}">{{ $step }}</div>
                 @endforeach
             </div>
         </x-card>
@@ -89,7 +89,7 @@
                         $current = $document?->currentVersion;
                         $hasDocument = (bool) $current || filled($onboarding->{$field});
                     @endphp
-                    <div class="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
+                    <div class="rounded-lg border border-slate-200 p-4">
                         <p class="font-semibold">{{ $label }}</p>
                         <p class="mt-1 text-sm {{ $hasDocument ? 'text-emerald-700' : 'text-rose-700' }}">{{ $hasDocument ? 'Uploaded' : 'Missing' }}</p>
                         @if ($hasDocument)
@@ -118,13 +118,13 @@
                             @endif
                         @endif
                         @if ($document && $document->versions->isNotEmpty())
-                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-cyan-700">History ({{ $document->versions->count() }})</summary>
+                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-[#006da9]">History ({{ $document->versions->count() }})</summary>
                                 <div class="mt-2 grid gap-2">
                                     @foreach ($document->versions as $version)
                                         <div class="rounded border border-slate-200 p-2 text-xs">
                                             <p>v{{ $version->version_number }} · {{ $version->review_status }} · {{ $version->created_at->format('d M Y H:i') }}{{ $version->archived_at ? ' · Archived' : '' }}</p>
                                             <p class="break-all text-slate-500">{{ $version->original_filename }}</p>
-                                            <a class="font-semibold text-cyan-700" href="{{ route('subcontractor-document-versions.download', $version) }}">Download version</a>
+                                            <a class="font-semibold text-[#006da9]" href="{{ route('subcontractor-document-versions.download', $version) }}">Download version</a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -155,7 +155,7 @@
             </div>
 
             @if ($onboarding->status === 'Active' && $staffMember)
-                <div class="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100">
+                <div class="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
                     <p class="font-semibold">Approved and subcontractor profile created in this system.</p>
                     <p class="mt-1 leading-6">The subcontractor can now be managed directly in the Hydrox portal.</p>
                     <div class="mt-4 flex flex-wrap gap-3">
@@ -167,7 +167,7 @@
             @if ($onboarding->sync_logs)
                 <div class="mt-4 grid gap-2 text-sm">
                     @php $log = collect($onboarding->sync_logs)->last(); @endphp
-                    <p class="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800"><strong>{{ $log['status'] }}</strong> · {{ $log['message'] }} · {{ $log['logged_at'] }}</p>
+                    <p class="rounded-lg bg-slate-50 px-3 py-2"><strong>{{ $log['status'] }}</strong> · {{ $log['message'] }} · {{ $log['logged_at'] }}</p>
                 </div>
             @endif
         </x-card>

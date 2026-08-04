@@ -85,7 +85,7 @@
                         @foreach (array_chunk($services, 2) as $row)
                             <tr>
                                 @foreach ($row as $service)
-                                    <td class="stack-cell" width="50%" valign="top" style="padding:8px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td style="padding:20px;background:#ffffff;border:1px solid #dfe8ee;border-radius:12px;"><div style="width:28px;height:4px;margin-bottom:13px;background:#11bd8a;"></div><h3 style="margin:0 0 8px;font-size:16px;line-height:22px;color:#071b35;">{{ $service[0] }}</h3><p style="margin:0;font-size:13px;line-height:21px;color:#607183;">{{ $service[1] }}</p></td></tr></table></td>
+                                    <td class="stack-cell" width="50%" valign="top" style="padding:8px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td style="padding:20px;background:#ffffff;border:1px solid #dfe8ee;border-radius:12px;"><div style="width:28px;height:4px;margin-bottom:13px;background:#11d394;"></div><h3 style="margin:0 0 8px;font-size:16px;line-height:22px;color:#071b35;">{{ $service[0] }}</h3><p style="margin:0;font-size:13px;line-height:21px;color:#607183;">{{ $service[1] }}</p></td></tr></table></td>
                                 @endforeach
                                 @if (count($row) === 1)<td class="stack-cell" width="50%"></td>@endif
                             </tr>
@@ -99,14 +99,14 @@
                     <h2 style="margin:0 0 22px;font-size:27px;line-height:34px;text-align:center;color:#071b35;">Why Organisations Choose Hydrox</h2>
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="font-size:15px;line-height:23px;color:#3f5164;">
                         @foreach (array_chunk(['Tailored service plans', 'Flexible recurring schedules', 'Trained and properly equipped personnel', 'Police-checked and insured team members', 'Professional-grade products and equipment', 'Responsive communication and support'], 2) as $benefits)
-                            <tr>@foreach ($benefits as $benefit)<td class="stack-cell" width="50%" valign="top" style="padding:8px 10px;"><span style="color:#08a978;font-weight:bold;">✓</span>&nbsp; {{ $benefit }}</td>@endforeach</tr>
+                            <tr>@foreach ($benefits as $benefit)<td class="stack-cell" width="50%" valign="top" style="padding:8px 10px;"><span style="color:#11d394;font-weight:bold;">✓</span>&nbsp; {{ $benefit }}</td>@endforeach</tr>
                         @endforeach
                     </table>
                 </td>
             </tr>
             <tr>
-                <td class="mobile-pad" style="padding:40px 34px;background:#e9f8f3;">
-                    <p style="margin:0 0 8px;text-align:center;font-size:12px;line-height:18px;font-weight:bold;letter-spacing:1.5px;color:#087b5d;">OUR SERVICE PROCESS</p>
+                <td class="mobile-pad" style="padding:40px 34px;background:#eaf6fc;">
+                    <p style="margin:0 0 8px;text-align:center;font-size:12px;line-height:18px;font-weight:bold;letter-spacing:1.5px;color:#07527d;">OUR SERVICE PROCESS</p>
                     <h2 style="margin:0 0 26px;text-align:center;font-size:27px;line-height:34px;color:#071b35;">Clear from Consultation to Delivery</h2>
                     @foreach ([['1', 'Initial Consultation', 'We discuss your property, services, schedule and operating requirements.'], ['2', 'Site Assessment', 'Where required, we assess access, risks, surfaces and the service scope.'], ['3', 'Tailored Proposal', 'You receive a clear proposal covering frequency, inclusions and pricing.'], ['4', 'Service & Support', 'Scheduled work is delivered with ongoing communication and quality monitoring.']] as $step)
                         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:12px;"><tr><td width="42" valign="top"><div style="width:34px;height:34px;line-height:34px;border-radius:50%;background:#071b35;color:#ffffff;text-align:center;font-size:14px;font-weight:bold;">{{ $step[0] }}</div></td><td valign="top"><p style="margin:0 0 3px;font-size:16px;line-height:22px;font-weight:bold;color:#071b35;">{{ $step[1] }}</p><p style="margin:0;font-size:14px;line-height:22px;color:#526477;">{{ $step[2] }}</p></td></tr></table>
@@ -118,7 +118,7 @@
                 <td class="mobile-pad" style="padding:42px;background:#071b35;text-align:center;color:#ffffff;">
                     <h2 style="margin:0 0 13px;font-size:28px;line-height:35px;color:#ffffff;">Explore Our Complete Capabilities</h2>
                     <p style="margin:0 auto 24px;max-width:520px;font-size:15px;line-height:25px;color:#cbd9e5;">View the Hydrox company profile to learn more about our services, equipment, operating approach and available facility solutions.</p>
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"><tr><td bgcolor="#11bd8a" style="border-radius:28px;"><a href="{{ \App\Mail\CompanyProfileMail::PROFILE_URL }}" style="display:inline-block;padding:15px 29px;border-radius:28px;color:#04291f;text-decoration:none;font-size:14px;line-height:18px;font-weight:bold;">OPEN COMPANY PROFILE</a></td></tr></table>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"><tr><td bgcolor="#11d394" style="border-radius:28px;"><a href="{{ \App\Mail\CompanyProfileMail::PROFILE_URL }}" style="display:inline-block;padding:15px 29px;border-radius:28px;color:#04291f;text-decoration:none;font-size:14px;line-height:18px;font-weight:bold;">OPEN COMPANY PROFILE</a></td></tr></table>
                     <p style="margin:14px 0 0;font-size:12px;line-height:18px;"><a href="{{ \App\Mail\CompanyProfileMail::PROFILE_URL }}" style="color:#9fc8df;word-break:break-all;">{{ \App\Mail\CompanyProfileMail::PROFILE_URL }}</a></p>
                 </td>
             </tr>
@@ -135,7 +135,7 @@
             <tr>
                 <td class="mobile-pad" style="padding:28px 34px;background:#051426;text-align:center;color:#9fb0bf;font-size:12px;line-height:20px;">
                     <img src="{{ asset('images/hydrox-email-logo-transparent.png') }}" width="160" height="54" alt="Hydrox Facility Management" style="display:block;width:160px;height:auto;max-width:60%;margin:0 auto 15px;border:0;">
-                    <p style="margin:0 0 8px;"><a href="{{ $website }}" style="color:#8ddbc4;text-decoration:none;">{{ $website }}</a> · <a href="mailto:{{ $email }}" style="color:#8ddbc4;text-decoration:none;">{{ $email }}</a> · {{ $phone }}</p>
+                    <p style="margin:0 0 8px;"><a href="{{ $website }}" style="color:#79c5e9;text-decoration:none;">{{ $website }}</a> · <a href="mailto:{{ $email }}" style="color:#79c5e9;text-decoration:none;">{{ $email }}</a> · {{ $phone }}</p>
                     @if (filled($address))<p style="margin:0 0 8px;">{{ $address }}</p>@endif
                     <p style="margin:0 0 8px;"><a href="https://hydrox.au/privacy-policy/" style="color:#9fc8df;">Privacy Policy</a></p>
                     <p style="margin:0;">You are receiving this email because your organisation may benefit from Hydrox Facility Management’s cleaning or facility services. Reply with “unsubscribe” if you do not wish to receive future company-profile emails.</p>
