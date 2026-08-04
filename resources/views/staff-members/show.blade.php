@@ -111,6 +111,11 @@
                     @foreach ($staffMember->documentFields() as $field => $label)
                         <div><dt class="font-semibold text-slate-500">{{ $label }}</dt><dd>{{ $staffMember->{$field} ? 'Uploaded' : 'Missing' }}</dd></div>
                     @endforeach
+                    @if ($staffMember->onboarding)
+                        <div><dt class="font-semibold text-slate-500">Citizenship / Residency</dt><dd>{{ $staffMember->onboarding->residency_status ?: 'Not recorded' }}</dd></div>
+                        <div><dt class="font-semibold text-slate-500">Visa Type</dt><dd>{{ $staffMember->onboarding->visa_type ?: 'Not applicable' }}</dd></div>
+                        <div><dt class="font-semibold text-slate-500">Visa Expiry</dt><dd>{{ $staffMember->onboarding->visa_expiry_date?->format('d M Y') ?: 'Not applicable' }}</dd></div>
+                    @endif
                 </dl>
             </x-card>
 
@@ -129,22 +134,32 @@
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 @foreach ($staffMember->documentFields() as $field => $label)
                     @php
-                        $staffHasDocument = filled($staffMember->{$field});
+                        $document = $staffMember->currentDocumentsByCategory()->get($field);
+                        $current = $document?->currentVersion;
+                        $staffHasDocument = (bool) $current || filled($staffMember->{$field});
                     @endphp
                     <div class="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
                         <p class="font-semibold">{{ $label }}</p>
                         <p class="mt-1 text-sm {{ $staffHasDocument ? 'text-emerald-700' : 'text-rose-700' }}">{{ $staffHasDocument ? 'Uploaded' : 'Missing' }}</p>
                         @if ($staffHasDocument)
+                            @if ($current)<p class="mt-1 text-xs text-slate-500">Version {{ $current->version_number }} · {{ $current->review_status }}</p>@endif
                             <div class="mt-3 flex flex-wrap gap-2">
                                 <a class="btn-secondary" href="{{ route('staff-members.documents.show', [$staffMember, $field]) }}" target="_blank">Preview</a>
                                 <a class="btn-secondary" href="{{ route('staff-members.documents.download', [$staffMember, $field]) }}">Download</a>
-                                <form method="POST" action="{{ route('staff-members.documents.destroy', [$staffMember, $field]) }}" onsubmit="return confirm('Delete {{ $label }} from this subcontractor profile? This removes the uploaded file from the Hydrox Portal.');">
+                                <form method="POST" action="{{ $current ? route('subcontractor-document-versions.archive', $current) : route('staff-members.documents.destroy', [$staffMember, $field]) }}" onsubmit="return confirm('Archive {{ $label }}? It will remain available in history.');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 shadow-sm transition hover:bg-red-100">Delete</button>
+                                    <button class="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 shadow-sm transition hover:bg-red-100">Archive</button>
                                 </form>
                             </div>
-                            <p class="mt-2 break-all text-xs text-slate-500">{{ $staffMember->documentName($field) }}</p>
+                            <p class="mt-2 break-all text-xs text-slate-500">{{ $current?->original_filename ?: $staffMember->documentName($field) }}</p>
+                        @endif
+                        @if ($document && $document->versions->isNotEmpty())
+                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-cyan-700">History ({{ $document->versions->count() }})</summary>
+                                <div class="mt-2 grid gap-2">@foreach ($document->versions as $version)
+                                    <div class="rounded border border-slate-200 p-2 text-xs"><p>v{{ $version->version_number }} · {{ $version->review_status }}{{ $version->archived_at ? ' · Archived' : '' }}</p><a class="font-semibold text-cyan-700" href="{{ route('subcontractor-document-versions.download', $version) }}">{{ $version->original_filename }}</a></div>
+                                @endforeach</div>
+                            </details>
                         @endif
                     </div>
                 @endforeach

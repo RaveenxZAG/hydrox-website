@@ -63,8 +63,39 @@
                     <x-field label="Business Address" name="business_address"><input class="input" name="business_address" value="{{ old('business_address') }}" placeholder="Street address, suburb, state and postcode" required></x-field>
                 </div>
 
-                <div class="grid gap-4 rounded-3xl border border-slate-200 p-5 md:grid-cols-2 sm:p-6">
+                <div class="grid gap-4 rounded-3xl border border-slate-200 p-5 md:grid-cols-2 sm:p-6" x-data="{ residency: @js(old('residency_status', '')) }">
                     <div class="md:col-span-2"><p class="text-xs font-black uppercase tracking-[0.18em] text-[#0082c9]">Step 2</p><h2 class="mt-1 text-xl font-black">Insurance and Victorian compliance</h2></div>
+                    <x-field class="md:col-span-2" label="Citizenship or Residency Status" name="residency_status">
+                        <select class="input" name="residency_status" x-model="residency" required>
+                            <option value="">Select your status</option>
+                            @foreach (\App\Models\SubcontractorOnboarding::RESIDENCY_STATUSES as $status)
+                                <option value="{{ $status }}">{{ $status }}</option>
+                            @endforeach
+                        </select>
+                    </x-field>
+                    <div class="md:col-span-2 rounded-2xl border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950" x-show="residency === 'Australian Citizen'" x-cloak>
+                        <p class="font-bold">Upload any one Australian citizenship document</p>
+                        <div class="mt-3 grid gap-4 md:grid-cols-3">
+                            <x-field label="Australian Passport" name="australian_passport"><input class="input" type="file" name="australian_passport" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></x-field>
+                            <x-field label="Birth Certificate" name="birth_certificate"><input class="input" type="file" name="birth_certificate" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></x-field>
+                            <x-field label="Citizenship Certificate" name="citizenship_certificate"><input class="input" type="file" name="citizenship_certificate" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></x-field>
+                        </div>
+                        @error('citizenship_evidence')<p class="mt-2 font-semibold text-rose-700">{{ $message }}</p>@enderror
+                    </div>
+                    <template x-if="residency === 'Permanent Resident'">
+                        <div class="contents">
+                            <x-field label="Passport" name="passport"><input class="input" type="file" name="passport" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required></x-field>
+                            <x-field label="Permanent Residency Evidence" name="permanent_residency_evidence"><input class="input" type="file" name="permanent_residency_evidence" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required></x-field>
+                        </div>
+                    </template>
+                    <template x-if="residency === 'Other Visa Holder'">
+                        <div class="contents">
+                            <x-field label="Visa Type" name="visa_type"><input class="input" name="visa_type" value="{{ old('visa_type') }}" required></x-field>
+                            <x-field label="Visa Expiry Date" name="visa_expiry_date"><input class="input" type="date" name="visa_expiry_date" value="{{ old('visa_expiry_date') }}" required></x-field>
+                            <x-field label="Passport" name="passport"><input class="input" type="file" name="passport" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required></x-field>
+                            <x-field label="Visa Evidence" name="visa_evidence"><input class="input" type="file" name="visa_evidence" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required></x-field>
+                        </div>
+                    </template>
                     <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 md:col-span-2">
                         <p class="font-bold">Before uploading documents</p>
                         <p class="mt-1 leading-6">Upload relevant current documents only: Public Liability Insurance, Victorian Working with Children Check, National Police Check, Driver Licence and Australian working-rights evidence. Leave optional documents blank if they are not relevant to your work.</p>
@@ -76,6 +107,9 @@
                     <x-field label="National Police Check (if applicable)" name="police_clearance"><input class="input" type="file" name="police_clearance"></x-field>
                     <x-field label="Driver Licence (if applicable)" name="driver_licence"><input class="input" type="file" name="driver_licence"></x-field>
                     <x-field label="Australian Working Rights / Visa (if applicable)" name="working_rights"><input class="input" type="file" name="working_rights"></x-field>
+                    <x-field label="Resume (required)" name="resume"><input class="input" type="file" name="resume" accept=".pdf,.doc,.docx" required></x-field>
+                    <x-field label="Cover Letter Attachment (optional)" name="cover_letter_attachment"><input class="input" type="file" name="cover_letter_attachment" accept=".pdf,.doc,.docx"></x-field>
+                    <x-field class="md:col-span-2" label="Cover Letter (optional)" name="cover_letter_text"><textarea class="input min-h-32" name="cover_letter_text" placeholder="Type your cover letter here, upload one above, or leave both blank.">{{ old('cover_letter_text') }}</textarea></x-field>
                 </div>
 
                 <div class="grid gap-4 rounded-3xl border border-slate-200 bg-slate-50/70 p-5 md:grid-cols-2 sm:p-6">

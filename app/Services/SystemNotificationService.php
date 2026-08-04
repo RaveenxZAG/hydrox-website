@@ -11,6 +11,8 @@ class SystemNotificationService
 {
     public const ADMIN_EMAIL = 'admin@hydrox.au';
 
+    public function __construct(private readonly TelegramNotificationService $telegram) {}
+
     public function notify(
         string $type,
         string $title,
@@ -31,6 +33,8 @@ class SystemNotificationService
         if ($sendEmail) {
             $this->sendEmail($notification);
         }
+
+        $this->telegram->send($notification);
 
         return $notification;
     }
@@ -62,5 +66,4 @@ class SystemNotificationService
             report($exception);
         }
     }
-
 }

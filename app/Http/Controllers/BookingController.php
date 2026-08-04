@@ -155,7 +155,17 @@ class BookingController extends Controller
             app(SystemNotificationService::class)->notify(
                 'booking_request',
                 "New booking request {$booking->reference}",
-                "{$booking->customer_name} requested ".implode(', ', $booking->services ?? [$booking->service]).'.',
+                "Name: {$booking->customer_name}\n"
+                    ."Email: {$booking->email}\n"
+                    ."Phone: {$booking->phone}\n"
+                    .'Services: '.implode(', ', $booking->services ?? [$booking->service])."\n"
+                    .'Extras: '.(implode(', ', $booking->extras ?? []) ?: 'None')."\n"
+                    .'Frequency: '.($booking->frequency ?: 'Not specified')."\n"
+                    .'Preferred date: '.($booking->preferred_date?->format('d M Y') ?: 'Flexible')."\n"
+                    .'Preferred time: '.($booking->preferred_time ?: 'Flexible')."\n"
+                    .'Address: '.trim(implode(', ', array_filter([$booking->address, $booking->suburb, $booking->postcode])))."\n"
+                    .'Notes: '.($booking->notes ?: 'None')."\n"
+                    .'Photos: '.$booking->photos()->count(),
                 route('bookings.show', $booking),
                 $booking,
                 false

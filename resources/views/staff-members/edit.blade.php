@@ -150,15 +150,17 @@
             <p class="mb-4 text-sm text-slate-500">Upload only relevant replacement files. PDF, Word, JPG, PNG, or WebP. Maximum 10 MB each.</p>
             <div class="grid gap-4 md:grid-cols-2">
                 @foreach ($staffMember->documentFields() as $field => $label)
+                    @php $currentVersion = $staffMember->currentDocumentsByCategory()->get($field)?->currentVersion; @endphp
                     <x-field :label="$label" :name="$field">
                         <input class="input file:mr-3 file:rounded-md file:border-0 file:bg-cyan-50 file:px-3 file:py-2 file:text-cyan-700" type="file" name="{{ $field }}" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*">
-                        @if ($staffMember->{$field})
-                            <p class="mt-2 text-xs text-slate-500">Current file: {{ $staffMember->documentName($field) }}</p>
+                        @if ($currentVersion || $staffMember->{$field})
+                            <p class="mt-2 text-xs text-slate-500">Current file: {{ $currentVersion?->original_filename ?: $staffMember->documentName($field) }}</p>
                         @else
                             <p class="mt-2 text-xs text-amber-700">Missing document.</p>
                         @endif
                     </x-field>
                 @endforeach
+                <x-field class="md:col-span-2" label="Replacement Reason (applies to new files)" name="replacement_reason"><textarea class="input min-h-20" name="replacement_reason">{{ old('replacement_reason') }}</textarea></x-field>
             </div>
         </x-card>
 

@@ -42,6 +42,9 @@
                         'Email' => $onboarding->email,
                         'Mobile' => $onboarding->mobile ?: $onboarding->phone,
                         'Business Address / Personal Address' => $onboarding->business_address ?: $onboarding->address,
+                        'Citizenship / Residency' => $onboarding->residency_status,
+                        'Visa Type' => $onboarding->visa_type,
+                        'Visa Expiry' => $onboarding->visa_expiry_date?->format('d M Y'),
                     ] as $label => $value)
                         <div><dt class="font-semibold text-slate-500">{{ $label }}</dt><dd>{{ $value ?: 'Not listed' }}</dd></div>
                     @endforeach
@@ -64,6 +67,7 @@
                     <div><dt class="font-semibold text-slate-500">Cleaning Skills</dt><dd>{{ $onboarding->skillsText() ?: 'Not listed' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Availability</dt><dd class="whitespace-pre-line">{{ $onboarding->available_hours ?: 'Not listed' }}</dd></div>
                     <div><dt class="font-semibold text-slate-500">Previous Experience</dt><dd class="whitespace-pre-line">{{ $onboarding->experience ?: 'Not listed' }}</dd></div>
+                    <div><dt class="font-semibold text-slate-500">Typed Cover Letter</dt><dd class="whitespace-pre-line">{{ $onboarding->cover_letter_text ?: 'Not provided' }}</dd></div>
                 </dl>
             </x-card>
 
@@ -80,20 +84,51 @@
             <h2 class="mb-4 text-lg font-bold">Documents</h2>
             <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 @foreach ($onboarding->documentFields() as $field => $label)
-                    @php $hasDocument = $field === 'uploaded_certificates' ? filled($onboarding->uploaded_certificates) : filled($onboarding->{$field}); @endphp
+                    @php
+                        $document = $onboarding->documents->firstWhere('category', $field);
+                        $current = $document?->currentVersion;
+                        $hasDocument = (bool) $current || filled($onboarding->{$field});
+                    @endphp
                     <div class="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
                         <p class="font-semibold">{{ $label }}</p>
                         <p class="mt-1 text-sm {{ $hasDocument ? 'text-emerald-700' : 'text-rose-700' }}">{{ $hasDocument ? 'Uploaded' : 'Missing' }}</p>
                         @if ($hasDocument)
+                            @if ($current)
+                                <p class="mt-1 text-xs text-slate-500">Version {{ $current->version_number }} · {{ $current->review_status }} · {{ $current->original_filename }}</p>
+                            @endif
                             <div class="mt-3 flex flex-wrap gap-2">
                                 <a class="btn-secondary" href="{{ route('subcontractor-onboardings.documents.show', [$onboarding, $field]) }}" target="_blank">Preview</a>
                                 <a class="btn-secondary" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Download</a>
-                                <form method="POST" action="{{ route('subcontractor-onboardings.documents.destroy', [$onboarding, $field]) }}" onsubmit="return confirm('Delete this document? This will remove the uploaded file from this onboarding review.');">
+                                <form method="POST" action="{{ $current ? route('subcontractor-document-versions.archive', $current) : route('subcontractor-onboardings.documents.destroy', [$onboarding, $field]) }}" onsubmit="return confirm('Archive this document? It will remain available in history.');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-bold text-rose-700 hover:bg-rose-100">Delete</button>
+                                    <button class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-bold text-rose-700 hover:bg-rose-100">Archive</button>
                                 </form>
                             </div>
+                            @if ($current)
+                                <form method="POST" action="{{ route('subcontractor-document-versions.update', $current) }}" class="mt-3 grid gap-2">
+                                    @csrf @method('PATCH')
+                                    <select class="input" name="review_status">
+                                        @foreach (\App\Models\SubcontractorDocumentVersion::REVIEW_STATUSES as $reviewStatus)<option @selected($current->review_status === $reviewStatus)>{{ $reviewStatus }}</option>@endforeach
+                                    </select>
+                                    <input class="input" type="date" name="expiry_date" value="{{ $current->expiry_date?->format('Y-m-d') }}">
+                                    <textarea class="input min-h-20" name="admin_notes" placeholder="Admin review notes">{{ $current->admin_notes }}</textarea>
+                                    <button class="btn-secondary">Save Review</button>
+                                </form>
+                            @endif
+                        @endif
+                        @if ($document && $document->versions->isNotEmpty())
+                            <details class="mt-3 text-sm"><summary class="cursor-pointer font-semibold text-cyan-700">History ({{ $document->versions->count() }})</summary>
+                                <div class="mt-2 grid gap-2">
+                                    @foreach ($document->versions as $version)
+                                        <div class="rounded border border-slate-200 p-2 text-xs">
+                                            <p>v{{ $version->version_number }} · {{ $version->review_status }} · {{ $version->created_at->format('d M Y H:i') }}{{ $version->archived_at ? ' · Archived' : '' }}</p>
+                                            <p class="break-all text-slate-500">{{ $version->original_filename }}</p>
+                                            <a class="font-semibold text-cyan-700" href="{{ route('subcontractor-document-versions.download', $version) }}">Download version</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </details>
                         @endif
                     </div>
                 @endforeach

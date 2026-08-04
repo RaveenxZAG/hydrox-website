@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class StaffMember extends Model
@@ -111,6 +112,11 @@ class StaffMember extends Model
         return $this->hasMany(StaffProfileChangeRequest::class);
     }
 
+    public function documents(): HasMany
+    {
+        return $this->hasMany(SubcontractorDocument::class);
+    }
+
     public function serviceM8Inviter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'servicem8_invited_by');
@@ -154,13 +160,16 @@ class StaffMember extends Model
 
     public function documentFields(): array
     {
-        return [
-            'public_liability_insurance' => 'Public Liability Insurance',
-            'workers_compensation_insurance' => 'Victorian Working with Children Check',
-            'police_clearance' => 'Police Clearance',
-            'driver_licence' => 'Driver Licence',
-            'working_rights' => 'Working Rights / VISA or relevant document',
-        ];
+        return SubcontractorOnboarding::DOCUMENT_FIELDS;
+    }
+
+    public function currentDocumentsByCategory()
+    {
+        $this->loadMissing('documents.currentVersion', 'onboarding.documents.currentVersion');
+
+        return $this->documents->concat($this->onboarding?->documents ?? collect())
+            ->filter(fn (SubcontractorDocument $document): bool => (bool) $document->currentVersion)
+            ->unique('category')->keyBy('category');
     }
 
     public function documentName(string $field): ?string
@@ -170,7 +179,7 @@ class StaffMember extends Model
 
     public function skillsText(): string
     {
-        return implode(', ', \Illuminate\Support\Arr::wrap($this->skills));
+        return implode(', ', Arr::wrap($this->skills));
     }
 
     public function missingInfo(): array

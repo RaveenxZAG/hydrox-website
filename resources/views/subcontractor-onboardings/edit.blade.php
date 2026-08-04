@@ -33,12 +33,23 @@
             <x-field label="Mobile" name="mobile"><input class="input" name="mobile" value="{{ old('mobile', $onboarding->mobile) }}" required></x-field>
             <input type="hidden" name="position" value="Sub Contractor">
             <x-field class="md:col-span-2" label="Business Address / Personal Address" name="business_address"><input class="input" name="business_address" value="{{ old('business_address', $onboarding->business_address) }}" required></x-field>
+            <x-field label="Citizenship or Residency Status" name="residency_status">
+                <select class="input" name="residency_status">
+                    <option value="">Legacy record — not recorded</option>
+                    @foreach (\App\Models\SubcontractorOnboarding::RESIDENCY_STATUSES as $residencyStatus)
+                        <option value="{{ $residencyStatus }}" @selected(old('residency_status', $onboarding->residency_status) === $residencyStatus)>{{ $residencyStatus }}</option>
+                    @endforeach
+                </select>
+            </x-field>
+            <x-field label="Visa Type" name="visa_type"><input class="input" name="visa_type" value="{{ old('visa_type', $onboarding->visa_type) }}"></x-field>
+            <x-field label="Visa Expiry Date" name="visa_expiry_date"><input class="input" type="date" name="visa_expiry_date" value="{{ old('visa_expiry_date', $onboarding->visa_expiry_date?->format('Y-m-d')) }}"></x-field>
         </section>
 
         <section class="panel grid gap-4 p-6 md:grid-cols-2">
             <h2 class="text-lg font-bold md:col-span-2">Insurance & Compliance</h2>
             <x-field label="Insurance Expiry (if applicable)" name="insurance_expiry"><input class="input" type="date" name="insurance_expiry" value="{{ old('insurance_expiry', $onboarding->insurance_expiry?->format('Y-m-d')) }}"></x-field>
             @foreach ($onboarding->documentFields() as $field => $label)
+                @php $currentVersion = $onboarding->currentDocumentsByCategory()->get($field)?->currentVersion; @endphp
                 <div class="grid gap-2 rounded-lg border border-slate-200 p-4 dark:border-slate-700">
                     <p class="text-sm font-semibold">{{ $label }}</p>
                     @if ($field === 'uploaded_certificates')
@@ -50,7 +61,7 @@
                         @endif
                         <input class="input" type="file" name="uploaded_certificates[]" multiple>
                     @else
-                        @if ($onboarding->{$field})
+                        @if ($currentVersion || $onboarding->{$field})
                             <a class="text-sm font-semibold text-cyan-700 dark:text-cyan-300" href="{{ route('subcontractor-onboardings.documents.download', [$onboarding, $field]) }}">Download current file</a>
                         @else
                             <p class="text-sm text-slate-500">No current file.</p>
@@ -59,6 +70,7 @@
                     @endif
                 </div>
             @endforeach
+            <x-field class="md:col-span-2" label="Replacement Reason (applies to new files)" name="replacement_reason"><textarea class="input min-h-20" name="replacement_reason">{{ old('replacement_reason') }}</textarea></x-field>
         </section>
 
         <section class="panel grid gap-4 p-6 md:grid-cols-2">
@@ -83,6 +95,7 @@
             <x-field class="md:col-span-2" label="Previous Experience" name="experience">
                 <textarea class="input min-h-32" name="experience" placeholder="Example:&#10;Three years delivering commercial cleaning across Melbourne.&#10;Reference: Jane Smith, Facilities Manager, 0400 000 000.&#10;Service area: Melbourne CBD and surrounding suburbs.">{{ old('experience', $onboarding->experience) }}</textarea>
             </x-field>
+            <x-field class="md:col-span-2" label="Typed Cover Letter" name="cover_letter_text"><textarea class="input min-h-32" name="cover_letter_text">{{ old('cover_letter_text', $onboarding->cover_letter_text) }}</textarea></x-field>
         </section>
 
         <section class="panel grid gap-4 p-6 md:grid-cols-2">

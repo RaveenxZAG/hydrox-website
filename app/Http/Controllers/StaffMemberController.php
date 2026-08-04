@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\StaffMember;
 use App\Models\SubcontractorOnboarding;
 use App\Services\StaffPortal\StaffIdentityService;
+use App\Services\SubcontractorDocumentService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -46,7 +47,7 @@ class StaffMemberController extends Controller
     public function show(StaffMember $staffMember): View
     {
         return view('staff-members.show', [
-            'staffMember' => $staffMember->load('onboarding'),
+            'staffMember' => $staffMember->load('onboarding.documents.versions.reviewer', 'documents.versions.reviewer', 'documents.currentVersion'),
             'roleNames' => $this->loadRoleNames(),
         ]);
     }
@@ -59,7 +60,7 @@ class StaffMemberController extends Controller
         ]);
     }
 
-    public function update(Request $request, StaffMember $staffMember, StaffIdentityService $identity): RedirectResponse
+    public function update(Request $request, StaffMember $staffMember, StaffIdentityService $identity, SubcontractorDocumentService $documents): RedirectResponse
     {
         $request->merge([
             'abn' => filled($request->input('abn'))
@@ -104,6 +105,15 @@ class StaffMemberController extends Controller
             'police_clearance' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
             'driver_licence' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
             'working_rights' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'australian_passport' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'birth_certificate' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'citizenship_certificate' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'passport' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'permanent_residency_evidence' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'visa_evidence' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp,doc,docx'],
+            'resume' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx'],
+            'cover_letter_attachment' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx'],
+            'replacement_reason' => ['nullable', 'string', 'max:1000'],
             'show_on_schedule' => ['nullable', 'boolean'],
             'notes' => ['nullable', 'string'],
         ]);
@@ -111,10 +121,16 @@ class StaffMemberController extends Controller
         foreach ($staffMember->documentFields() as $field => $label) {
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
-                $data[$field] = $file->store('staff-documents/'.$staffMember->id, 'local');
-                $data[$field.'_name'] = $file->getClientOriginalName();
+                $version = $documents->addForStaff($staffMember, $field, $file, auth()->id(), $request->input('replacement_reason'));
+                if (in_array($field, ['public_liability_insurance', 'workers_compensation_insurance', 'police_clearance', 'driver_licence', 'working_rights'], true)) {
+                    $data[$field] = $version->storage_path;
+                    $data[$field.'_name'] = $version->original_filename;
+                } else {
+                    unset($data[$field]);
+                }
             }
         }
+        unset($data['replacement_reason']);
 
         $normalizedEmail = $identity->normalizeEmail($data['email'] ?? null);
         $normalizedMobile = $identity->normalizeMobile($data['mobile'] ?? null);
@@ -146,35 +162,31 @@ class StaffMemberController extends Controller
 
     public function document(StaffMember $staffMember, string $field): BinaryFileResponse
     {
-        $path = $this->documentPath($staffMember, $field);
-        abort_unless($path && Storage::disk('local')->exists($path), 404);
+        [$disk, $path] = $this->documentLocation($staffMember, $field);
+        abort_unless($path && Storage::disk($disk)->exists($path), 404);
 
-        return response()->file(Storage::disk('local')->path($path));
+        return response()->file(Storage::disk($disk)->path($path));
     }
 
     public function downloadDocument(StaffMember $staffMember, string $field): StreamedResponse
     {
-        $path = $this->documentPath($staffMember, $field);
-        abort_unless($path && Storage::disk('local')->exists($path), 404);
+        [$disk, $path, $name] = $this->documentLocation($staffMember, $field);
+        abort_unless($path && Storage::disk($disk)->exists($path), 404);
 
-        return Storage::disk('local')->download($path, $staffMember->documentName($field));
+        return Storage::disk($disk)->download($path, $name);
     }
 
     public function deleteDocument(StaffMember $staffMember, string $field): RedirectResponse
     {
-        $path = $this->documentPath($staffMember, $field);
-        abort_unless($path, 404);
+        $document = $staffMember->currentDocumentsByCategory()->get($field);
+        abort_unless($document?->currentVersion, 404);
+        $document->currentVersion->update(['is_current' => false, 'archived_at' => now()]);
 
-        if (Storage::disk('local')->exists($path)) {
-            Storage::disk('local')->delete($path);
+        if (in_array($field, ['public_liability_insurance', 'workers_compensation_insurance', 'police_clearance', 'driver_licence', 'working_rights'], true)) {
+            $staffMember->forceFill([$field => null, $field.'_name' => null])->save();
         }
 
-        $staffMember->forceFill([
-            $field => null,
-            $field.'_name' => null,
-        ])->save();
-
-        return back()->with('status', $staffMember->documentFields()[$field].' deleted.');
+        return back()->with('status', $staffMember->documentFields()[$field].' archived and retained in history.');
     }
 
     public function destroy(StaffMember $staffMember): RedirectResponse
@@ -232,10 +244,17 @@ class StaffMemberController extends Controller
             ->all();
     }
 
-    private function documentPath(StaffMember $staffMember, string $field): ?string
+    private function documentLocation(StaffMember $staffMember, string $field): array
     {
         abort_unless(array_key_exists($field, $staffMember->documentFields()), 404);
 
-        return $staffMember->{$field};
+        $version = $staffMember->currentDocumentsByCategory()->get($field)?->currentVersion;
+        if ($version) {
+            return [$version->storage_disk, $version->storage_path, $version->original_filename];
+        }
+
+        $path = $staffMember->{$field};
+
+        return ['local', $path, $staffMember->documentName($field) ?: basename((string) $path)];
     }
 }

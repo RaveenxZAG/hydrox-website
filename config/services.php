@@ -10,4 +10,9 @@ return [
         'client_secret' => env('MICROSOFT_GRAPH_CLIENT_SECRET'),
         'sender' => env('MICROSOFT_GRAPH_SENDER', 'admin@hydrox.au'),
     ],
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
+        'chat_id' => env('TELEGRAM_CHAT_ID'),
+        'api_url' => env('TELEGRAM_API_URL', 'https://api.telegram.org'),
+    ],
 ];

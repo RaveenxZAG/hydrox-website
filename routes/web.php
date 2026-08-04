@@ -13,6 +13,7 @@ use App\Http\Controllers\StaffMemberController;
 use App\Http\Controllers\StaffPortal\AuthController as StaffPortalAuthController;
 use App\Http\Controllers\StaffPortal\DashboardController as StaffPortalDashboardController;
 use App\Http\Controllers\SubcontractorOnboardingController;
+use App\Http\Controllers\SubcontractorDocumentVersionController;
 use App\Http\Controllers\SystemSettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,10 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}', [SubcontractorOnboardingController::class, 'document'])->name('subcontractor-onboardings.documents.show');
     Route::get('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}/download', [SubcontractorOnboardingController::class, 'downloadDocument'])->name('subcontractor-onboardings.documents.download');
     Route::delete('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}', [SubcontractorOnboardingController::class, 'deleteDocument'])->name('subcontractor-onboardings.documents.destroy');
+    Route::get('subcontractor-document-versions/{version}', [SubcontractorDocumentVersionController::class, 'show'])->name('subcontractor-document-versions.show');
+    Route::get('subcontractor-document-versions/{version}/download', [SubcontractorDocumentVersionController::class, 'download'])->name('subcontractor-document-versions.download');
+    Route::patch('subcontractor-document-versions/{version}', [SubcontractorDocumentVersionController::class, 'update'])->name('subcontractor-document-versions.update');
+    Route::delete('subcontractor-document-versions/{version}', [SubcontractorDocumentVersionController::class, 'archive'])->name('subcontractor-document-versions.archive');
     Route::redirect('employee-registrations', 'subcontractor-onboardings')->name('employee-registrations.index');
     Route::redirect('employee-registrations/{employeeRegistration}', 'subcontractor-onboardings')->name('employee-registrations.show');
     Route::get('invoice-template', [InvoiceTemplateController::class, 'edit'])->name('invoice-template.edit');

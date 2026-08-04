@@ -17,11 +17,14 @@ class SystemNotification extends Model
         'subject_id',
         'read_at',
         'emailed_at',
+        'telegram_sent_at',
+        'telegram_error',
     ];
 
     protected $casts = [
         'read_at' => 'datetime',
         'emailed_at' => 'datetime',
+        'telegram_sent_at' => 'datetime',
     ];
 
     public function subject(): MorphTo

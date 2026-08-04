@@ -12,7 +12,7 @@ class CompanyProfileMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public const SUBJECT = 'Hydrox Facility Management Company Profile';
+    public const SUBJECT = 'Hydrox Facility Management | Company Profile & Service Capabilities';
 
     public const PROFILE_URL = 'https://profile.hydrox.au';
 
@@ -25,6 +25,6 @@ class CompanyProfileMail extends Mailable
 
     public function content(): Content
     {
-        return new Content(view: 'emails.company-profile');
+        return new Content(view: 'emails.company-profile', text: 'emails.company-profile-text');
     }
 }

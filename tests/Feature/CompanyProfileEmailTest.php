@@ -33,7 +33,7 @@ class CompanyProfileEmailTest extends TestCase
             ->assertOk()
             ->assertSee('Send new email')
             ->assertSee('Preconfigured template')
-            ->assertSee('Hydrox Facility Management Company Profile');
+            ->assertSee('Hydrox Facility Management | Company Profile &amp; Service Capabilities', false);
     }
 
     public function test_multiple_mixed_and_duplicate_recipients_receive_separate_emails(): void
@@ -100,7 +100,10 @@ class CompanyProfileEmailTest extends TestCase
         $this->assertStringContainsString('hello@hydrox.example', $html);
         $this->assertStringContainsString('10 Test Street', $html);
         $this->assertStringContainsString('href="https://profile.hydrox.au"', $html);
-        $this->assertStringContainsString('View Company Profile', $html);
+        $this->assertStringContainsString('VIEW OUR COMPANY PROFILE', $html);
+        $this->assertStringContainsString('Professional Facility Solutions Built Around Your Organisation', $html);
+        $this->assertStringContainsString('REQUEST A FREE QUOTE', $html);
+        $this->assertStringContainsString('company-profile-email/hydrox-team-hero.jpg', $html);
     }
 
     public function test_a_failed_recipient_does_not_stop_remaining_deliveries(): void
