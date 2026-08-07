@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\StaffPortal;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubcontractorProfileUpdateReceivedMail;
 use App\Models\StaffInvoiceSubmission;
 use App\Models\StaffMember;
 use App\Models\StaffProfileChangeRequest;
@@ -242,6 +243,11 @@ class DashboardController extends Controller
             "{$staff->fullName()} submitted a profile update request.\n\nPlease review and approve or reject the changes in the Hydrox Portal.",
             route('staff-profile-changes.index'),
             $profileChange
+        );
+
+        app(SystemNotificationService::class)->notifyMailable(
+            $staff->email,
+            new SubcontractorProfileUpdateReceivedMail($staff, $profileChange)
         );
 
         return redirect()

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SubcontractorApplicationApprovedMail;
+use App\Mail\SubcontractorApplicationReceivedMail;
+use App\Mail\SubcontractorApplicationRejectedMail;
 use App\Models\StaffMember;
 use App\Models\SubcontractorOnboarding;
 use App\Services\StaffPortal\StaffIdentityService;
@@ -69,6 +72,10 @@ class SubcontractorOnboardingController extends Controller
         }
 
         $this->notifyAdminOfSubmission($onboarding);
+        app(SystemNotificationService::class)->notifyMailable(
+            $onboarding->email,
+            new SubcontractorApplicationReceivedMail($onboarding)
+        );
 
         return redirect()->route('login')->with('onboarding_success', true);
     }
@@ -188,6 +195,17 @@ class SubcontractorOnboardingController extends Controller
         }
 
         app(SystemNotificationService::class)->markSubjectRead($subcontractorOnboarding);
+        app(SystemNotificationService::class)->notify(
+            'subcontractor_onboarding_approved',
+            'Subcontractor Onboarding Approved',
+            "The onboarding application for {$subcontractorOnboarding->full_name} has been approved.",
+            route('staff-members.show', $subcontractorOnboarding->staff_member_id),
+            $subcontractorOnboarding
+        );
+        app(SystemNotificationService::class)->notifyMailable(
+            $subcontractorOnboarding->email,
+            new SubcontractorApplicationApprovedMail($subcontractorOnboarding)
+        );
 
         return back()->with('status', 'Subcontractor approved and added to the Hydrox portal.');
     }
@@ -207,6 +225,18 @@ class SubcontractorOnboardingController extends Controller
 
         $subcontractorOnboarding->appendSyncLog('rejected', $data['rejection_reason']);
         app(SystemNotificationService::class)->markSubjectRead($subcontractorOnboarding);
+
+        app(SystemNotificationService::class)->notify(
+            'subcontractor_onboarding_rejected',
+            'Subcontractor Onboarding Rejected',
+            "The onboarding application for {$subcontractorOnboarding->full_name} was rejected.\n\nReason: {$data['rejection_reason']}",
+            route('subcontractor-onboardings.show', $subcontractorOnboarding),
+            $subcontractorOnboarding
+        );
+        app(SystemNotificationService::class)->notifyMailable(
+            $subcontractorOnboarding->email,
+            new SubcontractorApplicationRejectedMail($subcontractorOnboarding)
+        );
 
         return back()->with('status', 'Subcontractor onboarding rejected.');
     }

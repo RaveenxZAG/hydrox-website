@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubcontractorProfileUpdateReviewedMail;
 use App\Models\StaffProfileChangeRequest;
 use App\Services\StaffPortal\StaffIdentityService;
+use App\Services\SubcontractorDocumentService;
 use App\Services\SystemNotificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -26,7 +29,7 @@ class ProfileChangeRequestController extends Controller
         ]);
     }
 
-    public function approve(StaffProfileChangeRequest $profileChange, StaffIdentityService $identity): RedirectResponse
+    public function approve(StaffProfileChangeRequest $profileChange, StaffIdentityService $identity, SubcontractorDocumentService $documentService): RedirectResponse
     {
         $staff = $profileChange->staffMember;
         $changes = $profileChange->changes ?? [];
@@ -64,18 +67,18 @@ class ProfileChangeRequestController extends Controller
         foreach ($staff->documentFields() as $field => $label) {
             $file = $changes[$field] ?? null;
 
-            if (is_array($file) && filled($file['path'] ?? null)) {
-                $currentPath = $staff->{$field};
+            if (is_array($file) && filled($file['path'] ?? null) && Storage::disk('local')->exists($file['path'])) {
+                $fullPath = Storage::disk('local')->path($file['path']);
+                $uploadedFile = new UploadedFile(
+                    $fullPath,
+                    $file['original_name'] ?? basename((string) $file['path']),
+                    mime_content_type($fullPath) ?: 'application/octet-stream',
+                    null,
+                    true
+                );
 
-                if (
-                    filled($currentPath)
-                    && $currentPath !== $file['path']
-                    && Storage::disk('local')->exists($currentPath)
-                ) {
-                    Storage::disk('local')->delete($currentPath);
-                }
-
-                $staff->{$field} = $file['path'];
+                $version = $documentService->addForStaff($staff, $field, $uploadedFile, Auth::id(), 'Approved profile update');
+                $staff->{$field} = $version->storage_path;
                 $staff->{$field.'_name'} = $file['original_name'] ?? basename((string) $file['path']);
             }
         }
@@ -92,12 +95,26 @@ class ProfileChangeRequestController extends Controller
         ]);
         app(SystemNotificationService::class)->markSubjectRead($profileChange);
 
+        app(SystemNotificationService::class)->notify(
+            'staff_profile_update_approved',
+            'Subcontractor profile update approved',
+            "Profile update for {$staff->fullName()} has been approved.",
+            route('staff-members.show', $staff),
+            $profileChange
+        );
+
+        app(SystemNotificationService::class)->notifyMailable(
+            $staff->email,
+            new SubcontractorProfileUpdateReviewedMail($staff, $profileChange)
+        );
+
         return back()->with('status', 'Subcontractor profile update approved.');
     }
 
     public function reject(Request $request, StaffProfileChangeRequest $profileChange): RedirectResponse
     {
         $data = $request->validate(['review_note' => ['nullable', 'string', 'max:1000']]);
+        $staff = $profileChange->staffMember;
 
         $this->deletePendingDocuments($profileChange);
 
@@ -108,6 +125,21 @@ class ProfileChangeRequestController extends Controller
             'review_note' => $data['review_note'] ?? null,
         ]);
         app(SystemNotificationService::class)->markSubjectRead($profileChange);
+
+        if ($staff) {
+            app(SystemNotificationService::class)->notify(
+                'staff_profile_update_rejected',
+                'Subcontractor profile update rejected',
+                "Profile update for {$staff->fullName()} was rejected.\n\nNote: ".($data['review_note'] ?? 'None'),
+                route('staff-members.show', $staff),
+                $profileChange
+            );
+
+            app(SystemNotificationService::class)->notifyMailable(
+                $staff->email,
+                new SubcontractorProfileUpdateReviewedMail($staff, $profileChange)
+            );
+        }
 
         return back()->with('status', 'Subcontractor profile update rejected.');
     }

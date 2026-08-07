@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Mail\AdminSystemNotificationMail;
 use App\Models\SystemNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 
@@ -39,6 +41,21 @@ class SystemNotificationService
         return $notification;
     }
 
+    public function notifyMailable(string $recipientEmail, Mailable $mailable): bool
+    {
+        if (blank($recipientEmail)) {
+            return false;
+        }
+
+        try {
+            Mail::to($recipientEmail)->send($mailable);
+            return true;
+        } catch (Throwable $exception) {
+            report($exception);
+            return false;
+        }
+    }
+
     public function markSubjectRead(Model $subject): int
     {
         return SystemNotification::unread()
@@ -50,16 +67,8 @@ class SystemNotificationService
     private function sendEmail(SystemNotification $notification): void
     {
         try {
-            $body = trim((string) $notification->message);
-
-            if ($notification->action_url) {
-                $body .= "\n\nOpen in the Hydrox Portal:\n".$notification->action_url;
-            }
-
-            Mail::raw($body ?: $notification->title, function ($message) use ($notification): void {
-                $message->to(config('app.company_email', self::ADMIN_EMAIL))
-                    ->subject($notification->title);
-            });
+            $adminEmail = config('app.company_email', self::ADMIN_EMAIL);
+            Mail::to($adminEmail)->send(new AdminSystemNotificationMail($notification));
 
             $notification->forceFill(['emailed_at' => now()])->save();
         } catch (Throwable $exception) {
@@ -67,3 +76,4 @@ class SystemNotificationService
         }
     }
 }
+

@@ -16,10 +16,24 @@
             ['label' => 'Bookings', 'route' => 'bookings.index', 'pattern' => 'bookings.*', 'icon' => 'bookings'],
         ];
 
+        $onboardingPendingCount = \Illuminate\Support\Facades\Schema::hasTable('subcontractor_onboardings')
+            ? \App\Models\SubcontractorOnboarding::whereIn('status', ['Submitted', 'Pending Review', 'Documents Required'])->count()
+            : 0;
+
+        $profileChangesPendingCount = \Illuminate\Support\Facades\Schema::hasTable('staff_profile_change_requests')
+            ? \App\Models\StaffProfileChangeRequest::where('status', 'pending')->count()
+            : 0;
+
+        $directoryMissingDocsCount = \Illuminate\Support\Facades\Schema::hasTable('staff_members')
+            ? \App\Models\StaffMember::where('active', true)->whereNull('archived_at')->get()->filter(fn($s) => $s->missingInfoCount() > 0)->count()
+            : 0;
+
+        $subcontractorTotalBadge = $onboardingPendingCount + $profileChangesPendingCount;
+
         $staffItems = [
-            ['label' => 'Onboarding', 'route' => 'subcontractor-onboardings.index', 'pattern' => 'subcontractor-onboardings.*'],
-            ['label' => 'Directory', 'route' => 'staff-members.index', 'pattern' => 'staff-members.*'],
-            ['label' => 'Profile Requests', 'route' => 'staff-profile-changes.index', 'pattern' => 'staff-profile-changes.*'],
+            ['label' => 'Onboarding', 'route' => 'subcontractor-onboardings.index', 'pattern' => 'subcontractor-onboardings.*', 'badge' => $onboardingPendingCount, 'badge_color' => 'bg-rose-600 text-white'],
+            ['label' => 'Directory', 'route' => 'staff-members.index', 'pattern' => 'staff-members.*', 'badge' => $directoryMissingDocsCount, 'badge_color' => 'bg-amber-600 text-white'],
+            ['label' => 'Profile Requests', 'route' => 'staff-profile-changes.index', 'pattern' => 'staff-profile-changes.*', 'badge' => $profileChangesPendingCount, 'badge_color' => 'bg-rose-600 text-white'],
         ];
 
         $invoiceCounts = [
@@ -184,6 +198,9 @@
                             {!! $sidebarIcon('staff') !!}
                         </span>
                         <span class="min-w-0 flex-1 truncate">Subcontractors</span>
+                        @if ($subcontractorTotalBadge > 0)
+                            <span class="grid h-5 min-w-5 shrink-0 place-items-center rounded-full bg-rose-600 px-1.5 text-[11px] font-bold text-white shadow-sm">{{ $subcontractorTotalBadge > 99 ? '99+' : $subcontractorTotalBadge }}</span>
+                        @endif
                         <span class="grid h-5 w-5 place-items-center rounded-md text-slate-400 transition-transform duration-200" :class="open ? 'rotate-90 text-[#0082c9]' : ''">
                             <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -193,11 +210,14 @@
                     <div x-show="open" x-cloak class="ml-[26px] mt-1 grid gap-0.5 border-l border-slate-200 pl-4">
                         @foreach ($staffItems as $item)
                             @php $active = request()->routeIs($item['pattern']); @endphp
-                            <a href="{{ route($item['route']) }}" class="relative flex h-8 items-center rounded-lg px-3 text-[13px] font-semibold transition {{ $active ? 'bg-[#0082c9]/8 text-[#0082c9]' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-950' }}">
+                            <a href="{{ route($item['route']) }}" class="relative flex h-8 items-center justify-between gap-2 rounded-lg px-3 text-[13px] font-semibold transition {{ $active ? 'bg-[#0082c9]/8 text-[#0082c9]' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-950' }}">
                                 @if ($active)
                                     <span class="absolute -left-[17px] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-[#0082c9]"></span>
                                 @endif
                                 <span class="truncate">{{ $item['label'] }}</span>
+                                @if (! empty($item['badge']) && $item['badge'] > 0)
+                                    <span class="grid h-4 min-w-4 shrink-0 place-items-center rounded-full {{ $item['badge_color'] }} px-1 text-[10px] font-bold">{{ $item['badge'] > 99 ? '99+' : $item['badge'] }}</span>
+                                @endif
                             </a>
                         @endforeach
                     </div>
