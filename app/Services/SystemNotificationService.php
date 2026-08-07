@@ -13,7 +13,10 @@ class SystemNotificationService
 {
     public const ADMIN_EMAIL = 'admin@hydrox.au';
 
-    public function __construct(private readonly TelegramNotificationService $telegram) {}
+    public function __construct(
+        private readonly TelegramNotificationService $telegram,
+        private readonly MicrosoftGraphMailService $graph
+    ) {}
 
     public function notify(
         string $type,
@@ -48,10 +51,20 @@ class SystemNotificationService
         }
 
         try {
-            Mail::to($recipientEmail)->send($mailable);
+            if ($this->graph->configured()) {
+                $this->graph->send(
+                    $recipientEmail,
+                    (string) $mailable->envelope()->subject,
+                    $mailable->render()
+                );
+            } else {
+                Mail::to($recipientEmail)->send($mailable);
+            }
+
             return true;
         } catch (Throwable $exception) {
             report($exception);
+
             return false;
         }
     }
@@ -68,7 +81,17 @@ class SystemNotificationService
     {
         try {
             $adminEmail = config('app.company_email', self::ADMIN_EMAIL);
-            Mail::to($adminEmail)->send(new AdminSystemNotificationMail($notification));
+            $mailable = new AdminSystemNotificationMail($notification);
+
+            if ($this->graph->configured()) {
+                $this->graph->send(
+                    $adminEmail,
+                    (string) $mailable->envelope()->subject,
+                    $mailable->render()
+                );
+            } else {
+                Mail::to($adminEmail)->send($mailable);
+            }
 
             $notification->forceFill(['emailed_at' => now()])->save();
         } catch (Throwable $exception) {
