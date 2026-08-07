@@ -172,9 +172,32 @@
                             @yield('content')
                         </div>
                         <div class="footer">
-                            <p style="margin: 0 0 8px 0;"><strong>Hydrox Facility Management</strong></p>
-                            <p style="margin: 0 0 8px 0;">Commercial &amp; Residential Cleaning Solutions</p>
-                            <p style="margin: 0;">Need support? Email us at <a href="mailto:admin@hydrox.au">admin@hydrox.au</a></p>
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse: collapse; margin-bottom: 16px;">
+                                <tr>
+                                    <td valign="top" align="left">
+                                        <div style="font-size: 15px; font-weight: 800; color: #10243a; margin-bottom: 2px;">Sathiska Weerarathna</div>
+                                        <div style="font-size: 12px; font-weight: 700; color: #0082c9; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Owner &amp; Director · Hydrox Facility Management</div>
+                                        <div style="font-size: 12px; color: #475569; line-height: 1.6;">
+                                            <span><strong>T:</strong> <a href="tel:+61418222477" style="color: #475569; text-decoration: none;">+61 418 222 477</a></span> &nbsp;|&nbsp;
+                                            <span><strong>E:</strong> <a href="mailto:admin@hydrox.au" style="color: #0082c9; text-decoration: none;">admin@hydrox.au</a></span> &nbsp;|&nbsp;
+                                            <span><strong>W:</strong> <a href="https://hydrox.au/" target="_blank" style="color: #0082c9; text-decoration: none; font-weight: 700;">hydrox.au</a></span>
+                                        </div>
+                                        <div style="margin-top: 10px;">
+                                            <a href="https://www.linkedin.com/in/sathiska-weerarathna-8047b0101/" target="_blank" style="display: inline-block; background-color: #0a66c2; color: #ffffff !important; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 4px; text-decoration: none;">
+                                                LinkedIn Profile &rarr;
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 16px;">
+                                <div style="background-color: #f1f5f9; border-left: 3px solid #0082c9; border-radius: 4px; padding: 12px 14px; font-size: 11px; line-height: 1.5; color: #64748b; text-align: left;">
+                                    <strong style="color: #334155; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">CONFIDENTIALITY NOTICE</strong>
+                                    This email and any attachments may contain confidential or privileged information intended only for the recipient. If you received it in error, please notify the sender, delete it, and do not copy, use, or disclose its contents. Hydrox Facility Management takes reasonable precautions but cannot guarantee that email transmissions are secure or free from harmful components. Please consider the environment before printing.
+                                    <a href="https://hydrox.au/783-2/" target="_blank" style="color: #0082c9; text-decoration: underline; font-weight: 600; display: inline-block; margin-top: 4px;">Privacy &amp; legal policies</a>.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </td>
