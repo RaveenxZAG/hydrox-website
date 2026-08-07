@@ -30,7 +30,18 @@
                             <td class="py-3 pr-4">{{ $onboarding->email }}</td>
                             <td class="py-3 pr-4"><span class="badge {{ $onboarding->statusBadgeClass() }}">{{ $onboarding->status }}</span></td>
                             <td class="py-3 pr-4">{{ $onboarding->submitted_at?->format('d M Y') ?: $onboarding->created_at->format('d M Y') }}</td>
-                            <td class="py-3 text-right"><a class="font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">Review</a></td>
+                            <td class="py-3 text-right">
+                                <div class="flex items-center justify-end gap-3">
+                                    <a class="font-semibold text-[#006da9]" href="{{ route('subcontractor-onboardings.show', $onboarding) }}">Review</a>
+                                    @if ($onboarding->status === 'Rejected')
+                                        <form method="POST" action="{{ route('subcontractor-onboardings.destroy', $onboarding) }}" class="inline" onsubmit="return confirm('Permanently delete this rejected onboarding application?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="font-semibold text-rose-600 hover:text-rose-800">Delete</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr><td class="py-6 text-slate-500" colspan="6">No subcontractor onboardings yet.</td></tr>

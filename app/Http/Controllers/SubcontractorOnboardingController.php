@@ -241,6 +241,46 @@ class SubcontractorOnboardingController extends Controller
         return back()->with('status', 'Subcontractor onboarding rejected.');
     }
 
+    public function destroy(SubcontractorOnboarding $subcontractorOnboarding): RedirectResponse
+    {
+        foreach ($subcontractorOnboarding->documents as $document) {
+            foreach ($document->versions as $version) {
+                if (Storage::disk($version->storage_disk)->exists($version->storage_path)) {
+                    Storage::disk($version->storage_disk)->delete($version->storage_path);
+                }
+                $version->delete();
+            }
+            $document->delete();
+        }
+
+        foreach ($subcontractorOnboarding->uploaded_certificates ?? [] as $certificate) {
+            $path = Arr::get($certificate, 'path');
+            if ($path && Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
+        }
+
+        foreach (array_keys(SubcontractorOnboarding::DOCUMENT_FIELDS) as $field) {
+            $path = $subcontractorOnboarding->{$field};
+            if ($path && Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
+        }
+
+        \App\Models\StaffIdentityLock::query()
+            ->where('owner_type', $subcontractorOnboarding::class)
+            ->where('owner_id', $subcontractorOnboarding->id)
+            ->delete();
+
+        app(SystemNotificationService::class)->markSubjectRead($subcontractorOnboarding);
+
+        $subcontractorOnboarding->delete();
+
+        return redirect()
+            ->route('subcontractor-onboardings.index')
+            ->with('status', 'Subcontractor onboarding application deleted permanently.');
+    }
+
     public function document(SubcontractorOnboarding $subcontractorOnboarding, string $field): BinaryFileResponse
     {
         [$disk, $path] = $this->documentLocation($subcontractorOnboarding, $field);

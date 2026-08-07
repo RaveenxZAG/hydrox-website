@@ -2,6 +2,13 @@
 @section('title', 'Subcontractor Review')
 @section('actions')
     <a class="btn-secondary" href="{{ route('subcontractor-onboardings.edit', $onboarding) }}">Edit Details</a>
+    @if ($onboarding->status === 'Rejected')
+        <form method="POST" action="{{ route('subcontractor-onboardings.destroy', $onboarding) }}" class="inline" onsubmit="return confirm('Permanently delete this rejected onboarding application? This action cannot be undone.');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-bold text-rose-700 hover:bg-rose-100">Delete Application</button>
+        </form>
+    @endif
     <a class="btn-secondary" href="{{ route('subcontractor-onboardings.index') }}">Back</a>
 @endsection
 @section('content')
@@ -139,11 +146,13 @@
             @php $staffMember = $onboarding->staffMember; @endphp
             <h2 class="mb-4 text-lg font-bold">Review Actions</h2>
             <div class="flex flex-wrap items-start gap-3">
-                <form method="POST" action="{{ route('subcontractor-onboardings.reject', $onboarding) }}" class="grid gap-2">
-                    @csrf
-                    <textarea class="input min-h-20" name="rejection_reason" placeholder="Reason for rejection" required></textarea>
-                    <button class="btn-secondary text-rose-700" onclick="return confirm('Reject this subcontractor onboarding?')">Reject</button>
-                </form>
+                @if ($onboarding->status !== 'Rejected')
+                    <form method="POST" action="{{ route('subcontractor-onboardings.reject', $onboarding) }}" class="grid gap-2">
+                        @csrf
+                        <textarea class="input min-h-20" name="rejection_reason" placeholder="Reason for rejection" required></textarea>
+                        <button class="btn-secondary text-rose-700" onclick="return confirm('Reject this subcontractor onboarding?')">Reject</button>
+                    </form>
+                @endif
 
                 @if ($onboarding->status !== 'Active')
                     <form method="POST" action="{{ route('subcontractor-onboardings.approve', $onboarding) }}" class="grid gap-2">
@@ -153,6 +162,21 @@
                     </form>
                 @endif
             </div>
+
+            @if ($onboarding->status === 'Rejected')
+                <div class="mt-5 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+                    <p class="font-semibold">This onboarding application has been rejected.</p>
+                    @if ($onboarding->rejection_reason)
+                        <p class="mt-1 text-xs text-rose-700">Rejection reason: {{ $onboarding->rejection_reason }}</p>
+                    @endif
+                    <p class="mt-2 text-xs leading-5 text-slate-600">You can permanently delete this rejected application and all uploaded files.</p>
+                    <form method="POST" action="{{ route('subcontractor-onboardings.destroy', $onboarding) }}" class="mt-3" onsubmit="return confirm('Permanently delete this rejected onboarding application? This action cannot be undone.');">
+                        @csrf
+                        @method('DELETE')
+                        <button class="rounded-lg bg-rose-600 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-rose-700">Delete Rejected Application</button>
+                    </form>
+                </div>
+            @endif
 
             @if ($onboarding->status === 'Active' && $staffMember)
                 <div class="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">

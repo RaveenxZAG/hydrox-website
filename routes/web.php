@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('subcontractor-onboardings/{subcontractorOnboarding}', [SubcontractorOnboardingController::class, 'show'])->name('subcontractor-onboardings.show');
     Route::post('subcontractor-onboardings/{subcontractorOnboarding}/approve', [SubcontractorOnboardingController::class, 'approve'])->name('subcontractor-onboardings.approve');
     Route::post('subcontractor-onboardings/{subcontractorOnboarding}/reject', [SubcontractorOnboardingController::class, 'reject'])->name('subcontractor-onboardings.reject');
+    Route::delete('subcontractor-onboardings/{subcontractorOnboarding}', [SubcontractorOnboardingController::class, 'destroy'])->name('subcontractor-onboardings.destroy');
     Route::get('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}', [SubcontractorOnboardingController::class, 'document'])->name('subcontractor-onboardings.documents.show');
     Route::get('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}/download', [SubcontractorOnboardingController::class, 'downloadDocument'])->name('subcontractor-onboardings.documents.download');
     Route::delete('subcontractor-onboardings/{subcontractorOnboarding}/documents/{field}', [SubcontractorOnboardingController::class, 'deleteDocument'])->name('subcontractor-onboardings.documents.destroy');
