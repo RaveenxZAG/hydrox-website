@@ -129,7 +129,20 @@
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"><tr><td bgcolor="#0082c9" style="border-radius:26px;"><a href="{{ $quoteUrl }}" style="display:inline-block;padding:14px 24px;border-radius:26px;color:#ffffff;text-decoration:none;font-size:14px;line-height:18px;font-weight:bold;">REQUEST A FREE QUOTE</a></td><td width="10"></td><td bgcolor="#eef4f7" style="border-radius:26px;"><a href="{{ $phoneHref }}" style="display:inline-block;padding:14px 21px;border-radius:26px;color:#071b35;text-decoration:none;font-size:14px;line-height:18px;font-weight:bold;">CALL {{ $phone }}</a></td></tr></table>
                     <p style="margin:24px 0 0;font-size:14px;line-height:23px;color:#526477;"><a href="{{ $website }}" style="color:#0082c9;text-decoration:none;">{{ $website }}</a> &nbsp;·&nbsp; <a href="mailto:{{ $email }}" style="color:#0082c9;text-decoration:none;">{{ $email }}</a><br>Melbourne and surrounding areas, Victoria</p>
                     <p style="margin:28px 0 0;font-size:15px;line-height:25px;color:#45566a;">Thank you for taking the time to learn more about {{ $companyName }}. We look forward to the opportunity to support your organisation.</p>
-                    <p style="margin:18px 0 0;font-size:15px;line-height:24px;color:#071b35;"><strong>Kind regards,<br>The Hydrox Facility Management Team</strong></p>
+
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:24px;text-align:left;background:#f5f8fa;border:1px solid #e2e8f0;border-radius:10px;">
+                        <tr>
+                            <td style="padding:20px 24px;">
+                                <div style="font-size:16px;font-weight:bold;color:#071b35;">Sathiska Weerarathna</div>
+                                <div style="margin-top:2px;font-size:12px;font-weight:bold;color:#0082c9;text-transform:uppercase;letter-spacing:0.5px;">Owner &amp; Director · Hydrox Facility Management</div>
+                                <div style="margin-top:10px;font-size:13px;color:#526477;line-height:20px;">
+                                    <a href="https://www.linkedin.com/in/sathiska-weerarathna-8047b0101/" target="_blank" style="display:inline-block;padding:7px 16px;background-color:#0a66c2;color:#ffffff !important;font-size:12px;font-weight:bold;border-radius:6px;text-decoration:none;">View LinkedIn Profile &rarr;</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p style="margin:18px 0 0;font-size:15px;line-height:24px;color:#071b35;"><strong>Kind regards,<br>Sathiska Weerarathna &amp; The Hydrox Facility Management Team</strong></p>
                 </td>
             </tr>
             <tr>
@@ -138,7 +151,16 @@
                     <p style="margin:0 0 8px;"><a href="{{ $website }}" style="color:#79c5e9;text-decoration:none;">{{ $website }}</a> · <a href="mailto:{{ $email }}" style="color:#79c5e9;text-decoration:none;">{{ $email }}</a> · {{ $phone }}</p>
                     @if (filled($address))<p style="margin:0 0 8px;">{{ $address }}</p>@endif
                     <p style="margin:0 0 8px;"><a href="https://hydrox.au/privacy-policy/" style="color:#9fc8df;">Privacy Policy</a></p>
-                    <p style="margin:0;">You are receiving this email because your organisation may benefit from Hydrox Facility Management’s cleaning or facility services. Reply with “unsubscribe” if you do not wish to receive future company-profile emails.</p>
+                    <p style="margin:0 0 16px;">You are receiving this email because your organisation may benefit from Hydrox Facility Management’s cleaning or facility services. Reply with “unsubscribe” if you do not wish to receive future company-profile emails.</p>
+
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align:left;">
+                        <tr>
+                            <td style="padding:12px 14px;background:#092038;border-left:3px solid #0082c9;border-radius:4px;font-size:10px;line-height:15px;color:#9fb0bf;">
+                                <strong style="color:#ffffff;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:3px;">CONFIDENTIALITY NOTICE</strong>
+                                This email and any attachments may contain confidential or privileged information intended only for the recipient. If you received it in error, please notify the sender, delete it, and do not copy, use, or disclose its contents. Hydrox Facility Management takes reasonable precautions but cannot guarantee that email transmissions are secure or free from harmful components. Please consider the environment before printing. <a href="https://hydrox.au/783-2/" target="_blank" style="color:#79c5e9;text-decoration:underline;">Privacy &amp; legal policies</a>.
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>

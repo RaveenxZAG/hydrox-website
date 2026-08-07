@@ -41,6 +41,12 @@ Service area: Melbourne and surrounding areas, Victoria
 Thank you for taking the time to learn more about Hydrox Facility Management. We look forward to the opportunity to support your organisation.
 
 Kind regards,
+Sathiska Weerarathna
+Owner & Director · Hydrox Facility Management
+LinkedIn: https://www.linkedin.com/in/sathiska-weerarathna-8047b0101/
 The Hydrox Facility Management Team
 
 Reply with “unsubscribe” if you do not wish to receive future company-profile emails.
+
+CONFIDENTIALITY NOTICE:
+This email and any attachments may contain confidential or privileged information intended only for the recipient. If you received it in error, please notify the sender, delete it, and do not copy, use, or disclose its contents. Hydrox Facility Management takes reasonable precautions but cannot guarantee that email transmissions are secure or free from harmful components. Please consider the environment before printing. Privacy & legal policies: https://hydrox.au/783-2/
