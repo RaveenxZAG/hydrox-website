@@ -36,9 +36,16 @@
         .header {
             background-color: #10243a;
             background-image: linear-gradient(135deg, #10243a 0%, #004c7d 100%);
-            padding: 28px 32px;
+            padding: 24px 32px;
             text-align: left;
             border-bottom: 3px solid #0082c9;
+        }
+        .header-logo {
+            max-height: 46px;
+            height: 46px;
+            width: auto;
+            display: block;
+            border: 0;
         }
         .header-title {
             color: #ffffff;
@@ -49,9 +56,8 @@
         }
         .header-subtitle {
             color: #79c5e9;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -145,8 +151,22 @@
                 <td align="center">
                     <div class="main-card">
                         <div class="header">
-                            <div class="header-title">Hydrox Facility Management</div>
-                            <div class="header-subtitle">Subcontractor Portal</div>
+                            @php
+                                $logoFile = public_path('images/hydrox-email-logo-transparent.png');
+                                $logoSrc = file_exists($logoFile)
+                                    ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoFile))
+                                    : config('app.url') . '/images/hydrox-email-logo-transparent.png';
+                            @endphp
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td valign="middle" align="left">
+                                        <img src="{{ $logoSrc }}" alt="Hydrox Facility Management" class="header-logo" style="max-height: 46px; height: 46px; width: auto; display: block; border: 0;" />
+                                    </td>
+                                    <td valign="middle" align="right">
+                                        <div class="header-subtitle">Subcontractor Portal</div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="content">
                             @yield('content')
