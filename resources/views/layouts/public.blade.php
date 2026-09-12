@@ -271,6 +271,29 @@
                 </div>
             </div>
 
+            <!-- Acknowledgement of Country -->
+            <div class="py-6 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs text-slate-400">
+                <div class="flex items-center gap-2 flex-shrink-0" aria-hidden="true">
+                    <svg class="w-8 h-5 rounded-sm overflow-hidden flex-shrink-0 border border-slate-700/80 shadow-sm" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Australian Aboriginal Flag">
+                        <rect width="60" height="20" fill="#000000"/>
+                        <rect y="20" width="60" height="20" fill="#d9241b"/>
+                        <circle cx="30" cy="20" r="10" fill="#ffd100"/>
+                    </svg>
+                    <svg class="w-8 h-5 rounded-sm overflow-hidden flex-shrink-0 border border-slate-700/80 shadow-sm" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Torres Strait Islander Flag">
+                        <rect width="60" height="40" fill="#00247d"/>
+                        <rect width="60" height="8" fill="#009944"/>
+                        <rect y="8" width="60" height="2" fill="#000000"/>
+                        <rect y="30" width="60" height="2" fill="#000000"/>
+                        <rect y="32" width="60" height="8" fill="#009944"/>
+                        <path d="M22 25 C23 15 37 15 38 25 L36 25 C35 17 25 17 24 25 Z" fill="#ffffff"/>
+                        <polygon points="30,17 31.2,20.5 35,20.5 32,22.7 33.1,26.2 30,24 26.9,26.2 28,22.7 25,20.5 28.8,20.5" fill="#ffffff"/>
+                    </svg>
+                </div>
+                <p class="leading-relaxed">
+                    <span class="text-slate-300 font-semibold">Acknowledgement of Country:</span> Hydrox Facility Management acknowledges the Traditional Custodians of Country throughout Australia and their continuing connection to land, waters, and community. We pay our respects to Aboriginal and Torres Strait Islander cultures, and to Elders past and present.
+                </p>
+            </div>
+
             <!-- Bottom Copyright -->
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
                 <p>© {{ date('Y') }} Hydrox Facility Management Cleaning Services Pty. Ltd. All rights reserved. <span class="mx-1.5 text-slate-600">|</span> Developed by <span class="text-slate-400 font-medium">Genius Geeks</span></p>
