@@ -55,12 +55,15 @@
                     </div>
                 </div>
 
-                <div class="p-6 bg-sky-50 rounded-2xl border border-sky-100 space-y-2">
-                    <p class="font-bold text-sm text-slate-900">Looking for pricing instead?</p>
-                    <p class="text-xs text-slate-600">Use our rapid quote form for an immediate service scope and estimate.</p>
-                    <a href="{{ route('booking.create') }}" class="inline-block mt-2 font-bold text-xs text-[#0082c9] hover:underline">
-                        Go to Quote Request Form →
-                    </a>
+                <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white">
+                    <img src="{{ asset('images/BADC4CCA-FF3A-4FB0-86C9-FDF62C04F6F0.png') }}" alt="Hydrox Customer Support" class="w-full h-52 object-cover">
+                    <div class="p-5 space-y-2 bg-sky-50/50">
+                        <p class="font-bold text-sm text-slate-900">Looking for pricing instead?</p>
+                        <p class="text-xs text-slate-600">Use our rapid quote form for an immediate service scope and estimate.</p>
+                        <a href="{{ route('booking.create') }}" class="inline-block mt-1 font-bold text-xs text-[#0082c9] hover:underline">
+                            Go to Quote Request Form →
+                        </a>
+                    </div>
                 </div>
             </div>
 

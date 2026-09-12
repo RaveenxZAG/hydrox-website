@@ -210,7 +210,7 @@
                 <!-- Service 2: Residential -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/BADC4CCA-FF3A-4FB0-86C9-FDF62C04F6F0.png') }}" alt="Residential Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/9EA94CC5-F6BF-48BF-8253-DEB940AFD0CC.png') }}" alt="Residential Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Residential</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -227,7 +227,7 @@
                 <!-- Service 3: NDIS & DVA -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/22844EED-965A-4388-AFF5-6940471F4538.png') }}" alt="NDIS Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/5FEDE1A6-6A36-4D69-A34E-E54753EF05EC.png') }}" alt="NDIS Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">NDIS / DVA</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -244,7 +244,7 @@
                 <!-- Service 4: Aged Care & Medical -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/5FEDE1A6-6A36-4D69-A34E-E54753EF05EC.png') }}" alt="Aged Care Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/293D37B7-4B0A-4617-A899-0A9CAA5C9188.png') }}" alt="Aged Care Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Healthcare</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -261,7 +261,7 @@
                 <!-- Service 5: Industrial -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/532304F2-E2A0-4B53-8698-BF7D0266135B.png') }}" alt="Industrial Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/BD1AA40B-5901-4391-8F1D-F5A685B48CD3.png') }}" alt="Industrial Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Industrial</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -278,7 +278,7 @@
                 <!-- Service 6: School Cleaning -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/9671D71F-840B-4492-A18F-1AFCEE9023DE.png') }}" alt="School Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="School Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Education</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -295,7 +295,7 @@
                 <!-- Service 7: Lawn Care -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/293D37B7-4B0A-4617-A899-0A9CAA5C9188.png') }}" alt="Lawn Care" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/B0ED0E75-620F-4F7C-A4E5-E404C41CA7B2.png') }}" alt="Lawn Care" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Outdoor</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -312,7 +312,7 @@
                 <!-- Service 8: Concreting -->
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
                     <div class="h-48 overflow-hidden bg-slate-100 relative">
-                        <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="Concreting Services" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('images/F96E5EB4-AE8A-4B55-8C6B-45C198FAEC6F.png') }}" alt="Concreting Services" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Concreting</span>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
@@ -368,10 +368,10 @@
                 </div>
 
                 <div class="lg:col-span-6 grid grid-cols-2 gap-4">
-                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.44 (2).jpeg') }}" alt="Hydrox Team Equipment" class="rounded-2xl shadow-md w-full h-64 object-cover">
-                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.45 (2).jpeg') }}" alt="Hydrox Clean Facility" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
-                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.47 (1).jpeg') }}" alt="Hydrox Clean Work" class="rounded-2xl shadow-md w-full h-64 object-cover">
-                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.49.jpeg') }}" alt="Hydrox Clean Finish" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                    <img src="{{ asset('images/08DAF5B0-3CEE-464C-B334-84A930649E27.png') }}" alt="Commercial Facility Care" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                    <img src="{{ asset('images/BD1AA40B-5901-4391-8F1D-F5A685B48CD3.png') }}" alt="Industrial Facility Maintenance" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                    <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="Educational Campus Cleaning" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                    <img src="{{ asset('images/293D37B7-4B0A-4617-A899-0A9CAA5C9188.png') }}" alt="Healthcare Facility Sanitation" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
                 </div>
             </div>
         </div>

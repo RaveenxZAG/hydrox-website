@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="lg:col-span-5">
-                <img src="{{ asset('images/9671D71F-840B-4492-A18F-1AFCEE9023DE.png') }}" alt="School and Childcare Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
+                <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="School and Childcare Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="lg:col-span-5">
-                <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="Concreting and Pressure Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
+                <img src="{{ asset('images/F96E5EB4-AE8A-4B55-8C6B-45C198FAEC6F.png') }}" alt="Concreting and Pressure Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
             </div>
         </div>
     </div>
@@ -84,6 +84,30 @@
                         Call 0418 222 477
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#0082c9]">Recent Work</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Quality Concreting & Driveway Finishes</h2>
+            <p class="text-sm text-slate-600 mt-2">Precision exposed aggregate, clean edges, and durable sealing across Melbourne properties.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
+                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.44 (2).jpeg') }}" alt="Exposed aggregate driveway" class="w-full h-56 object-cover hover:scale-105 transition duration-300">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
+                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.45 (2).jpeg') }}" alt="Exposed aggregate pathway" class="w-full h-56 object-cover hover:scale-105 transition duration-300">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
+                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.47 (1).jpeg') }}" alt="Finished concrete driveway" class="w-full h-56 object-cover hover:scale-105 transition duration-300">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
+                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.49.jpeg') }}" alt="Exposed aggregate side pathway" class="w-full h-56 object-cover hover:scale-105 transition duration-300">
             </div>
         </div>
     </div>

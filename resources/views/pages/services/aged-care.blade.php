@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="lg:col-span-5">
-                <img src="{{ asset('images/5FEDE1A6-6A36-4D69-A34E-E54753EF05EC.png') }}" alt="Aged Care and Medical Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
+                <img src="{{ asset('images/293D37B7-4B0A-4617-A899-0A9CAA5C9188.png') }}" alt="Aged Care and Medical Cleaning" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
             </div>
         </div>
     </div>

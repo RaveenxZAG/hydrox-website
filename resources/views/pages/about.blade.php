@@ -49,9 +49,8 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-6 grid grid-cols-2 gap-4">
-                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.44 (1).jpeg') }}" alt="Hydrox Team" class="rounded-2xl shadow-lg w-full h-72 object-cover">
-                <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.48 (2).jpeg') }}" alt="Hydrox Facility Work" class="rounded-2xl shadow-lg w-full h-72 object-cover mt-8">
+            <div class="lg:col-span-6">
+                <img src="{{ asset('images/E1C8726B-1C50-45B9-883D-A37A6B850FFF.png') }}" alt="Hydrox Facility Management Team" class="rounded-3xl shadow-xl border border-slate-200 w-full h-80 sm:h-96 object-cover">
             </div>
         </div>
     </div>

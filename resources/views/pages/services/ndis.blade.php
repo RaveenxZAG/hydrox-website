@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="lg:col-span-5">
-                <img src="{{ asset('images/22844EED-965A-4388-AFF5-6940471F4538.png') }}" alt="NDIS Cleaning Support" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
+                <img src="{{ asset('images/5FEDE1A6-6A36-4D69-A34E-E54753EF05EC.png') }}" alt="NDIS Cleaning Support" class="rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-80 sm:h-96">
             </div>
         </div>
     </div>
