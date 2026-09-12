@@ -4,7 +4,7 @@ Tags: booking, cleaning, facility management
 Requires at least: 6.2
 Tested up to: 6.6
 Requires PHP: 8.0
-Stable tag: 2.1.2
+Stable tag: 2.1.4
 License: GPLv2 or later
 
 Adds a guided multiple service booking request with secure photo uploads and Hydrox Portal integration.
@@ -32,6 +32,12 @@ Optional heading text:
 [hydrox_booking_form title="Book a Hydrox service" intro="Tell us what you need and we will contact you."]
 
 == Changelog ==
+
+= 2.1.4 =
+* Added Google Ads conversion tracking after a booking is successfully finalized and its confirmation code is displayed.
+
+= 2.1.3 =
+* Prevented Safari Autofill from populating the anti-spam field and blocking legitimate bookings.
 
 = 2.1.2 =
 * Added single service compatibility data for older Portal deployments.

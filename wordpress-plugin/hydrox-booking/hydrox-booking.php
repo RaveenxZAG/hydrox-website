@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hydrox Booking
  * Description: Premium multiple service booking requests for Hydrox Facility Management.
- * Version: 2.1.2
+ * Version: 2.1.4
  * Author: Hydrox Facility Management
  * Text Domain: hydrox-booking
  * Requires at least: 6.2
@@ -130,9 +130,9 @@ final class Hydrox_Booking_Plugin
             'intro' => 'Choose the services you need. Our team will review your request and contact you to confirm availability and pricing.',
         ], $attributes, 'hydrox_booking_form');
 
-        wp_enqueue_style('hydrox-booking', plugin_dir_url(__FILE__) . 'assets/booking.css', [], '2.1.2');
-        wp_enqueue_style('hydrox-booking-fixes', plugin_dir_url(__FILE__) . 'assets/booking-fixes.css', ['hydrox-booking'], '2.1.2');
-        wp_enqueue_script('hydrox-booking', plugin_dir_url(__FILE__) . 'assets/booking.js', [], '2.1.2', true);
+        wp_enqueue_style('hydrox-booking', plugin_dir_url(__FILE__) . 'assets/booking.css', [], '2.1.4');
+        wp_enqueue_style('hydrox-booking-fixes', plugin_dir_url(__FILE__) . 'assets/booking-fixes.css', ['hydrox-booking'], '2.1.4');
+        wp_enqueue_script('hydrox-booking', plugin_dir_url(__FILE__) . 'assets/booking.js', [], '2.1.4', true);
         wp_localize_script('hydrox-booking', 'HydroxBooking', [
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce(self::NONCE_ACTION),
@@ -160,7 +160,7 @@ final class Hydrox_Booking_Plugin
                 </div>
 
                 <form class="hydrox-booking__form" novalidate>
-                    <input class="hydrox-booking__trap" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <input class="hydrox-booking__trap" name="hydrox_booking_guard" tabindex="-1" autocomplete="new-password" aria-hidden="true">
 
                     <section class="hydrox-booking__step is-active" data-step="1">
                         <div class="hydrox-booking__section-heading"><span>01</span><div><h3>What can we help with?</h3><p>Select one or more main services, then add any extras.</p></div></div>
@@ -251,7 +251,7 @@ final class Hydrox_Booking_Plugin
     public static function ajax_create(): void
     {
         self::verify_ajax();
-        if (! empty($_POST['company_website'])) {
+        if (! empty($_POST['hydrox_booking_guard'])) {
             wp_send_json_error(['message' => 'Unable to submit this request.'], 400);
         }
 

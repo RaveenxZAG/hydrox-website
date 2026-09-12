@@ -12,7 +12,17 @@
   const previews = root.querySelector('.hydrox-booking__previews');
   const photoSummary = root.querySelector('.hydrox-booking__photo-summary span');
   const uploadStatus = root.querySelector('.hydrox-booking__upload-status');
-  let step = 1, photos = [], session = '', reference = '', busy = false;
+  let step = 1, photos = [], session = '', reference = '', busy = false, conversionTracked = false;
+
+  const trackGoogleAdsConversion = () => {
+    if (conversionTracked || typeof window.gtag !== 'function') return;
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-18428986459/bOSgCPbm6-0cENu10NNE',
+      value: 1.0,
+      currency: 'AUD'
+    });
+    conversionTracked = true;
+  };
 
   const showError = message => { error.textContent = message; error.hidden = false; error.scrollIntoView({behavior:'smooth', block:'center'}); };
   const clearError = () => { error.hidden = true; error.textContent = ''; };
@@ -121,6 +131,7 @@
       const success=root.querySelector('.hydrox-booking__success'); success.hidden=false;
       success.querySelector('strong').textContent=final.reference || reference;
       success.querySelector('.hydrox-booking__success-copy').textContent=HydroxBooking.successMessage;
+      trackGoogleAdsConversion();
       success.scrollIntoView({behavior:'smooth',block:'center'});
     } catch(e) {
       showError(e.message); uploadStatus.hidden=true; root.querySelector('.hydrox-booking__actions').hidden=false;

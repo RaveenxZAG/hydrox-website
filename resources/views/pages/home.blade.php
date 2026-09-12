@@ -1,0 +1,432 @@
+@extends('layouts.public')
+
+@section('title', 'Hydrox Facility Management | Commercial, Residential & Specialised Cleaning Melbourne')
+@section('meta_description', 'Top-rated commercial, residential, NDIS, aged care, and industrial cleaning services in Melbourne and Victoria. Get a fast free quote online.')
+
+@section('content')
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-slate-900 via-[#061b35] to-[#041426] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
+        <!-- Ambient background glows -->
+        <div class="absolute -top-40 right-0 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Hero Copy -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/15 text-xs font-semibold text-sky-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Premium Facility Solutions Across Victoria
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-white">
+                        Professional Cleaning. <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-emerald-300">Trusted Results.</span>
+                    </h1>
+
+                    <p class="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Hydrox Facility Management delivers exceptional commercial, residential, NDIS, aged care, and industrial cleaning services across Melbourne. Vetted, police-checked cleaners with guaranteed satisfaction.
+                    </p>
+
+                    <!-- Trust checklist -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-lg mx-auto lg:mx-0 text-left text-xs font-medium text-slate-200">
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Police-Checked Staff</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>\$20M Public Liability</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Tailored Schedules</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Eco-Friendly Products</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>NDIS & DVA Approved</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>24/7 Client Support</span>
+                        </div>
+                    </div>
+
+                    <!-- Call & Action -->
+                    <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center lg:justify-start">
+                        <a href="{{ route('booking.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#0082c9] text-white font-bold text-base shadow-xl shadow-sky-600/30 hover:bg-[#006da9] hover:shadow-sky-600/50 transition transform hover:-translate-y-0.5">
+                            Get a Free Quote
+                        </a>
+                        <a href="tel:0418222477" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/20 hover:bg-white/15 transition">
+                            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            Call 0418 222 477
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Quick Lead Capture Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 text-slate-900 shadow-2xl shadow-black/40 border border-slate-100">
+                        <div class="mb-6">
+                            <span class="inline-block px-3 py-1 rounded-md bg-sky-50 text-[#0082c9] text-xs font-bold uppercase tracking-wider mb-2">Instant Lead Estimate</span>
+                            <h2 class="text-2xl font-black text-slate-900">Request Your Quote</h2>
+                            <p class="text-xs text-slate-500 mt-1">Tell us what you need and get a rapid response from our local team.</p>
+                        </div>
+
+                        <form action="{{ route('booking.store') }}" method="POST" class="space-y-4">
+                            @csrf
+                            <input type="text" name="booking_guard_field" class="hidden" tabindex="-1" autocomplete="off">
+
+                            <!-- Service Selection -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Cleaning Service *</label>
+                                <select name="service" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                                    <option value="">Select a service...</option>
+                                    <option value="Commercial Cleaning">Commercial & Office Cleaning</option>
+                                    <option value="Residential Cleaning">Residential & House Cleaning</option>
+                                    <option value="NDIS Cleaning">NDIS & DVA Cleaning Services</option>
+                                    <option value="Aged Care & Medical">Aged Care & Medical Facilities</option>
+                                    <option value="Industrial & Warehouse">Industrial & Warehouse Cleaning</option>
+                                    <option value="School Cleaning">School & Childcare Cleaning</option>
+                                    <option value="Lawn Care & Gardening">Lawn Care & Gardening</option>
+                                    <option value="Concreting & Pressure Cleaning">Concreting & Pressure Cleaning</option>
+                                    <option value="Other Facility Request">Other Facility Request</option>
+                                </select>
+                            </div>
+
+                            <!-- Suburb and Postcode -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Suburb *</label>
+                                    <input type="text" name="suburb" required placeholder="e.g. Melbourne" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Postcode</label>
+                                    <input type="text" name="postcode" maxlength="4" placeholder="3000" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                                </div>
+                            </div>
+
+                            <!-- Name & Phone -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Your Name *</label>
+                                    <input type="text" name="customer_name" required placeholder="Full name" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Phone Number *</label>
+                                    <input type="tel" name="phone" required placeholder="04XX XXX XXX" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">Email Address *</label>
+                                <input type="email" name="email" required placeholder="your.name@company.com.au" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#0082c9] focus:ring-[#0082c9]">
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-[#0082c9] hover:bg-[#006da9] text-white font-bold text-base shadow-lg shadow-sky-600/30 transition duration-150">
+                                Get Free Quote Now
+                            </button>
+
+                            <p class="text-[11px] text-center text-slate-500">
+                                🔒 No obligation. Your information is kept strictly private.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase Section -->
+    <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#0082c9]">Inside Hydrox</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 leading-tight">Delivering High-Standard Facility Support Across Victoria</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Watch our quick introduction video to see how Hydrox Facility Management delivers dependable, safe, and spotless results for corporate clients, commercial premises, healthcare, and educational providers.
+                    </p>
+                    <div class="pt-2 space-y-2.5">
+                        <div class="flex items-center gap-3 text-sm text-slate-700">
+                            <span class="w-6 h-6 rounded-lg bg-sky-50 text-[#0082c9] flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Dedicated account manager and proactive reporting</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-slate-700">
+                            <span class="w-6 h-6 rounded-lg bg-sky-50 text-[#0082c9] flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Consistent quality audits and completion checklists</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-slate-700">
+                            <span class="w-6 h-6 rounded-lg bg-sky-50 text-[#0082c9] flex items-center justify-center font-bold text-xs">✓</span>
+                            <span>Flexible after-hours & weekend schedules</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-black aspect-video border border-slate-200">
+                        <video controls poster="{{ asset('images/36B42554-D4C4-4DBF-91B9-11B162AE4F3F.png') }}" class="w-full h-full object-cover">
+                            <source src="{{ asset('videos/Hydrox_business_introduction_video_1080p_202608151956.mp4') }}" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-sky-100 text-[#0082c9] text-xs font-bold uppercase tracking-wider mb-3">Our Core Expertise</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Tailored Cleaning & Facility Solutions</h2>
+                <p class="text-base text-slate-600 mt-3">From daily office maintenance to specialized medical sanitization and heavy industrial scrubbing, we provide end-to-end facility services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1: Commercial -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/08DAF5B0-3CEE-464C-B334-84A930649E27.png') }}" alt="Commercial Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Commercial</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Commercial Cleaning</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Complete office, retail, and corporate workplace cleaning tailored around your operational hours.</p>
+                        </div>
+                        <a href="{{ route('services.commercial') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2: Residential -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/BADC4CCA-FF3A-4FB0-86C9-FDF62C04F6F0.png') }}" alt="Residential Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Residential</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Residential Cleaning</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Weekly, fortnightly, spring cleans, and end-of-lease vacate cleans with guaranteed bond back standards.</p>
+                        </div>
+                        <a href="{{ route('services.residential') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3: NDIS & DVA -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/22844EED-965A-4388-AFF5-6940471F4538.png') }}" alt="NDIS Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">NDIS / DVA</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">NDIS & DVA Support</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Respectful, compassionate domestic support designed around individual participant plans and needs.</p>
+                        </div>
+                        <a href="{{ route('services.ndis') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 4: Aged Care & Medical -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/5FEDE1A6-6A36-4D69-A34E-E54753EF05EC.png') }}" alt="Aged Care Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Healthcare</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Aged Care & Medical</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Strict infection control, medical grade disinfection, and safe sanitation for clinics and retirement living.</p>
+                        </div>
+                        <a href="{{ route('services.aged-care') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 5: Industrial -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/532304F2-E2A0-4B53-8698-BF7D0266135B.png') }}" alt="Industrial Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Industrial</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Industrial & Warehouse</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Heavy machinery zones, high-pressure washing, warehouse floor scrubbers, and industrial depots.</p>
+                        </div>
+                        <a href="{{ route('services.industrial') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 6: School Cleaning -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/9671D71F-840B-4492-A18F-1AFCEE9023DE.png') }}" alt="School Cleaning" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Education</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">School & Childcare</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Child-safe sanitizing, non-toxic products, classrooms, auditoriums, and playground outdoor care.</p>
+                        </div>
+                        <a href="{{ route('services.school') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 7: Lawn Care -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/293D37B7-4B0A-4617-A899-0A9CAA5C9188.png') }}" alt="Lawn Care" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Outdoor</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Lawn & Garden Care</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Scheduled lawn mowing, hedging, weeding, pruning, and comprehensive commercial grounds maintenance.</p>
+                        </div>
+                        <a href="{{ route('services.lawn-care') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 8: Concreting -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img src="{{ asset('images/BB04C489-7C7A-4FFE-A966-95E45B414013.png') }}" alt="Concreting Services" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2.5 py-1 rounded-md text-slate-800">Concreting</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2">Concreting Services</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Driveways, concrete slabs, pathways, commercial repair, and deep industrial surface high-pressure washing.</p>
+                        </div>
+                        <a href="{{ route('services.concreting') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
+                            Learn more →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Hydrox / Trust Factors -->
+    <section class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#0082c9]">The Hydrox Advantage</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">Reliable Cleaning Backed By Rigorous Standards</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        We know facility managers, business owners, and homeowners need cleaners who show up on time, communicate clearly, and take genuine pride in their work.
+                    </p>
+
+                    <div class="grid sm:grid-cols-2 gap-6 pt-4">
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 text-[#0082c9] flex items-center justify-center font-bold text-base">🛡️</div>
+                            <h3 class="font-bold text-slate-900 text-base">Fully Vetted & Insured</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Every team member undergoes national police checks, background verification, and continuous quality training.</p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-base">🌿</div>
+                            <h3 class="font-bold text-slate-900 text-base">Eco & Safe Products</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Commercial-grade products that eliminate pathogens while safeguarding employee health and air quality.</p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 text-[#0082c9] flex items-center justify-center font-bold text-base">⚡</div>
+                            <h3 class="font-bold text-slate-900 text-base">Fast Turnaround</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Swift quoting and rapid deployment across Melbourne metropolitan and Victorian regional hubs.</p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-base">⭐</div>
+                            <h3 class="font-bold text-slate-900 text-base">100% Satisfaction</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">If anything falls short of our agreed service level, we promptly return to rectify it at zero charge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.44 (2).jpeg') }}" alt="Hydrox Team Equipment" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.45 (2).jpeg') }}" alt="Hydrox Clean Facility" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.47 (1).jpeg') }}" alt="Hydrox Clean Work" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                    <img src="{{ asset('images/WhatsApp Image 2025-11-13 at 19.59.49.jpeg') }}" alt="Hydrox Clean Finish" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Step Simple Process -->
+    <section class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-wider text-sky-400">Streamlined Experience</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">How Easy It Is To Work With Us</h2>
+                <p class="text-sm text-slate-400 mt-2">No complicated forms or endless phone tag. Capture your quote in three straightforward steps.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 relative">
+                    <span class="text-5xl font-black text-sky-500/20 absolute top-4 right-6">01</span>
+                    <h3 class="text-xl font-bold mb-3">1. Tell Us What You Need</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Choose your service, provide your suburb and preferred date. No forced account registration or unnecessary hurdles.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 relative">
+                    <span class="text-5xl font-black text-sky-500/20 absolute top-4 right-6">02</span>
+                    <h3 class="text-xl font-bold mb-3">2. Fast Custom Estimate</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Our Melbourne operations team reviews your requirements and contacts you with transparent, competitive pricing.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 relative">
+                    <span class="text-5xl font-black text-sky-500/20 absolute top-4 right-6">03</span>
+                    <h3 class="text-xl font-bold mb-3">3. Confirmed & Delivered</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Once accepted, your cleaning team is dispatched with a full scope checklist and photographic completion report.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('booking.create') }}" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#0082c9] text-white font-bold text-base shadow-xl hover:bg-[#006da9] transition">
+                    Request Your Free Quote Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <section class="py-16 bg-[#0082c9] text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Ready For A Cleaner, Healthier Facility?</h2>
+            <p class="text-base text-sky-100 max-w-2xl mx-auto">
+                Call our friendly Melbourne team directly at <a href="tel:0418222477" class="underline font-bold text-white">0418 222 477</a> or request your free quote online in less than 60 seconds.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+                <a href="{{ route('booking.create') }}" class="px-8 py-3.5 rounded-xl bg-white text-[#0082c9] font-bold text-sm shadow-xl hover:bg-slate-100 transition">
+                    Get Free Quote
+                </a>
+                <a href="{{ route('contact') }}" class="px-8 py-3.5 rounded-xl bg-sky-800/80 text-white border border-white/20 font-bold text-sm hover:bg-sky-900 transition">
+                    Contact Our Office
+                </a>
+            </div>
+        </div>
+    </section>
+@endsection

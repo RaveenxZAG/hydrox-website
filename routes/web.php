@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PublicBookingController;
+use App\Http\Controllers\PublicWebsiteController;
 use App\Http\Controllers\Admin\InvoiceAdminController;
 use App\Http\Controllers\Admin\ProfileChangeRequestController;
 use App\Http\Controllers\AuthController;
@@ -17,7 +19,37 @@ use App\Http\Controllers\SubcontractorDocumentVersionController;
 use App\Http\Controllers\SystemSettingsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('dashboard'));
+/*
+|--------------------------------------------------------------------------
+| Public Website Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [PublicWebsiteController::class, 'home'])->name('home');
+Route::get('/commercial-cleaning-services', [PublicWebsiteController::class, 'commercial'])->name('services.commercial');
+Route::get('/residential-cleaning-services', [PublicWebsiteController::class, 'residential'])->name('services.residential');
+Route::get('/ndis-cleaning-services', [PublicWebsiteController::class, 'ndis'])->name('services.ndis');
+Route::get('/aged-care-cleaning-services', [PublicWebsiteController::class, 'agedCare'])->name('services.aged-care');
+Route::get('/industrial-warehouse', [PublicWebsiteController::class, 'industrial'])->name('services.industrial');
+Route::get('/school-cleaning', [PublicWebsiteController::class, 'school'])->name('services.school');
+Route::get('/lawn-care-gardening', [PublicWebsiteController::class, 'lawnCare'])->name('services.lawn-care');
+Route::get('/concreting-services', [PublicWebsiteController::class, 'concreting'])->name('services.concreting');
+Route::get('/about-us', [PublicWebsiteController::class, 'about'])->name('about');
+Route::get('/contact-us', [PublicWebsiteController::class, 'contact'])->name('contact');
+Route::post('/contact-us', [PublicWebsiteController::class, 'sendContact'])->name('contact.send');
+Route::get('/faq', [PublicWebsiteController::class, 'faq'])->name('faq');
+Route::get('/careers', [PublicWebsiteController::class, 'careers'])->name('careers');
+Route::get('/legal-policies', [PublicWebsiteController::class, 'legal'])->name('legal');
+Route::redirect('/783-2', '/legal-policies', 301);
+
+/*
+|--------------------------------------------------------------------------
+| Simplified Public Quote & Booking UX
+|--------------------------------------------------------------------------
+*/
+Route::redirect('/quote', '/booking');
+Route::get('/booking', [PublicBookingController::class, 'create'])->name('booking.create');
+Route::post('/booking', [PublicBookingController::class, 'store'])->name('booking.store');
+Route::get('/booking/confirmation/{reference}', [PublicBookingController::class, 'confirmation'])->name('booking.confirmation');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
