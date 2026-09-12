@@ -14,9 +14,21 @@ class SystemSetting extends Model
 
     public static function getValue(string $key, ?string $default = null): ?string
     {
-        return Cache::rememberForever("system-setting:{$key}", function () use ($key, $default): ?string {
-            return static::query()->where('key', $key)->value('value') ?? $default;
-        });
+        try {
+            return Cache::rememberForever("system-setting:{$key}", function () use ($key, $default): ?string {
+                try {
+                    return static::query()->where('key', $key)->value('value') ?? $default;
+                } catch (\Throwable) {
+                    return $default;
+                }
+            });
+        } catch (\Throwable) {
+            try {
+                return static::query()->where('key', $key)->value('value') ?? $default;
+            } catch (\Throwable) {
+                return $default;
+            }
+        }
     }
 
     public static function setValue(string $key, ?string $value): void

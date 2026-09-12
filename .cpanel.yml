@@ -1,14 +1,7 @@
 ---
 deployment:
   tasks:
-    - /bin/bash -lc "find storage bootstrap/cache -type d -exec chmod 775 {} +"
-    - /bin/bash -lc "find storage bootstrap/cache -type f ! -name .gitignore -exec chmod 664 {} +"
-    - '/bin/bash -lc "test -f vendor/autoload.php || { echo Packaged PHP dependencies are missing; exit 1; }"'
-    - '/bin/bash -lc "if [ ! -f .env ]; then echo Create the project .env file in cPanel File Manager before deployment; exit 1; fi"'
-    - '/bin/bash -lc "if ! /bin/grep -q \"^APP_KEY=base64:\" .env; then php artisan key:generate --force; fi"'
-    - '/bin/bash -lc "if /bin/grep -q \"^DB_CONNECTION=sqlite\" .env; then /usr/bin/touch database/database.sqlite; fi"'
-    - /bin/bash -lc "php artisan config:clear"
-    - /bin/bash -lc "php artisan migrate --force"
-    - /bin/bash -lc "php artisan db:seed --force"
-    - /bin/bash -lc "php artisan storage:link || true"
-    - /bin/bash -lc "php artisan optimize"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type d -exec chmod 775 {} + 2>/dev/null || true"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type f ! -name .gitignore -exec chmod 664 {} + 2>/dev/null || true"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; if [ ! -f .env ]; then echo 'ERROR: .env file missing in repository path'; exit 1; fi"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; PHP_BIN=$(which ea-php83 2>/dev/null || which ea-php82 2>/dev/null || which php); $PHP_BIN artisan hydrox:deploy"

@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@hydrox.au'],
             ['name' => 'Hydrox Administrator', 'password' => $password]
         );
+
+        if (! \App\Models\SystemSetting::query()->where('key', 'business_information')->exists()) {
+            \App\Models\SystemSetting::setValue('business_information', json_encode(\App\Models\SystemSetting::businessInformation(), JSON_UNESCAPED_SLASHES));
+            $this->command?->info('Default business information initialized.');
+        }
     }
 }
