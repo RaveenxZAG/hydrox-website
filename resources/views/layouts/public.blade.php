@@ -273,7 +273,7 @@
 
             <!-- Bottom Copyright -->
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-                <p>© {{ date('Y') }} Hydrox Facility Management Cleaning Services Pty. Ltd. All rights reserved.</p>
+                <p>© {{ date('Y') }} Hydrox Facility Management Cleaning Services Pty. Ltd. All rights reserved. <span class="mx-1.5 text-slate-600">|</span> Developed by <span class="text-slate-400 font-medium">Genius Geeks</span></p>
                 <div class="flex items-center gap-6">
                     <a href="{{ route('legal') }}" class="hover:text-slate-400 transition">Terms of Service</a>
                     <a href="{{ route('legal') }}" class="hover:text-slate-400 transition">Privacy Policy</a>
