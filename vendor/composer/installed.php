@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'ctc/cleaning-management-system',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'name' => 'hydrox/facility-management-portal',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '12d1ad2d392906745ccc0ad6f6ae25d106ca2ff4',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -42,15 +42,6 @@
             'replaced' => array(
                 0 => '*',
             ),
-        ),
-        'ctc/cleaning-management-system' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
-            'type' => 'project',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
         ),
         'davedevelopment/hamcrest-php' => array(
             'dev_requirement' => true,
@@ -210,6 +201,15 @@
             'install_path' => __DIR__ . '/../hamcrest/hamcrest-php',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'hydrox/facility-management-portal' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '12d1ad2d392906745ccc0ad6f6ae25d106ca2ff4',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'illuminate/auth' => array(
             'dev_requirement' => false,
