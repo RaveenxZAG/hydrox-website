@@ -3,5 +3,5 @@ deployment:
   tasks:
     - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type d -exec chmod 775 {} + 2>/dev/null || true"
     - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type f ! -name .gitignore -exec chmod 664 {} + 2>/dev/null || true"
-    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; if [ ! -f .env ]; then echo 'ERROR: .env file missing in repository path'; exit 1; fi"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; test -f .env || exit 1"
     - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; PHP_BIN=$(which ea-php83 2>/dev/null || which ea-php82 2>/dev/null || which php); $PHP_BIN artisan hydrox:deploy"
