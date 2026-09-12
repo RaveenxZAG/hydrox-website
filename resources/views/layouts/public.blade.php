@@ -268,15 +268,6 @@
                             <span>Melbourne, Victoria, Australia</span>
                         </p>
                     </div>
-
-                    <div class="mt-6 pt-5 border-t border-slate-800 space-y-2 text-xs">
-                        <a href="{{ route('staff-portal.login') }}" class="block text-slate-400 hover:text-sky-400 transition font-medium">
-                            🔒 Staff & Subcontractor Portal
-                        </a>
-                        <a href="{{ route('login') }}" class="block text-slate-400 hover:text-sky-400 transition font-medium">
-                            ⚙️ Admin Login
-                        </a>
-                    </div>
                 </div>
             </div>
 

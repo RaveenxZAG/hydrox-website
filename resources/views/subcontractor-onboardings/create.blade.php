@@ -34,7 +34,7 @@
                         <h1 class="mt-1 text-2xl font-black tracking-tight sm:text-3xl">Subcontractor application</h1>
                     </div>
                 </div>
-                <a class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/15" href="{{ route('login') }}">Back to portal</a>
+                <a class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/15" href="{{ route('home') }}">Back to website</a>
             </div>
             <p class="mt-5 max-w-3xl text-sm leading-6 text-slate-300">Tell us about your cleaning business, compliance and availability to work with Hydrox across metropolitan Melbourne.</p>
             </div>

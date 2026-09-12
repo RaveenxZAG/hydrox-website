@@ -16,8 +16,8 @@
                 For security, this page expired because it was left open for too long. Please restart the verification process.
             </p>
             <div class="mt-7 grid gap-3 sm:grid-cols-2">
-                <a class="btn-primary" href="{{ route('staff-portal.login') }}">Restart verification</a>
-                <a class="btn-secondary" href="{{ route('login') }}">Return to home</a>
+                <a class="btn-primary" href="{{ route('home') }}">Return to Homepage</a>
+                <a class="btn-secondary" href="{{ route('contact') }}">Contact Support</a>
             </div>
         </section>
     </main>
