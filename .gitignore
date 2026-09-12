@@ -8,7 +8,9 @@
 
 /node_modules
 
-/public/build
+/public/build/*
+!/public/build/manifest.json
+!/public/build/assets/
 /public/hot
 /public/storage
 /database/*.sqlite
