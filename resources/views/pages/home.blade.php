@@ -13,6 +13,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <!-- Left Hero Copy -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/15 text-xs font-semibold text-sky-300">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
