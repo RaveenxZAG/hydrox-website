@@ -15,10 +15,18 @@ Artisan::command('hydrox:deploy', function () {
     $this->call('config:clear');
 
     $this->info('Applying pending database migrations...');
-    $this->call('migrate', ['--force' => true]);
+    $migrateExit = $this->call('migrate', ['--force' => true]);
+    if ($migrateExit !== 0) {
+        $this->error('Database migrations failed with exit code ' . $migrateExit);
+        return 1;
+    }
 
     $this->info('Seeding required baseline data...');
-    $this->call('db:seed', ['--force' => true]);
+    $seedExit = $this->call('db:seed', ['--force' => true]);
+    if ($seedExit !== 0) {
+        $this->error('Database seeding failed with exit code ' . $seedExit);
+        return 1;
+    }
 
     $this->info('Linking storage...');
     try {
@@ -35,4 +43,5 @@ Artisan::command('hydrox:deploy', function () {
     }
 
     $this->info('Hydrox deployment completed successfully.');
+    return 0;
 })->purpose('Safely migrate, seed baseline data, link storage, and optimize for production');

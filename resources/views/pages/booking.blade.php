@@ -17,6 +17,12 @@
 <div class="py-12 sm:py-16 bg-slate-50">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200">
+            @if (session('error'))
+                <div class="mb-6 rounded-2xl bg-rose-50 p-4 border border-rose-200 text-rose-800 text-sm">
+                    <p class="font-bold mb-1">{{ session('error') }}</p>
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="mb-6 rounded-2xl bg-rose-50 p-4 border border-rose-200 text-rose-800 text-sm">
                     <p class="font-bold mb-1">Please review the following:</p>
