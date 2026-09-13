@@ -215,7 +215,7 @@
                     </p>
                     <div class="flex items-center gap-3 pt-2">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">
-                            ABN: 89 669 467 261
+                            ABN: 35 670 676 785
                         </span>
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800 text-xs font-medium">
                             ✓ Fully Insured

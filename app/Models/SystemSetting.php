@@ -45,7 +45,7 @@ class SystemSetting extends Model
     {
         $defaults = [
             'company_name' => 'Hydrox Facility Management Cleaning Services Pty. Ltd',
-            'abn' => '89669467261',
+            'abn' => '35670676785',
             'website' => 'https://hydrox.au',
             'email' => 'admin@hydrox.au',
             'billing_email' => 'admin@hydrox.au',

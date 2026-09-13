@@ -22,8 +22,8 @@
             <div class="lg:col-span-6 space-y-6">
                 <span class="text-xs font-bold uppercase tracking-wider text-[#0082c9]">Who We Are</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">Elevating Facility Cleanliness Across Victoria</h2>
-                <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-                    Hydrox Facility Management Cleaning Services Pty. Ltd (ABN: 89 669 467 261) was founded with a clear objective: to provide businesses, educational campuses, medical institutions, and residential clients with reliable, honest, and spotless facility care.
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+                    Hydrox Facility Management Cleaning Services Pty. Ltd (ABN: 35 670 676 785) was founded with a clear objective: to provide businesses, educational campuses, medical institutions, and residential clients with reliable, honest, and spotless facility care.
                 </p>
                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
                     We believe that a facility provider shouldn't just be an occasional service; we are an essential partner in your daily operational health, safety, and brand presentation.

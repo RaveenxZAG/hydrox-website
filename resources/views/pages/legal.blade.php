@@ -8,7 +8,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Legal Policies & Terms of Service</h1>
         <p class="text-xs sm:text-sm text-slate-300">
-            Hydrox Facility Management Cleaning Services Pty. Ltd · ABN: 89 669 467 261
+            Hydrox Facility Management Cleaning Services Pty. Ltd · ABN: 35 670 676 785
         </p>
     </div>
 </section>
@@ -74,7 +74,7 @@
             </p>
             <ul class="list-disc pl-5 space-y-1 text-xs">
                 <li>Company: Hydrox Facility Management Cleaning Services Pty. Ltd</li>
-                <li>ABN: 89 669 467 261</li>
+                <li>ABN: 35 670 676 785</li>
                 <li>Email: <a href="mailto:admin@hydrox.au" class="text-[#0082c9] underline">admin@hydrox.au</a></li>
                 <li>Phone: <a href="tel:0418222477" class="text-[#0082c9] underline">0418 222 477</a></li>
                 <li>Location: Melbourne, Victoria, Australia</li>
