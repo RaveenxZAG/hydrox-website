@@ -77,24 +77,33 @@ class CreateBookingLeadAction
         }
 
         // Send email notifications
-        $this->bookingEmailService->send($booking->fresh('photos'));
+        try {
+            $this->bookingEmailService->send($booking->fresh('photos'));
+        } catch (\Throwable $exception) {
+            report($exception);
+            $booking->forceFill(['email_error' => $exception->getMessage()])->save();
+        }
 
         // Send admin internal system notification
-        $this->systemNotificationService->notify(
-            'booking_request',
-            "New Quote/Booking Request: {$booking->reference}",
-            "Name: {$booking->customer_name}\n"
-                ."Email: {$booking->email}\n"
-                ."Phone: {$booking->phone}\n"
-                ."Services: {$booking->service}\n"
-                .'Frequency: '.($booking->frequency ?: 'Not specified')."\n"
-                .'Location: '.trim(implode(', ', array_filter([$booking->address, $booking->suburb, $booking->postcode])))."\n"
-                .'Notes: '.($booking->notes ?: 'None')."\n"
-                .'Photos: '.$booking->photos()->count(),
-            route('bookings.show', $booking),
-            $booking,
-            false
-        );
+        try {
+            $this->systemNotificationService->notify(
+                'booking_request',
+                "New Quote/Booking Request: {$booking->reference}",
+                "Name: {$booking->customer_name}\n"
+                    ."Email: {$booking->email}\n"
+                    ."Phone: {$booking->phone}\n"
+                    ."Services: {$booking->service}\n"
+                    .'Frequency: '.($booking->frequency ?: 'Not specified')."\n"
+                    .'Location: '.trim(implode(', ', array_filter([$booking->address, $booking->suburb, $booking->postcode])))."\n"
+                    .'Notes: '.($booking->notes ?: 'None')."\n"
+                    .'Photos: '.$booking->photos()->count(),
+                route('bookings.show', $booking),
+                $booking,
+                false
+            );
+        } catch (\Throwable $exception) {
+            report($exception);
+        }
 
         return $booking;
     }
