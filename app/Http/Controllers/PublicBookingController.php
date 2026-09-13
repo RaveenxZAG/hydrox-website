@@ -51,21 +51,38 @@ class PublicBookingController extends Controller
             $validated['services'] = ['General Cleaning'];
         }
 
-        $photos = $request->file('photos', []);
-        $booking = $action->execute($validated, is_array($photos) ? $photos : []);
+        try {
+            $photos = $request->file('photos', []);
+            $booking = $action->execute($validated, is_array($photos) ? $photos : []);
 
-        // One-time conversion trigger flag stored in session
-        $request->session()->put('booking_just_submitted_' . $booking->reference, true);
+            // One-time conversion trigger flag stored in session
+            $request->session()->put('booking_just_submitted_' . $booking->reference, true);
 
-        if ($request->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'reference' => $booking->reference,
-                'redirect' => route('booking.confirmation', $booking->reference),
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'reference' => $booking->reference,
+                    'redirect' => route('booking.confirmation', $booking->reference),
+                ]);
+            }
+
+            return redirect()->route('booking.confirmation', $booking->reference);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Public booking submission error: ' . $e->getMessage(), [
+                'exception' => $e::class,
+                'trace' => $e->getTraceAsString()
             ]);
-        }
 
-        return redirect()->route('booking.confirmation', $booking->reference);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unable to save your booking at this moment. Please call 0418 222 477.',
+                    'error' => config('app.debug') ? $e->getMessage() : null
+                ], 500);
+            }
+
+            return back()->withInput()->with('error', 'We encountered an issue saving your request. Please call 0418 222 477 or email admin@hydrox.au.');
+        }
     }
 
     public function confirmation(Request $request, string $reference): View
