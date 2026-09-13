@@ -17,4 +17,5 @@ return [
     'company_email' => env('COMPANY_EMAIL', 'admin@hydrox.au'),
     'company_phone' => env('COMPANY_PHONE', '0418 222 477'),
     'company_address' => env('COMPANY_ADDRESS', ''),
+    'deployment_token' => env('DEPLOYMENT_TOKEN'),
 ];
