@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'api/bookings',
             'api/bookings/*',
-            'internal/deploy',
         ]);
 
         $middleware->web(append: [

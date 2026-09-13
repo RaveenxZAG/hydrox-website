@@ -16,7 +16,6 @@ use App\Http\Controllers\StaffPortal\AuthController as StaffPortalAuthController
 use App\Http\Controllers\StaffPortal\DashboardController as StaffPortalDashboardController;
 use App\Http\Controllers\SubcontractorOnboardingController;
 use App\Http\Controllers\SubcontractorDocumentVersionController;
-use App\Http\Controllers\InternalDeploymentController;
 use App\Http\Controllers\SystemSettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -142,16 +141,4 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('settings/maintenance', [SystemSettingsController::class, 'edit'])->name('settings.maintenance');
     Route::post('settings/clear-cache', [SystemSettingsController::class, 'clearCache'])->name('settings.clear-cache');
     Route::post('settings/clear-temporary-data', [SystemSettingsController::class, 'clearTemporaryData'])->name('settings.clear-temporary-data');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Temporary Deployment Endpoint (Browser-based for HostPapa cPanel)
-|--------------------------------------------------------------------------
-| Safely executes 'php artisan hydrox:deploy'. Protected by DEPLOYMENT_TOKEN.
-| Delete this block once database migration and initial setup is complete.
-*/
-Route::middleware('throttle:5,1')->group(function (): void {
-    Route::get('/internal/deploy', [InternalDeploymentController::class, 'show'])->name('internal.deploy.show');
-    Route::post('/internal/deploy', [InternalDeploymentController::class, 'deploy'])->name('internal.deploy.run');
 });
