@@ -105,4 +105,9 @@ class InternalDeploymentTest extends TestCase
         $response->assertSee('Deployment Successful');
         $response->assertSee('Deployment via header success');
     }
+
+    public function test_schema_default_string_length_is_191_for_mysql_compatibility(): void
+    {
+        $this->assertSame(191, \Illuminate\Database\Schema\Builder::$defaultStringLength);
+    }
 }
