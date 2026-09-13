@@ -10,43 +10,55 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('subcontractor_onboardings', function (Blueprint $table): void {
-            $table->string('residency_status')->nullable()->after('business_address');
-            $table->string('visa_type')->nullable()->after('residency_status');
-            $table->date('visa_expiry_date')->nullable()->after('visa_type');
-            $table->longText('cover_letter_text')->nullable()->after('experience');
+            if (! Schema::hasColumn('subcontractor_onboardings', 'residency_status')) {
+                $table->string('residency_status')->nullable()->after('business_address');
+            }
+            if (! Schema::hasColumn('subcontractor_onboardings', 'visa_type')) {
+                $table->string('visa_type')->nullable()->after('residency_status');
+            }
+            if (! Schema::hasColumn('subcontractor_onboardings', 'visa_expiry_date')) {
+                $table->date('visa_expiry_date')->nullable()->after('visa_type');
+            }
+            if (! Schema::hasColumn('subcontractor_onboardings', 'cover_letter_text')) {
+                $table->longText('cover_letter_text')->nullable()->after('experience');
+            }
         });
 
-        Schema::create('subcontractor_documents', function (Blueprint $table): void {
-            $table->id();
-            $table->foreignId('subcontractor_onboarding_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('staff_member_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('category');
-            $table->timestamps();
-            $table->index(['subcontractor_onboarding_id', 'category']);
-            $table->index(['staff_member_id', 'category']);
-        });
+        if (! Schema::hasTable('subcontractor_documents')) {
+            Schema::create('subcontractor_documents', function (Blueprint $table): void {
+                $table->id();
+                $table->foreignId('subcontractor_onboarding_id')->nullable()->constrained('subcontractor_onboardings', indexName: 'subcontractor_docs_onboarding_id_foreign')->cascadeOnDelete();
+                $table->foreignId('staff_member_id')->nullable()->constrained('staff_members', indexName: 'subcontractor_docs_staff_id_foreign')->cascadeOnDelete();
+                $table->string('category');
+                $table->timestamps();
+                $table->index(['subcontractor_onboarding_id', 'category'], 'subcontractor_docs_onboarding_category_idx');
+                $table->index(['staff_member_id', 'category'], 'subcontractor_docs_staff_category_idx');
+            });
+        }
 
-        Schema::create('subcontractor_document_versions', function (Blueprint $table): void {
-            $table->id();
-            $table->foreignId('subcontractor_document_id')->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('version_number');
-            $table->string('original_filename');
-            $table->string('storage_disk')->default('local');
-            $table->string('storage_path');
-            $table->string('mime_type')->nullable();
-            $table->unsignedBigInteger('file_size')->nullable();
-            $table->date('expiry_date')->nullable();
-            $table->string('review_status')->default('Pending Review');
-            $table->text('admin_notes')->nullable();
-            $table->foreignId('uploaded_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamp('reviewed_at')->nullable();
-            $table->text('replacement_reason')->nullable();
-            $table->boolean('is_current')->default(true)->index();
-            $table->timestamp('archived_at')->nullable();
-            $table->timestamps();
-            $table->unique(['subcontractor_document_id', 'version_number'], 'subcontractor_document_version_unique');
-        });
+        if (! Schema::hasTable('subcontractor_document_versions')) {
+            Schema::create('subcontractor_document_versions', function (Blueprint $table): void {
+                $table->id();
+                $table->foreignId('subcontractor_document_id')->constrained('subcontractor_documents', indexName: 'subcontractor_doc_versions_doc_id_foreign')->cascadeOnDelete();
+                $table->unsignedInteger('version_number');
+                $table->string('original_filename');
+                $table->string('storage_disk')->default('local');
+                $table->string('storage_path');
+                $table->string('mime_type')->nullable();
+                $table->unsignedBigInteger('file_size')->nullable();
+                $table->date('expiry_date')->nullable();
+                $table->string('review_status')->default('Pending Review');
+                $table->text('admin_notes')->nullable();
+                $table->foreignId('uploaded_by')->nullable()->constrained('users', indexName: 'subcontractor_doc_versions_uploaded_by_foreign')->nullOnDelete();
+                $table->foreignId('reviewed_by')->nullable()->constrained('users', indexName: 'subcontractor_doc_versions_reviewed_by_foreign')->nullOnDelete();
+                $table->timestamp('reviewed_at')->nullable();
+                $table->text('replacement_reason')->nullable();
+                $table->boolean('is_current')->default(true)->index('subcontractor_doc_versions_is_current_idx');
+                $table->timestamp('archived_at')->nullable();
+                $table->timestamps();
+                $table->unique(['subcontractor_document_id', 'version_number'], 'subcontractor_document_version_unique');
+            });
+        }
 
         $labels = [
             'public_liability_insurance',
