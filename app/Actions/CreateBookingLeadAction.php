@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Models\Booking;
 use App\Models\BookingPhoto;
 use App\Services\BookingEmailService;
+use App\Services\HydroxPortalBookingSyncService;
 use App\Services\SystemNotificationService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
@@ -13,7 +14,8 @@ class CreateBookingLeadAction
 {
     public function __construct(
         private readonly BookingEmailService $bookingEmailService,
-        private readonly SystemNotificationService $systemNotificationService
+        private readonly SystemNotificationService $systemNotificationService,
+        private readonly HydroxPortalBookingSyncService $portalSyncService
     ) {}
 
     /**
@@ -101,6 +103,13 @@ class CreateBookingLeadAction
                 $booking,
                 false
             );
+        } catch (\Throwable $exception) {
+            report($exception);
+        }
+
+        // Sync to Hydrox Portal
+        try {
+            $this->portalSyncService->sync($booking->fresh('photos'));
         } catch (\Throwable $exception) {
             report($exception);
         }

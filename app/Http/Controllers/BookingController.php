@@ -150,7 +150,14 @@ class BookingController extends Controller
 
         if ($booking->status === 'uploading') {
             $booking->update(['status' => 'processing', 'finalized_at' => now()]);
-            $emails->send($booking->fresh('photos'));
+
+            $sendEmails = $request->boolean('send_emails', true);
+            $sendCustomer = $sendEmails && $request->boolean('send_customer_email', true);
+            $sendAdmin = $sendEmails && $request->boolean('send_admin_email', true);
+
+            if ($sendCustomer || $sendAdmin) {
+                $emails->send($booking->fresh('photos'), $sendCustomer, $sendAdmin);
+            }
 
             app(SystemNotificationService::class)->notify(
                 'booking_request',

@@ -13,38 +13,42 @@ class BookingEmailService
 {
     public function __construct(private readonly MicrosoftGraphMailService $graph) {}
 
-    public function send(Booking $booking): void
+    public function send(Booking $booking, bool $sendCustomer = true, bool $sendAdmin = true): void
     {
         $errors = [];
 
-        try {
-            $mail = new BookingRequestReceived($booking);
-            $this->deliver(
-                $booking->email,
-                "We received your Hydrox request: {$booking->reference}",
-                $mail->render(),
-                $mail
-            );
-            $booking->forceFill(['customer_email_sent_at' => now()])->save();
-        } catch (Throwable $exception) {
-            report($exception);
-            $errors[] = 'Customer receipt: '.$exception->getMessage();
+        if ($sendCustomer) {
+            try {
+                $mail = new BookingRequestReceived($booking);
+                $this->deliver(
+                    $booking->email,
+                    "We received your Hydrox request: {$booking->reference}",
+                    $mail->render(),
+                    $mail
+                );
+                $booking->forceFill(['customer_email_sent_at' => now()])->save();
+            } catch (Throwable $exception) {
+                report($exception);
+                $errors[] = 'Customer receipt: '.$exception->getMessage();
+            }
         }
 
-        try {
-            $business = SystemSetting::businessInformation();
-            $recipient = $business['email'] ?: config('app.company_email');
-            $mail = new NewBookingRequest($booking);
-            $this->deliver(
-                $recipient,
-                "New Hydrox booking request: {$booking->reference}",
-                $mail->render(),
-                $mail
-            );
-            $booking->forceFill(['admin_email_sent_at' => now()])->save();
-        } catch (Throwable $exception) {
-            report($exception);
-            $errors[] = 'Hydrox alert: '.$exception->getMessage();
+        if ($sendAdmin) {
+            try {
+                $business = SystemSetting::businessInformation();
+                $recipient = $business['email'] ?: config('app.company_email');
+                $mail = new NewBookingRequest($booking);
+                $this->deliver(
+                    $recipient,
+                    "New Hydrox booking request: {$booking->reference}",
+                    $mail->render(),
+                    $mail
+                );
+                $booking->forceFill(['admin_email_sent_at' => now()])->save();
+            } catch (Throwable $exception) {
+                report($exception);
+                $errors[] = 'Hydrox alert: '.$exception->getMessage();
+            }
         }
 
         $booking->forceFill(['email_error' => $errors ? implode("\n", $errors) : null])->save();

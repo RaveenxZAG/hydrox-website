@@ -4,6 +4,10 @@ return [
     'hydrox_booking' => [
         'token' => env('HYDROX_BOOKING_TOKEN'),
     ],
+    'hydrox_portal' => [
+        'url' => env('HYDROX_PORTAL_URL', 'https://portal.hydrox.au'),
+        'token' => env('HYDROX_BOOKING_TOKEN'),
+    ],
     'microsoft_graph' => [
         'tenant_id' => env('MICROSOFT_GRAPH_TENANT_ID'),
         'client_id' => env('MICROSOFT_GRAPH_CLIENT_ID'),
