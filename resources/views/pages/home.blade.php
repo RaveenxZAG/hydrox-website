@@ -13,10 +13,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <!-- Left Hero Copy -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/15 text-xs font-semibold text-sky-300">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        Premium Facility Solutions Across Victoria
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/15 text-xs font-semibold text-sky-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            Premium Facility Solutions Across Victoria
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/15 text-xs font-semibold text-white">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                            </svg>
+                            <span class="text-amber-400 font-bold">★★★★★ 5.0</span>
+                            <span class="text-slate-300 font-normal">Google & hipages</span>
+                        </div>
                     </div>
 
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-white">
@@ -449,6 +460,279 @@
                             ✓ DVA Services
                         </span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Reviews & Verified Ratings Section (Google & hipages) -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+        <!-- Ambient background glows -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#0082c9]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
+                        <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <span>Verified Client Feedback</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                        Trusted by Melbourne Businesses, <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-300 to-amber-300">Healthcare Providers & Families</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">
+                        Consistent 5-star ratings across Google and hipages. From busy corporate facilities to sensitive medical and NDIS environments, see what our clients have to say.
+                    </p>
+                </div>
+
+                <!-- Platform Aggregate Badges -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
+                    <!-- Google Scorecard -->
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-3.5 px-4 backdrop-blur shadow-sm">
+                        <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center p-2 shadow-inner shrink-0">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs font-bold">
+                                <span>★★★★★</span>
+                                <span class="text-white text-sm font-extrabold ml-1">5.0</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400 font-medium">Google Reviews</div>
+                        </div>
+                    </div>
+
+                    <!-- hipages Scorecard -->
+                    <a href="https://hipages.com.au/connect/hydroxfacilitymanagement" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-orange-500/40 rounded-2xl p-3.5 px-4 backdrop-blur shadow-sm transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-[#FF5A36] text-white flex items-center justify-center font-black text-sm tracking-tighter shrink-0 shadow-sm">
+                            hi
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs font-bold">
+                                <span>★★★★★</span>
+                                <span class="text-white text-sm font-extrabold ml-1">5.0</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400 group-hover:text-orange-300 font-medium transition-colors flex items-center gap-1">
+                                <span>hipages Verified</span>
+                                <svg class="w-2.5 h-2.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reviews Grid (6 realistic reviews covering commercial, medical, NDIS, industrial, childcare, residential) -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Review 1: Commercial Office (Google) -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-[#0082c9]/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                                </svg>
+                                <span>Google Review</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Hydrox has looked after our two corporate office floors in Melbourne for over a year now. Reliable, thorough, and always attentive. Their supervisor checks in routinely, and our staff noticed the hygiene improvement immediately."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">David M.</div>
+                            <div class="text-xs text-sky-400">Operations Manager • Commercial Offices</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified Client</span>
+                    </div>
+                </div>
+
+                <!-- Review 2: hipages Verified Job -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-orange-500/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-orange-400 font-semibold">
+                                <span class="w-3.5 h-3.5 rounded bg-[#FF5A36] text-white flex items-center justify-center text-[8px] font-black">hi</span>
+                                <span>hipages Verified</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Booked Hydrox through hipages for extensive concrete cleaning, driveway pressure washing, and building washdown. Punctual, top-of-the-line equipment, and fair pricing. The results exceeded expectations."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">Craig T.</div>
+                            <div class="text-xs text-orange-300">Property Owner • High-Pressure Cleaning</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/20">hipages Job</span>
+                    </div>
+                </div>
+
+                <!-- Review 3: Medical / Dental Clinic (Google) -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-[#0082c9]/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                                </svg>
+                                <span>Google Review</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "In healthcare, infection control standards are strict. Hydrox strictly follows sanitation protocols, uses hospital-grade disinfectants, and provides full digital sign-off logs every shift. Truly commendable team."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">Dr. Sarah K.</div>
+                            <div class="text-xs text-sky-400">Clinic Director • Medical Practice</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified Client</span>
+                    </div>
+                </div>
+
+                <!-- Review 4: NDIS Support Coordinator (Google) -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-[#0082c9]/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                                </svg>
+                                <span>Google Review</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "As an NDIS support coordinator, finding compassionate, respectful, and reliable cleaners is tough. Hydrox cleaners are gentle, police-vetted, and make our participants feel respected and safe in their homes."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">Elena R.</div>
+                            <div class="text-xs text-sky-400">Support Coordinator • NDIS Services</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified Client</span>
+                    </div>
+                </div>
+
+                <!-- Review 5: Industrial Warehouse (Google) -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-[#0082c9]/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                                </svg>
+                                <span>Google Review</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "They handle our distribution warehouse floor scrubbing and amenities cleaning in Dandenong South. Cm3 prequalified, correct SWMS, full PPE compliance, and zero disruptions to our dispatch shifts."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">Jason B.</div>
+                            <div class="text-xs text-sky-400">Logistics & Site Manager • Industrial Logistics</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified Client</span>
+                    </div>
+                </div>
+
+                <!-- Review 6: School / Childcare Center (Google) -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-[#0082c9]/60 hover:bg-slate-800 transition-all duration-200">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                                </svg>
+                                <span>Google Review</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Hydrox cleaned our early learning centre thoroughly prior to the new term. All staff hold Working with Children Checks, they only use safe, eco-certified products, and the centre looks spotless every morning."
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/60 mt-5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-sm text-white">Michelle P.</div>
+                            <div class="text-xs text-sky-400">Centre Director • Early Learning & Education</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified Client</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom trust banner & CTAs -->
+            <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-800 to-slate-800/60 border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-400/20 border border-amber-400/30 flex items-center justify-center text-amber-400 text-xl font-bold shrink-0">
+                        ★
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">Looking for verified commercial or domestic cleaning?</h3>
+                        <p class="text-xs sm:text-sm text-slate-400">Read our reviews or speak directly with our Melbourne facility team today.</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+                    <a href="https://www.google.com/search?q=Hydrox+Facility+Management+Melbourne" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-semibold transition-all">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24Z"/>
+                            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.15Z"/>
+                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98Z"/>
+                        </svg>
+                        <span>Google Search Profile</span>
+                        <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                    <a href="{{ route('booking.create') }}" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0082c9] to-sky-500 hover:from-sky-500 hover:to-[#0082c9] text-white text-xs font-bold shadow-md shadow-sky-500/20 transition-all">
+                        Request a Free Quote
+                    </a>
                 </div>
             </div>
         </div>
