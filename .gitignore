@@ -16,6 +16,14 @@
 /database/*.sqlite
 /database/*.sqlite-*
 
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+/bootstrap/cache/config.php
+/bootstrap/cache/events.php
+/bootstrap/cache/packages.php
+/bootstrap/cache/services.php
+/bootstrap/cache/routes-v7.php
+
 /storage/app/*
 !/storage/app/.gitignore
 /storage/framework/cache/*
