@@ -213,12 +213,24 @@
                     <p class="text-sm text-slate-400 leading-relaxed max-w-sm">
                         Hydrox Facility Management Cleaning Services Pty. Ltd delivers premium commercial, residential, medical, and specialized facility services across Melbourne and Victoria. Reliable, fully vetted, and insured.
                     </p>
-                    <div class="flex items-center gap-3 pt-2">
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">
                             ABN: 35 670 676 785
                         </span>
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800 text-xs font-medium">
                             ✓ Fully Insured
+                        </span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-800/80 text-[11px] font-medium text-slate-300 border border-slate-700">
+                            🛡️ WorkCover
+                        </span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-800/80 text-[11px] font-medium text-slate-300 border border-slate-700">
+                            ⚖️ Labour Hire
+                        </span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-800/80 text-[11px] font-medium text-slate-300 border border-slate-700">
+                            📋 Cm3 Prequalified
+                        </span>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-800/80 text-[11px] font-medium text-slate-300 border border-slate-700">
+                            💜 NDIS & DVA
                         </span>
                     </div>
                 </div>

@@ -108,7 +108,7 @@
                     </a>
 
                     <div class="mt-6 pt-6 border-t border-sky-200/60 space-y-2 text-xs text-slate-600">
-                        <p class="flex items-center gap-2"><span>🛡️</span> \$20M Public Liability Insurance</p>
+                        <p class="flex items-center gap-2"><span>🛡️</span> Comprehensive Public Liability Insurance</p>
                         <p class="flex items-center gap-2"><span>👮</span> 100% Police-Checked Staff</p>
                         <p class="flex items-center gap-2"><span>🕒</span> Flexible After-Hours Schedules</p>
                     </div>

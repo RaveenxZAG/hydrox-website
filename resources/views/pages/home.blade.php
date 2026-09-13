@@ -36,7 +36,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
-                            <span>\$20M Public Liability</span>
+                            <span>Public Liability Insured</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
@@ -323,6 +323,131 @@
                         <a href="{{ route('services.concreting') }}" class="inline-flex items-center text-xs font-bold text-[#0082c9] hover:underline">
                             Learn more →
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accreditation, Safety & Compliance Showcase -->
+    <section class="py-16 lg:py-20 bg-slate-50/80 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-50 text-[#0082c9] text-xs font-bold uppercase tracking-wider border border-sky-100">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#0082c9]"></span>
+                    Governance & Safety Accreditations
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Accredited, Insured & Fully Compliant
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    Hydrox Facility Management operates under strict Australian regulatory, safety, and workplace standards, giving commercial facilities, educational campuses, and participants complete confidence.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
+                <!-- 1. WorkCover -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold border border-amber-100 group-hover:scale-110 transition-transform">
+                            🛡️
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900 group-hover:text-[#0082c9] transition-colors">WorkCover Covered</h3>
+                            <p class="text-xs font-bold text-amber-600 mt-0.5">Committed to Workplace Safety</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Our employees and operations are protected under comprehensive WorkCover insurance, ensuring every project is carried out safely, professionally, and compliantly.
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-100 mt-5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                            ✓ Safety Protected
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 2. Labour Hire -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold border border-indigo-100 group-hover:scale-110 transition-transform">
+                            ⚖️
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900 group-hover:text-[#0082c9] transition-colors">Labour Hire Compliant</h3>
+                            <p class="text-xs font-bold text-indigo-600 mt-0.5">Professional & Industry Compliant</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Operating in accordance with Australian labour hire requirements where applicable, delivering dependable, ethical, and qualified cleaning professionals.
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-100 mt-5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                            ✓ Industry Compliant
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 3. Cm3 Prequalified -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-50 text-[#0082c9] flex items-center justify-center text-xl font-bold border border-sky-100 group-hover:scale-110 transition-transform">
+                            📋
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900 group-hover:text-[#0082c9] transition-colors">Cm3 Prequalified</h3>
+                            <p class="text-xs font-bold text-[#0082c9] mt-0.5">Contractor Safety & Compliance</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Demonstrating verified contractor WHS compliance, comprehensive safety documentation, and workplace readiness through Cm3 contractor prequalification.
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-100 mt-5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                            ✓ Cm3 Compliant
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 4. NDIS Provider -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold border border-purple-100 group-hover:scale-110 transition-transform">
+                            💜
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900 group-hover:text-[#0082c9] transition-colors">NDIS Provider</h3>
+                            <p class="text-xs font-bold text-purple-600 mt-0.5">Disability Support Cleaning</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Supporting NDIS participants with reliable, respectful, and professional cleaning services tailored to individual support plans and daily living needs.
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-100 mt-5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                            ✓ NDIS Services
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 5. DVA Provider -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold border border-emerald-100 group-hover:scale-110 transition-transform">
+                            🎖️
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900 group-hover:text-[#0082c9] transition-colors">DVA Provider</h3>
+                            <p class="text-xs font-bold text-emerald-600 mt-0.5">Veteran Support Cleaning</p>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Providing dependable household cleaning services for eligible veterans through Australian Department of Veterans' Affairs support programs.
+                        </p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-100 mt-5">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                            ✓ DVA Services
+                        </span>
                     </div>
                 </div>
             </div>

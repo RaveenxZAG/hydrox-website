@@ -24,7 +24,7 @@
                 ],
                 [
                     'q' => 'Are your cleaners police checked and insured?',
-                    'a' => 'Yes, absolutely. 100% of our staff and subcontractors hold clean national police checks. Team members assigned to schools and childcare hold current Working With Children Checks (WWCC). Furthermore, we carry comprehensive \$20M Public Liability insurance for complete peace of mind.'
+                    'a' => 'Yes, absolutely. 100% of our staff and subcontractors hold clean national police checks. Team members assigned to schools and childcare hold current Working With Children Checks (WWCC). Furthermore, we carry comprehensive Public Liability insurance for complete peace of mind.'
                 ],
                 [
                     'q' => 'What areas across Victoria do you cover?',

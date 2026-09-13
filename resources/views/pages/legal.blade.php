@@ -62,7 +62,7 @@
         <div class="space-y-3">
             <h2 class="text-xl font-bold text-slate-900">6. Liability & Insurance</h2>
             <p>
-                Hydrox maintains \$20,000,000 in Public Liability Insurance cover. Clients must notify Hydrox immediately of any accidental damage occurring during a cleaning shift. We are not liable for pre-existing wear, tear, discoloration, faulty building fixtures, or unrestorable chemical damage on aged materials.
+                Hydrox maintains comprehensive Public Liability Insurance cover and WorkCover compliance. Clients must notify Hydrox immediately of any accidental damage occurring during a cleaning shift. We are not liable for pre-existing wear, tear, discoloration, faulty building fixtures, or unrestorable chemical damage on aged materials.
             </p>
         </div>
 

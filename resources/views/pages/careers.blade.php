@@ -62,7 +62,7 @@
                     </p>
                     <div class="grid sm:grid-cols-2 gap-3 text-xs text-slate-200 pt-2">
                         <div class="flex items-center gap-2"><span>✓</span> Australian Business Number (ABN)</div>
-                        <div class="flex items-center gap-2"><span>✓</span> \$10M+ Public Liability Insurance</div>
+                        <div class="flex items-center gap-2"><span>✓</span> Valid Public Liability Insurance</div>
                         <div class="flex items-center gap-2"><span>✓</span> Current National Police Check (under 12m)</div>
                         <div class="flex items-center gap-2"><span>✓</span> Photo ID (Driver Licence or Passport)</div>
                         <div class="flex items-center gap-2"><span>✓</span> Commercial cleaning equipment & transport</div>

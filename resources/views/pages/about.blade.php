@@ -35,7 +35,7 @@
                         <p class="text-xs text-slate-500 mt-1 font-semibold">Satisfaction Guaranteed</p>
                     </div>
                     <div>
-                        <p class="text-3xl font-black text-[#0082c9]">\$20M</p>
+                        <p class="text-3xl font-black text-[#0082c9]">Full</p>
                         <p class="text-xs text-slate-500 mt-1 font-semibold">Public Liability Cover</p>
                     </div>
                     <div>
@@ -87,6 +87,82 @@
                 <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     Quality starts with happy, respected cleaners. All Hydrox team members and subcontractors are thoroughly onboarded, insured, and supported with ongoing skill development.
                 </p>
+            </div>
+        </div>
+
+        <!-- Accreditations Grid on About Us -->
+        <div class="mt-20 pt-16 border-t border-slate-200">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#0082c9]">Verified Standards</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Accreditations & Industry Compliance</h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-2">Meeting and exceeding Australian workplace, safety, and government requirements.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 items-stretch text-left">
+                <!-- 1. WorkCover -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg font-bold">🛡️</div>
+                        <h3 class="font-bold text-base text-slate-900">WorkCover Covered</h3>
+                        <p class="text-[11px] font-semibold text-amber-600">Workplace Safety</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Protected under WorkCover insurance, ensuring safe and compliant delivery across all facilities.</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-bold text-emerald-600">✓ Safety Protected</span>
+                    </div>
+                </div>
+
+                <!-- 2. Labour Hire -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold">⚖️</div>
+                        <h3 class="font-bold text-base text-slate-900">Labour Hire Compliant</h3>
+                        <p class="text-[11px] font-semibold text-indigo-600">Industry Standards</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Operating in accordance with Australian labour hire requirements, ensuring ethical, vetted staffing.</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-bold text-emerald-600">✓ Industry Compliant</span>
+                    </div>
+                </div>
+
+                <!-- 3. Cm3 Prequalified -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-sky-50 text-[#0082c9] flex items-center justify-center text-lg font-bold">📋</div>
+                        <h3 class="font-bold text-base text-slate-900">Cm3 Prequalified</h3>
+                        <p class="text-[11px] font-semibold text-[#0082c9]">WHS Compliance</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Demonstrating verified contractor WHS safety documentation and operational readiness.</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-bold text-emerald-600">✓ Cm3 Compliant</span>
+                    </div>
+                </div>
+
+                <!-- 4. NDIS Provider -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg font-bold">💜</div>
+                        <h3 class="font-bold text-base text-slate-900">NDIS Provider</h3>
+                        <p class="text-[11px] font-semibold text-purple-600">Disability Support</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Supporting NDIS participants with reliable, respectful, and tailored domestic and commercial cleaning.</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-bold text-emerald-600">✓ NDIS Services</span>
+                    </div>
+                </div>
+
+                <!-- 5. DVA Provider -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-bold">🎖️</div>
+                        <h3 class="font-bold text-base text-slate-900">DVA Provider</h3>
+                        <p class="text-[11px] font-semibold text-emerald-600">Veteran Support</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Dependable cleaning support for eligible veterans through Department of Veterans' Affairs programs.</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-bold text-emerald-600">✓ DVA Services</span>
+                    </div>
+                </div>
             </div>
         </div>
 
