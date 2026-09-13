@@ -78,16 +78,49 @@
 @if ($fireConversion)
     <!-- Google Ads Conversion Tracking (Fired only once on genuine backend acceptance) -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE',
-                    'value': 1.0,
-                    'currency': 'AUD'
-                });
-                console.log('Google Ads conversion event sent for {{ $booking->reference }}');
+        (function() {
+            var bookingRef = '{{ $booking->reference }}';
+            var storageKey = 'hydrox_gads_conv_{{ $booking->reference }}';
+
+            // Deduplication: Never fire more than once per completed booking on this client
+            try {
+                if (window.sessionStorage && window.sessionStorage.getItem(storageKey)) {
+                    return;
+                }
+                if (window.localStorage && window.localStorage.getItem(storageKey)) {
+                    return;
+                }
+            } catch (storageErr) {
+                // Ignore storage restrictions (e.g. strict private browsing modes)
             }
-        });
+
+            function fireConversion() {
+                try {
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'conversion', {'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE'});
+                    } else if (typeof gtag === 'function') {
+                        gtag('event', 'conversion', {'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE'});
+                    } else if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+                        window.dataLayer.push(['event', 'conversion', {'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE'}]);
+                    }
+
+                    try {
+                        if (window.sessionStorage) window.sessionStorage.setItem(storageKey, 'true');
+                        if (window.localStorage) window.localStorage.setItem(storageKey, 'true');
+                    } catch (e) {}
+
+                    console.log('Google Ads conversion event sent for ' + bookingRef);
+                } catch (err) {
+                    console.warn('Google Ads conversion tracking error:', err);
+                }
+            }
+
+            if (typeof window.gtag === 'function' || document.readyState !== 'loading') {
+                fireConversion();
+            } else {
+                document.addEventListener('DOMContentLoaded', fireConversion);
+            }
+        })();
     </script>
 @endif
 @endpush

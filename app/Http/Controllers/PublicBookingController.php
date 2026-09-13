@@ -58,15 +58,20 @@ class PublicBookingController extends Controller
             // One-time conversion trigger flag stored in session
             $request->session()->put('booking_just_submitted_' . $booking->reference, true);
 
+            $confirmationUrl = route('booking.confirmation', [
+                'reference' => $booking->reference,
+                'new' => 1,
+            ]);
+
             if ($request->wantsJson()) {
                 return response()->json([
                     'success' => true,
                     'reference' => $booking->reference,
-                    'redirect' => route('booking.confirmation', $booking->reference),
+                    'redirect' => $confirmationUrl,
                 ]);
             }
 
-            return redirect()->route('booking.confirmation', $booking->reference);
+            return redirect()->to($confirmationUrl);
         } catch (\Throwable $e) {
             \Illuminate\Support\Facades\Log::error('Public booking submission error: ' . $e->getMessage(), [
                 'exception' => $e::class,
@@ -90,8 +95,10 @@ class PublicBookingController extends Controller
         $booking = Booking::where('reference', $reference)->firstOrFail();
         $business = SystemSetting::businessInformation();
 
-        // Safe conversion firing: only true on first visit right after submission
-        $fireConversion = (bool) $request->session()->pull('booking_just_submitted_' . $booking->reference, false);
+        // Safe conversion firing: true upon confirmed booking creation (via session or recent 'new' flag)
+        $justSubmittedSession = (bool) $request->session()->pull('booking_just_submitted_' . $booking->reference, false);
+        $isRecent = $booking->created_at && $booking->created_at->diffInSeconds(now()) <= 300;
+        $fireConversion = $justSubmittedSession || ($request->has('new') && $isRecent);
 
         return view('pages.confirmation', compact('booking', 'business', 'fireConversion'));
     }
