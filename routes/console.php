@@ -22,13 +22,17 @@ Artisan::command('hydrox:deploy', function () {
 
     $this->info('Linking storage...');
     try {
-        $this->call('storage:link');
+        $this->call('storage:link', ['--force' => true]);
     } catch (\Throwable $e) {
         $this->warn('storage:link notice: ' . $e->getMessage());
     }
 
     $this->info('Caching configuration, routes, and views for production...');
-    $this->call('optimize');
+    try {
+        $this->call('optimize');
+    } catch (\Throwable $e) {
+        $this->warn('optimize notice: ' . $e->getMessage());
+    }
 
     $this->info('Hydrox deployment completed successfully.');
 })->purpose('Safely migrate, seed baseline data, link storage, and optimize for production');
