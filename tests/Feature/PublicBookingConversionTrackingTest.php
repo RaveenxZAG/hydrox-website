@@ -29,7 +29,7 @@ class PublicBookingConversionTrackingTest extends TestCase
         $response->assertSee('https://www.googletagmanager.com/gtag/js?id=AW-18428986459', false);
         $response->assertSee("gtag('config', 'AW-18428986459')", false);
         // Conversion snippet must NOT be present on page load
-        $response->assertDontSee('bOSgCPbm6-0cENu10NNE');
+        $response->assertDontSee('b0SgCPbm6-0cENuI0NNE');
     }
 
     public function test_validation_errors_do_not_fire_conversion_event(): void
@@ -46,7 +46,7 @@ class PublicBookingConversionTrackingTest extends TestCase
 
         // Follow redirect back to booking form
         $followUp = $this->get('/booking');
-        $followUp->assertDontSee('bOSgCPbm6-0cENu10NNE');
+        $followUp->assertDontSee('b0SgCPbm6-0cENuI0NNE');
     }
 
     public function test_honeypot_trap_does_not_create_booking_or_fire_conversion(): void
@@ -63,7 +63,7 @@ class PublicBookingConversionTrackingTest extends TestCase
         $this->assertDatabaseCount(Booking::class, 0);
 
         $home = $this->get('/');
-        $home->assertDontSee('bOSgCPbm6-0cENu10NNE');
+        $home->assertDontSee('b0SgCPbm6-0cENuI0NNE');
     }
 
     public function test_successful_booking_submission_redirects_and_fires_conversion_once(): void
@@ -99,7 +99,7 @@ class PublicBookingConversionTrackingTest extends TestCase
         $this->assertSame(1, substr_count($content, 'https://www.googletagmanager.com/gtag/js?id=AW-18428986459'));
 
         // Conversion event script is rendered with exact send_to payload
-        $confirmationResponse->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE'})", false);
+        $confirmationResponse->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/b0SgCPbm6-0cENuI0NNE'})", false);
         $confirmationResponse->assertSee('hydrox_gads_conv_' . $booking->reference, false);
     }
 
@@ -122,7 +122,7 @@ class PublicBookingConversionTrackingTest extends TestCase
         $response = $this->get(route('booking.confirmation', $booking->reference));
 
         $response->assertOk();
-        $response->assertDontSee('bOSgCPbm6-0cENu10NNE');
+        $response->assertDontSee('b0SgCPbm6-0cENuI0NNE');
     }
 
     public function test_ajax_booking_submission_returns_confirmation_redirect(): void
@@ -149,6 +149,6 @@ class PublicBookingConversionTrackingTest extends TestCase
         // Confirmation page contains conversion tag
         $confirmation = $this->get($expectedUrl);
         $confirmation->assertOk();
-        $confirmation->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/bOSgCPbm6-0cENu10NNE'})", false);
+        $confirmation->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/b0SgCPbm6-0cENuI0NNE'})", false);
     }
 }
