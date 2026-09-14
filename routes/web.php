@@ -17,6 +17,7 @@ use App\Http\Controllers\StaffPortal\DashboardController as StaffPortalDashboard
 use App\Http\Controllers\SubcontractorOnboardingController;
 use App\Http\Controllers\SubcontractorDocumentVersionController;
 use App\Http\Controllers\SystemSettingsController;
+use App\Http\Controllers\InternalMaintenanceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -142,3 +143,13 @@ Route::middleware(['auth'])->group(function (): void {
     Route::post('settings/clear-cache', [SystemSettingsController::class, 'clearCache'])->name('settings.clear-cache');
     Route::post('settings/clear-temporary-data', [SystemSettingsController::class, 'clearTemporaryData'])->name('settings.clear-temporary-data');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Internal Maintenance Routes (Guarded by Feature Flag & Secret Token)
+|--------------------------------------------------------------------------
+*/
+Route::match(['get', 'post'], '/internal/maintenance/migrate-sqlite', [InternalMaintenanceController::class, 'migrateSqlite'])
+    ->middleware('throttle:3,1')
+    ->name('internal.maintenance.migrate-sqlite');
+

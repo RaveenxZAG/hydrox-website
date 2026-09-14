@@ -8,6 +8,7 @@ use App\Services\BookingEmailService;
 use App\Services\HydroxPortalBookingSyncService;
 use App\Services\SystemNotificationService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CreateBookingLeadAction
@@ -43,40 +44,44 @@ class CreateBookingLeadAction
             $address = trim("{$suburb} {$postcode}");
         }
 
-        $booking = Booking::create([
-            'reference' => $this->newReference(),
-            'source' => $data['source'] ?? 'hydrox.au Website',
-            'external_reference' => $data['external_reference'] ?? ('WEB-' . Str::upper(Str::random(8))),
-            'status' => 'processing',
-            'customer_name' => trim((string) ($data['customer_name'] ?? '')),
-            'email' => trim((string) ($data['email'] ?? '')),
-            'phone' => trim((string) ($data['phone'] ?? '')),
-            'service' => $serviceString,
-            'services' => (array) $services,
-            'extras' => $data['extras'] ?? [],
-            'frequency' => $frequency,
-            'schedule_flexible' => $flexible,
-            'preferred_date' => ! empty($data['preferred_date']) ? $data['preferred_date'] : null,
-            'preferred_time' => ! empty($data['preferred_time']) ? $data['preferred_time'] : null,
-            'address' => $address ?: null,
-            'suburb' => $suburb ?: null,
-            'postcode' => $postcode ?: null,
-            'notes' => ! empty($data['notes']) ? trim((string) $data['notes']) : null,
-            'payload' => $data,
-            'finalized_at' => now(),
-        ]);
+        $booking = DB::transaction(function () use ($data, $photos, $services, $serviceString, $frequency, $flexible, $address, $suburb, $postcode) {
+            $booking = Booking::create([
+                'reference' => $this->newReference(),
+                'source' => $data['source'] ?? 'hydrox.au Website',
+                'external_reference' => $data['external_reference'] ?? ('WEB-' . Str::upper(Str::random(8))),
+                'status' => 'processing',
+                'customer_name' => trim((string) ($data['customer_name'] ?? '')),
+                'email' => trim((string) ($data['email'] ?? '')),
+                'phone' => trim((string) ($data['phone'] ?? '')),
+                'service' => $serviceString,
+                'services' => (array) $services,
+                'extras' => $data['extras'] ?? [],
+                'frequency' => $frequency,
+                'schedule_flexible' => $flexible,
+                'preferred_date' => ! empty($data['preferred_date']) ? $data['preferred_date'] : null,
+                'preferred_time' => ! empty($data['preferred_time']) ? $data['preferred_time'] : null,
+                'address' => $address ?: null,
+                'suburb' => $suburb ?: null,
+                'postcode' => $postcode ?: null,
+                'notes' => ! empty($data['notes']) ? trim((string) $data['notes']) : null,
+                'payload' => $data,
+                'finalized_at' => now(),
+            ]);
 
-        foreach ($photos as $file) {
-            if ($file instanceof UploadedFile && $file->isValid()) {
-                $path = $file->store("booking-photos/{$booking->id}", 'local');
-                $booking->photos()->create([
-                    'path' => $path,
-                    'original_name' => Str::limit($file->getClientOriginalName(), 240, ''),
-                    'mime_type' => $file->getMimeType() ?: 'application/octet-stream',
-                    'size' => $file->getSize(),
-                ]);
+            foreach ($photos as $file) {
+                if ($file instanceof UploadedFile && $file->isValid()) {
+                    $path = $file->store("booking-photos/{$booking->id}", 'local');
+                    $booking->photos()->create([
+                        'path' => $path,
+                        'original_name' => Str::limit($file->getClientOriginalName(), 240, ''),
+                        'mime_type' => $file->getMimeType() ?: 'application/octet-stream',
+                        'size' => $file->getSize(),
+                    ]);
+                }
             }
-        }
+
+            return $booking;
+        }, 5);
 
         // Send email notifications
         try {

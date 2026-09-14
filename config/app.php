@@ -17,4 +17,6 @@ return [
     'company_email' => env('COMPANY_EMAIL', 'admin@hydrox.au'),
     'company_phone' => env('COMPANY_PHONE', '0418 222 477'),
     'company_address' => env('COMPANY_ADDRESS', ''),
+    'sqlite_migration_enabled' => (bool) env('SQLITE_MIGRATION_ENABLED', false),
+    'internal_maintenance_token' => env('INTERNAL_MAINTENANCE_TOKEN'),
 ];

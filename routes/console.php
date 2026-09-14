@@ -14,6 +14,24 @@ Artisan::command('hydrox:deploy', function () {
     $this->info('Clearing old compiled config...');
     $this->call('config:clear');
 
+    // Ensure persistent SQLite directory and database file exist if SQLite is active
+    $defaultConn = config('database.default', 'mysql');
+    $dbConfig = config("database.connections.{$defaultConn}", []);
+    if (($dbConfig['driver'] ?? '') === 'sqlite') {
+        $dbPath = $dbConfig['database'] ?? '';
+        if ($dbPath !== ':memory:' && !empty($dbPath)) {
+            $dir = dirname($dbPath);
+            if (!\Illuminate\Support\Facades\File::isDirectory($dir)) {
+                \Illuminate\Support\Facades\File::makeDirectory($dir, 0750, true, true);
+            }
+            if (!\Illuminate\Support\Facades\File::exists($dbPath)) {
+                \Illuminate\Support\Facades\File::put($dbPath, '');
+                @chmod($dbPath, 0660);
+                $this->info("Created new SQLite database file at {$dbPath}");
+            }
+        }
+    }
+
     $this->info('Applying pending database migrations...');
     $migrateExit = $this->call('migrate', ['--force' => true]);
     if ($migrateExit !== 0) {

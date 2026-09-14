@@ -15,6 +15,14 @@
 /public/storage
 /database/*.sqlite
 /database/*.sqlite-*
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite.bak
+/database/backups/
+/storage/backups/
+/backups/
 
 /bootstrap/cache/*
 !/bootstrap/cache/.gitignore
