@@ -10,8 +10,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "${SCRIPT_DIR}")"
 
-# If deployed in persistent cPanel structure, default to repository path
-if [ -d "/home/hydro851/repositories/hydrox-website" ]; then
+# If deployed in persistent cPanel structure, check known deployment directory paths
+if [ -d "/home/hydro851/hydrox_dev_app" ]; then
+    PROJECT_ROOT="/home/hydro851/hydrox_dev_app"
+elif [ -d "/home/hydro851/repositories/hydrox-website" ]; then
     PROJECT_ROOT="/home/hydro851/repositories/hydrox-website"
 fi
 

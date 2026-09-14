@@ -3,8 +3,19 @@
 return [
     'default' => env('FILESYSTEM_DISK', 'local'),
     'disks' => [
-        'local' => ['driver' => 'local', 'root' => storage_path('app/private'), 'serve' => true],
-        'public' => ['driver' => 'local', 'root' => storage_path('app/public'), 'url' => env('APP_URL').'/storage', 'visibility' => 'public'],
+        'local' => [
+            'driver' => 'local',
+            'root' => env('FILESYSTEM_LOCAL_ROOT', storage_path('app/private')),
+            'serve' => true,
+        ],
+        'public' => [
+            'driver' => 'local',
+            'root' => env('FILESYSTEM_PUBLIC_ROOT', storage_path('app/public')),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
     ],
-    'links' => [public_path('storage') => storage_path('app/public')],
+    'links' => [
+        public_path('storage') => env('FILESYSTEM_PUBLIC_ROOT', storage_path('app/public')),
+    ],
 ];

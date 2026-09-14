@@ -149,7 +149,11 @@ Route::middleware(['auth'])->group(function (): void {
 | Internal Maintenance Routes (Guarded by Feature Flag & Secret Token)
 |--------------------------------------------------------------------------
 */
-Route::match(['get', 'post'], '/internal/maintenance/migrate-sqlite', [InternalMaintenanceController::class, 'migrateSqlite'])
+Route::get('/internal/maintenance/migrate-sqlite', [InternalMaintenanceController::class, 'statusForm'])
+    ->middleware('throttle:10,1')
+    ->name('internal.maintenance.migrate-sqlite.status');
+
+Route::post('/internal/maintenance/migrate-sqlite', [InternalMaintenanceController::class, 'migrateSqlite'])
     ->middleware('throttle:3,1')
     ->name('internal.maintenance.migrate-sqlite');
 

@@ -39,15 +39,16 @@ Artisan::command('hydrox:deploy', function () {
         return 1;
     }
 
-    $this->info('Seeding required baseline data...');
-    $seedExit = $this->call('db:seed', ['--force' => true]);
-    if ($seedExit !== 0) {
-        $this->error('Database seeding failed with exit code ' . $seedExit);
-        return 1;
-    }
-
     $this->info('Linking storage...');
     try {
+        $publicRoot = config('filesystems.disks.public.root');
+        $localRoot = config('filesystems.disks.local.root');
+        if (!empty($publicRoot) && !\Illuminate\Support\Facades\File::isDirectory($publicRoot)) {
+            \Illuminate\Support\Facades\File::makeDirectory($publicRoot, 0755, true, true);
+        }
+        if (!empty($localRoot) && !\Illuminate\Support\Facades\File::isDirectory($localRoot)) {
+            \Illuminate\Support\Facades\File::makeDirectory($localRoot, 0750, true, true);
+        }
         $this->call('storage:link', ['--force' => true]);
     } catch (\Throwable $e) {
         $this->warn('storage:link notice: ' . $e->getMessage());
