@@ -61,6 +61,12 @@ Artisan::command('hydrox:deploy', function () {
         $this->warn('optimize notice: ' . $e->getMessage());
     }
 
+    // Ensure application is brought out of maintenance mode if it was stuck
+    if ($this->laravel->isDownForMaintenance()) {
+        $this->info('Bringing application out of maintenance mode...');
+        $this->call('up');
+    }
+
     $this->info('Hydrox deployment completed successfully.');
     return 0;
-})->purpose('Safely migrate, seed baseline data, link storage, and optimize for production');
+})->purpose('Safely apply migrations, link persistent storage, and optimize for production');

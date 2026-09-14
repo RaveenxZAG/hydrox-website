@@ -107,4 +107,57 @@ class PersistentStorageAndPragmasTest extends TestCase
         $this->assertStringNotContainsString("'db:seed'", $consoleRoutes);
         $this->assertStringNotContainsString('"db:seed"', $consoleRoutes);
     }
+
+    public function test_hydrox_deploy_purpose_does_not_mention_seeding(): void
+    {
+        $consoleRoutes = File::get(base_path('routes/console.php'));
+        $this->assertStringNotContainsString('seed', strtolower($consoleRoutes));
+    }
+
+    public function test_database_connections_resolve_independently_without_namespace_collision(): void
+    {
+        $oldDbConn = $_ENV['DB_CONNECTION'] ?? null;
+        $oldDbDatabase = $_ENV['DB_DATABASE'] ?? null;
+        $oldSqliteDb = $_ENV['SQLITE_DB_DATABASE'] ?? null;
+
+        try {
+            $_ENV['DB_CONNECTION'] = 'mysql';
+            $_ENV['DB_DATABASE'] = 'hydro851_dev';
+            $_ENV['SQLITE_DB_DATABASE'] = '/tmp/site.sqlite';
+            putenv('DB_CONNECTION=mysql');
+            putenv('DB_DATABASE=hydro851_dev');
+            putenv('SQLITE_DB_DATABASE=/tmp/site.sqlite');
+
+            // Reload database configuration
+            $databaseConfig = require config_path('database.php');
+
+            $this->assertSame('hydro851_dev', $databaseConfig['connections']['mysql']['database']);
+            $this->assertSame('/tmp/site.sqlite', $databaseConfig['connections']['sqlite']['database']);
+        } finally {
+            if ($oldDbConn !== null) {
+                $_ENV['DB_CONNECTION'] = $oldDbConn;
+                putenv("DB_CONNECTION={$oldDbConn}");
+            } else {
+                unset($_ENV['DB_CONNECTION'], $_SERVER['DB_CONNECTION']);
+                putenv('DB_CONNECTION');
+            }
+
+            if ($oldDbDatabase !== null) {
+                $_ENV['DB_DATABASE'] = $oldDbDatabase;
+                putenv("DB_DATABASE={$oldDbDatabase}");
+            } else {
+                unset($_ENV['DB_DATABASE'], $_SERVER['DB_DATABASE']);
+                putenv('DB_DATABASE');
+            }
+
+            if ($oldSqliteDb !== null) {
+                $_ENV['SQLITE_DB_DATABASE'] = $oldSqliteDb;
+                putenv("SQLITE_DB_DATABASE={$oldSqliteDb}");
+            } else {
+                unset($_ENV['SQLITE_DB_DATABASE'], $_SERVER['SQLITE_DB_DATABASE']);
+                putenv('SQLITE_DB_DATABASE');
+            }
+        }
+    }
 }
+

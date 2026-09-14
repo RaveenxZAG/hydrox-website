@@ -157,3 +157,7 @@ Route::post('/internal/maintenance/migrate-sqlite', [InternalMaintenanceControll
     ->middleware('throttle:3,1')
     ->name('internal.maintenance.migrate-sqlite');
 
+Route::post('/internal/maintenance/up', [InternalMaintenanceController::class, 'bringUp'])
+    ->middleware('throttle:5,1')
+    ->name('internal.maintenance.up');
+

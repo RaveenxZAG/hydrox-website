@@ -23,25 +23,39 @@ class InternalMaintenanceController extends Controller
         }
 
         $activeDriver = config('database.default');
-        $sqlitePath = config('database.connections.sqlite.database');
+        $sqlitePath = config('database.connections.sqlite.database') ?: env('SQLITE_DB_DATABASE');
         $activeSqliteExists = !empty($sqlitePath) && File::exists($sqlitePath);
         $activeSqliteSize = $activeSqliteExists ? File::size($sqlitePath) : 0;
 
         $targetDir = !empty($sqlitePath) ? dirname($sqlitePath) : '';
         $isLocked = !empty($targetDir) && File::exists($targetDir . '/.sqlite_migration.lock');
+        $isDown = app()->isDownForMaintenance();
 
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'ready',
                 'active_driver' => $activeDriver,
+                'target_sqlite_path' => $sqlitePath,
                 'target_sqlite_exists' => $activeSqliteExists,
                 'target_sqlite_bytes' => $activeSqliteSize,
                 'is_locked' => $isLocked,
+                'is_down_for_maintenance' => $isDown,
                 'message' => 'GET is read-only. Submit a POST request with maintenance token to execute migration.',
             ]);
         }
 
         $csrfToken = csrf_token();
+        $downBanner = $isDown
+            ? '<div style="background:#fee2e2;border:1px solid #ef4444;color:#991b1b;padding:12px;border-radius:6px;margin-bottom:16px;">
+                <strong>Notice:</strong> The application is currently in maintenance mode (503).
+                <form method="POST" action="/internal/maintenance/up" style="margin-top:8px;">
+                    <input type="hidden" name="_token" value="' . $csrfToken . '">
+                    <input type="password" name="token" required placeholder="Enter token to restore site" style="padding:6px;font-size:13px;border-radius:4px;border:1px solid #cbd5e1;margin-right:8px;">
+                    <button type="submit" style="background:#dc2626;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">Bring Site Back Up</button>
+                </form>
+               </div>'
+            : '';
+
         $html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -66,11 +80,13 @@ class InternalMaintenanceController extends Controller
 <body>
     <div class="card">
         <h1>Hydrox Public Website - SQLite Cutover</h1>
+        {$downBanner}
         <div class="status-box">
             <strong>Active Database Driver:</strong> {$activeDriver}<br>
             <strong>Target SQLite Path:</strong> {$sqlitePath}<br>
             <strong>Target SQLite File Exists:</strong> {$activeSqliteExists} ({$activeSqliteSize} bytes)<br>
-            <strong>Migration Lock Active:</strong> {$isLocked}
+            <strong>Migration Lock Active:</strong> {$isLocked}<br>
+            <strong>Site In Maintenance Mode:</strong> {$isDown}
         </div>
         <form method="POST" action="/internal/maintenance/migrate-sqlite">
             <input type="hidden" name="_token" value="{$csrfToken}">
@@ -89,7 +105,7 @@ class InternalMaintenanceController extends Controller
                 <input type="number" id="chunk" name="chunk" value="500" min="50" max="2000">
             </div>
             <button type="submit" class="btn">Execute Migration</button>
-            <p class="notice">Note: Imports are built in an isolated staging database and atomically promoted only upon complete verification. Existing MySQL data is read-only.</p>
+            <p class="notice">Note: Live import temporarily places the website in write-free maintenance mode to ensure zero lost submissions, then automatically restores it upon completion. Staging database is verified before atomic promotion.</p>
         </form>
     </div>
 </body>
@@ -142,7 +158,7 @@ HTML;
         }
 
         // 4. Check import lock
-        $targetPath = config('database.connections.sqlite.database');
+        $targetPath = config('database.connections.sqlite.database') ?: env('SQLITE_DB_DATABASE');
         if (!empty($targetPath)) {
             $lockFile = dirname($targetPath) . '/.sqlite_migration.lock';
             if (File::exists($lockFile)) {
@@ -166,6 +182,20 @@ HTML;
             'chunk' => $chunk,
             'ip' => $request->ip(),
         ]);
+
+        // 6. Automated write-free maintenance window during non-dry-run live import
+        $enteredMaintenance = false;
+        if (! $dryRun) {
+            Log::info('Placing application into temporary maintenance mode to block concurrent writes during cutover...');
+            try {
+                Artisan::call('down', [
+                    '--render' => 'errors::503',
+                ]);
+                $enteredMaintenance = true;
+            } catch (\Throwable $downEx) {
+                Log::warning('Failed to enter maintenance mode via down command: ' . $downEx->getMessage());
+            }
+        }
 
         try {
             $params = [
@@ -215,6 +245,53 @@ HTML;
                 'status' => 'error',
                 'message' => 'An error occurred during execution. Databases were left untouched. Check Laravel log files for details.',
                 'duration_seconds' => round(microtime(true) - $startTime, 2),
+            ], 500);
+        } finally {
+            // Restore application from maintenance mode
+            if ($enteredMaintenance) {
+                try {
+                    Artisan::call('up');
+                    Log::info('Application brought out of maintenance mode after migration.');
+                } catch (\Throwable $upEx) {
+                    Log::emergency('Failed to bring application out of maintenance mode: ' . $upEx->getMessage());
+                }
+            }
+        }
+    }
+
+    /**
+     * Emergency recovery endpoint to bring application out of maintenance mode.
+     */
+    public function bringUp(Request $request): JsonResponse
+    {
+        // 1. Feature flag guard
+        if (! (bool) config('app.sqlite_migration_enabled', env('SQLITE_MIGRATION_ENABLED', false))) {
+            abort(404);
+        }
+
+        // 2. Reject query string token
+        if ($request->query('token') !== null) {
+            return response()->json(['status' => 'error', 'message' => 'Tokens in query string prohibited.'], 400);
+        }
+
+        // 3. Authenticate
+        $configuredToken = (string) config('app.internal_maintenance_token', env('INTERNAL_MAINTENANCE_TOKEN', ''));
+        $providedToken = (string) ($request->header('X-Maintenance-Token') ?? $request->post('token') ?? '');
+        if (empty($configuredToken) || empty($providedToken) || ! hash_equals($configuredToken, $providedToken)) {
+            return response()->json(['status' => 'error', 'message' => 'Unauthorized.'], 401);
+        }
+
+        try {
+            Artisan::call('up');
+            Log::info('Application brought out of maintenance mode via emergency recovery endpoint.');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Application brought out of maintenance mode successfully.',
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to bring application up: ' . $e->getMessage(),
             ], 500);
         }
     }

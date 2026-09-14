@@ -17,8 +17,11 @@ class BackupSqliteDatabaseCommand extends Command
 
     public function handle(): int
     {
-        $dbConfig = config('database.connections.sqlite');
-        $dbPath = $dbConfig['database'] ?? database_path('database.sqlite');
+        $dbConfig = config('database.connections.sqlite', []);
+        $dbPath = $dbConfig['database'] ?? '';
+        if (empty($dbPath) || $dbPath === ':memory:') {
+            $dbPath = env('SQLITE_DB_DATABASE', $dbPath);
+        }
 
         if ($dbPath === ':memory:' || empty($dbPath)) {
             $this->error('Cannot backup an in-memory or empty SQLite database.');

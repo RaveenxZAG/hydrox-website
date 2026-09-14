@@ -20,6 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Providers\AppServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->preventRequestsDuringMaintenance(except: [
+            'internal/maintenance/*',
+        ]);
+
         $middleware->validateCsrfTokens(except: [
             'api/bookings',
             'api/bookings/*',

@@ -92,10 +92,16 @@ class MigrateMysqlToSqliteCommand extends Command
             return 1;
         }
 
+        $allowEmptyPass = (bool) env('SOURCE_DB_EMPTY_PASSWORD_ALLOWED', false);
+        if ($sourcePass === null || ($sourcePass === '' && ! $allowEmptyPass)) {
+            $this->error("Missing required source password (SOURCE_DB_PASSWORD). Silent fallback to active DB is disabled. To intentionally allow an empty password, set SOURCE_DB_EMPTY_PASSWORD_ALLOWED=true in .env.");
+            return 1;
+        }
+
         // 2. Resolve destination path
-        $targetPath = $this->option('target-path') ?: config('database.connections.sqlite.database');
+        $targetPath = $this->option('target-path') ?: (config('database.connections.sqlite.database') ?: env('SQLITE_DB_DATABASE'));
         if (empty($targetPath) || $targetPath === ':memory:') {
-            $this->error("Invalid SQLite target path: [{$targetPath}]. Cannot migrate to memory or empty path.");
+            $this->error("Invalid SQLite target path: [{$targetPath}]. Cannot migrate to memory or empty path. Ensure SQLITE_DB_DATABASE is configured.");
             return 1;
         }
 
@@ -296,12 +302,45 @@ class MigrateMysqlToSqliteCommand extends Command
                                 $lastKey = $rows->last()->key;
                             }
                         } else {
-                            // Chunk by offset
-                            for ($offset = 0; $offset < $sourceCount; $offset += $chunkSize) {
-                                $rows = $sourceConn->table($table)->offset($offset)->limit($chunkSize)->get();
-                                $data = array_map(fn($r) => (array) $r, $rows->all());
-                                if (!empty($data)) {
+                            // Discover primary or unique key index on staging table
+                            $indexes = Schema::connection('sqlite_staging')->getIndexes($table);
+                            $primaryIndex = array_values(array_filter($indexes, fn($idx) => !empty($idx['primary'])))[0] ?? null;
+                            $uniqueIndex = array_values(array_filter($indexes, fn($idx) => !empty($idx['unique'])))[0] ?? null;
+                            $orderColumns = $primaryIndex['columns'] ?? $uniqueIndex['columns'] ?? [];
+
+                            if (empty($orderColumns)) {
+                                throw new \RuntimeException("Table [{$table}] has no primary or unique key for deterministic pagination. Refusing non-deterministic copy.");
+                            }
+
+                            if (count($orderColumns) === 1) {
+                                $orderCol = $orderColumns[0];
+                                $lastVal = null;
+                                while (true) {
+                                    $q = $sourceConn->table($table)->orderBy($orderCol, 'asc')->limit($chunkSize);
+                                    if ($lastVal !== null) {
+                                        $q->where($orderCol, '>', $lastVal);
+                                    }
+                                    $rows = $q->get();
+                                    if ($rows->isEmpty()) {
+                                        break;
+                                    }
+
+                                    $data = array_map(fn($r) => (array) $r, $rows->all());
                                     $stagingConn->table($table)->insert($data);
+                                    $lastVal = $rows->last()->{$orderCol};
+                                }
+                            } else {
+                                // Multi-column deterministic ordered chunking
+                                for ($offset = 0; $offset < $sourceCount; $offset += $chunkSize) {
+                                    $q = $sourceConn->table($table);
+                                    foreach ($orderColumns as $col) {
+                                        $q->orderBy($col, 'asc');
+                                    }
+                                    $rows = $q->offset($offset)->limit($chunkSize)->get();
+                                    $data = array_map(fn($r) => (array) $r, $rows->all());
+                                    if (!empty($data)) {
+                                        $stagingConn->table($table)->insert($data);
+                                    }
                                 }
                             }
                         }

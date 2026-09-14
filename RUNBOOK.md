@@ -101,9 +101,10 @@ Before switching databases, copy any existing uploads so that no historic docume
 # Active Database (KEEP ON MYSQL UNTIL AFTER DATA IMPORT)
 # ==============================================================================
 DB_CONNECTION=mysql
+DB_DATABASE=hydro851_dev
 
-# SQLite Configuration (Target for migration and cutover)
-DB_DATABASE=/home/hydro851/persistent/hydrox-website/database/database.sqlite
+# SQLite Configuration (Dedicated namespace - does not collide with MySQL DB_DATABASE)
+SQLITE_DB_DATABASE=/home/hydro851/persistent/hydrox-website/database/database.sqlite
 DB_FOREIGN_KEYS=true
 DB_BUSY_TIMEOUT=5000
 DB_JOURNAL_MODE=WAL
@@ -144,13 +145,13 @@ Because HostPapa shared hosting provides no SSH/Terminal, use the secure web mai
 4. Click **Execute Migration**.
 5. Review the dry-run summary table showing that all tables in MySQL are readable and row counts match.
 
-### B. Execute Live Import & Promotion (Brief Maintenance Window)
-To guarantee zero dropped or duplicate submissions during final data copy:
-1. In the browser, navigate back to `https://hydrox.au/internal/maintenance/migrate-sqlite`.
+### B. Execute Live Import & Promotion (Automated Write-Free Window)
+1. In the browser, navigate to `https://hydrox.au/internal/maintenance/migrate-sqlite`.
 2. Enter your secret `INTERNAL_MAINTENANCE_TOKEN`.
 3. **Uncheck** the Dry-Run Mode checkbox.
 4. Click **Execute Migration**.
 5. The system will:
+   - Automatically place the public site into a temporary write-free maintenance mode (503) so no customer submissions can commit to MySQL during the copy. (The `/internal/maintenance/*` route remains accessible).
    - Create a clean staging SQLite file.
    - Run complete schema migrations on staging.
    - Keyset-paginate all rows under a consistent MySQL transaction.
@@ -158,7 +159,13 @@ To guarantee zero dropped or duplicate submissions during final data copy:
    - Run `PRAGMA foreign_key_check` and `PRAGMA integrity_check`.
    - Checkpoint WAL and optimize SQLite.
    - Back up any prior SQLite file and atomically promote staging to `/home/hydro851/persistent/hydrox-website/database/database.sqlite`.
+   - Automatically restore the application out of maintenance mode upon completion.
 6. Confirm the browser displays `"status": "success"` and `0 violations`.
+
+### C. Safe Recovery (If Maintenance Mode Persists)
+If the web server or process dies while the application is in maintenance mode:
+1. **Option 1 (Browser)**: Navigate to `https://hydrox.au/internal/maintenance/migrate-sqlite` (which is exempted from 503). The page will display a banner indicating maintenance mode is active. Enter your `INTERNAL_MAINTENANCE_TOKEN` and click **Bring Site Back Up**.
+2. **Option 2 (cPanel Git)**: In cPanel Git Version Control, click **Deploy HEAD Commit**. The deployment tasks automatically execute `php artisan up` to restore live traffic.
 
 ---
 

@@ -47,6 +47,9 @@ class MigrateMysqlToSqliteTest extends TestCase
 
     protected function tearDown(): void
     {
+        if (app()->isDownForMaintenance()) {
+            Artisan::call('up');
+        }
         if (File::isDirectory($this->tempDir)) {
             File::deleteDirectory($this->tempDir);
         }
@@ -317,5 +320,170 @@ class MigrateMysqlToSqliteTest extends TestCase
         $this->assertTrue($response->json('dry_run'));
         $this->assertStringContainsString('DRY RUN', $response->json('output'));
         $this->assertFalse(File::exists($this->targetDb));
+    }
+
+    public function test_fails_closed_when_source_password_is_missing_unless_explicitly_allowed(): void
+    {
+        Config::set('database.connections.missing_pass_source', [
+            'driver' => 'sqlite',
+            'database' => $this->sourceDb,
+            'username' => 'test_user',
+            'password' => '',
+        ]);
+
+        putenv('SOURCE_DB_EMPTY_PASSWORD_ALLOWED=false');
+
+        $exitCode = Artisan::call('hydrox:migrate-to-sqlite', [
+            '--source' => 'missing_pass_source',
+            '--target-path' => $this->targetDb,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $output = Artisan::output();
+        $this->assertStringContainsString('Missing required source password (SOURCE_DB_PASSWORD)', $output);
+
+        // When explicitly allowed via SOURCE_DB_EMPTY_PASSWORD_ALLOWED=true
+        putenv('SOURCE_DB_EMPTY_PASSWORD_ALLOWED=true');
+
+        $exitCodeAllowed = Artisan::call('hydrox:migrate-to-sqlite', [
+            '--source' => 'missing_pass_source',
+            '--target-path' => $this->targetDb,
+            '--dry-run' => true,
+        ]);
+        $this->assertSame(0, $exitCodeAllowed);
+
+        putenv('SOURCE_DB_EMPTY_PASSWORD_ALLOWED');
+    }
+
+    public function test_dry_run_never_activates_maintenance_mode(): void
+    {
+        Config::set('app.sqlite_migration_enabled', true);
+        Config::set('app.internal_maintenance_token', 'ValidSecretToken');
+        Config::set('database.connections.sqlite.database', $this->targetDb);
+        Config::set('database.connections.mysql_source', [
+            'driver' => 'sqlite',
+            'database' => $this->sourceDb,
+            'username' => 'test_user',
+            'password' => 'test_pass',
+        ]);
+
+        $this->assertFalse(app()->isDownForMaintenance());
+
+        $response = $this->postJson('/internal/maintenance/migrate-sqlite', [
+            'token' => 'ValidSecretToken',
+            'dry_run' => true,
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertFalse(app()->isDownForMaintenance());
+    }
+
+    public function test_live_import_activates_maintenance_mode_and_restores_afterwards(): void
+    {
+        Config::set('app.sqlite_migration_enabled', true);
+        Config::set('app.internal_maintenance_token', 'ValidSecretToken');
+        Config::set('database.connections.sqlite.database', $this->targetDb);
+        Config::set('database.connections.mysql_source', [
+            'driver' => 'sqlite',
+            'database' => $this->sourceDb,
+            'username' => 'test_user',
+            'password' => 'test_pass',
+        ]);
+
+        $this->assertFalse(app()->isDownForMaintenance());
+
+        $response = $this->postJson('/internal/maintenance/migrate-sqlite', [
+            'token' => 'ValidSecretToken',
+            'dry_run' => false,
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertSame('success', $response->json('status'));
+        // Verified it executed and brought app back up in finally
+        $this->assertFalse(app()->isDownForMaintenance());
+        $this->assertTrue(File::exists($this->targetDb));
+    }
+
+    public function test_maintenance_mode_blocks_normal_requests_but_exempts_maintenance_endpoints(): void
+    {
+        Config::set('app.sqlite_migration_enabled', true);
+        Config::set('app.internal_maintenance_token', 'ValidSecretToken');
+
+        Artisan::call('down');
+        $this->assertTrue(app()->isDownForMaintenance());
+
+        // Regular route returns 503 Service Unavailable
+        $homeResponse = $this->get('/');
+        $homeResponse->assertStatus(503);
+
+        // Internal maintenance endpoints are exempted
+        $statusResponse = $this->get('/internal/maintenance/migrate-sqlite');
+        $statusResponse->assertStatus(200);
+
+        Artisan::call('up');
+        $this->assertFalse(app()->isDownForMaintenance());
+
+        $homeResponseRestored = $this->get('/');
+        $homeResponseRestored->assertStatus(200);
+    }
+
+    public function test_recovery_endpoint_brings_application_up(): void
+    {
+        Config::set('app.sqlite_migration_enabled', true);
+        Config::set('app.internal_maintenance_token', 'ValidSecretToken');
+
+        // Put application down
+        Artisan::call('down');
+        $this->assertTrue(app()->isDownForMaintenance());
+
+        // Unauthorized call to up
+        $unauth = $this->postJson('/internal/maintenance/up', ['token' => 'wrong']);
+        $unauth->assertStatus(401);
+        $this->assertTrue(app()->isDownForMaintenance());
+
+        // Authorized call to up
+        $auth = $this->postJson('/internal/maintenance/up', ['token' => 'ValidSecretToken']);
+        $auth->assertStatus(200);
+        $this->assertSame('success', $auth->json('status'));
+        $this->assertFalse(app()->isDownForMaintenance());
+    }
+
+    public function test_tables_without_deterministic_keys_fail_closed(): void
+    {
+        $tempMigration = database_path('migrations/9999_99_99_999999_create_unindexed_test_table.php');
+        File::put($tempMigration, '<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void {
+        Schema::create("unindexed_test_table", function (Blueprint $table) {
+            $table->string("message");
+        });
+    }
+    public function down(): void {
+        Schema::dropIfExists("unindexed_test_table");
+    }
+};
+');
+
+        try {
+            DB::connection('test_source')->statement('CREATE TABLE unindexed_test_table (message VARCHAR(255))');
+            DB::connection('test_source')->table('unindexed_test_table')->insert(['message' => 'hello']);
+
+            $exitCode = Artisan::call('hydrox:migrate-to-sqlite', [
+                '--source' => 'test_source',
+                '--target-path' => $this->targetDb,
+                '--force' => true,
+            ]);
+
+            $this->assertSame(1, $exitCode);
+            $this->assertStringContainsString('Table [unindexed_test_table] has no primary or unique key for deterministic pagination. Refusing non-deterministic copy.', Artisan::output());
+        } finally {
+            if (File::exists($tempMigration)) {
+                File::delete($tempMigration);
+            }
+        }
     }
 }
