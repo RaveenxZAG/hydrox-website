@@ -1,11 +1,7 @@
 ---
 deployment:
   tasks:
-    - >-
-      /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type d -exec chmod 775 {} + 2>/dev/null || true"
-    - >-
-      /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type f ! -name .gitignore -exec chmod 664 {} + 2>/dev/null || true"
-    - >-
-      /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; test -f .env || (echo 'ERROR: .env file missing' && exit 1)"
-    - >-
-      /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; for bin in /usr/local/bin/ea-php83 /usr/local/bin/ea-php82 /usr/bin/ea-php83 /usr/bin/ea-php82 /usr/local/bin/php /usr/bin/php $(which ea-php83 2>/dev/null) $(which ea-php82 2>/dev/null) $(which php 2>/dev/null); do if [ -x \"$bin\" ]; then PHP_BIN=\"$bin\"; break; fi; done; if [ -z \"$PHP_BIN\" ]; then echo 'ERROR: No suitable PHP binary found'; exit 1; fi; echo \"Using PHP: $($PHP_BIN -v | head -n 1)\"; $PHP_BIN artisan hydrox:deploy --no-interaction"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type d -exec chmod 775 {} + 2>/dev/null || true"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; find storage bootstrap/cache -type f ! -name .gitignore -exec chmod 664 {} + 2>/dev/null || true"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; test -f .env || (echo 'ERROR - .env file missing' && exit 1)"
+    - /bin/bash -lc "export PATH=/usr/local/bin:/usr/bin:/bin:$PATH; for bin in /usr/local/bin/ea-php83 /usr/local/bin/ea-php82 /usr/bin/ea-php83 /usr/bin/ea-php82 /usr/local/bin/php /usr/bin/php $(which ea-php83 2>/dev/null) $(which ea-php82 2>/dev/null) $(which php 2>/dev/null); do if [ -x \"$bin\" ]; then PHP_BIN=\"$bin\"; break; fi; done; if [ -z \"$PHP_BIN\" ]; then echo 'ERROR - No suitable PHP binary found'; exit 1; fi; echo \"Using PHP - $($PHP_BIN -v | head -n 1)\"; $PHP_BIN artisan hydrox:deploy --no-interaction"
