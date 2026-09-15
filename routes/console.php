@@ -17,6 +17,7 @@ Artisan::command('hydrox:deploy', function () {
     // Ensure persistent SQLite directory and database file exist if SQLite is active
     $defaultConn = config('database.default', 'mysql');
     $dbConfig = config("database.connections.{$defaultConn}", []);
+    $this->info('Active database driver: ' . ($dbConfig['driver'] ?? 'unknown'));
     if (($dbConfig['driver'] ?? '') === 'sqlite') {
         $dbPath = $dbConfig['database'] ?? '';
         if ($dbPath !== ':memory:' && !empty($dbPath)) {
@@ -37,6 +38,15 @@ Artisan::command('hydrox:deploy', function () {
     if ($migrateExit !== 0) {
         $this->error('Database migrations failed with exit code ' . $migrateExit);
         return 1;
+    }
+
+    if (($dbConfig['driver'] ?? '') === 'sqlite') {
+        $integrity = \Illuminate\Support\Facades\DB::connection()->select('PRAGMA integrity_check');
+        if (count($integrity) !== 1 || (array_values((array) $integrity[0])[0] ?? null) !== 'ok') {
+            $this->error('SQLite integrity check failed; refusing to publish');
+            return 1;
+        }
+        $this->info('SQLite verified: ' . ($dbConfig['database'] ?? '') . ' (integrity: ok)');
     }
 
     $this->info('Linking storage...');

@@ -33,4 +33,17 @@ class GitCleanlinessTest extends TestCase
         $this->assertStringContainsString('AW-18428986459/b0SgCPbm6-0cENuI0NNE', $viewContent);
         $this->assertStringNotContainsString('bOSgCPbm6-0cENu10NNE', $viewContent);
     }
+
+    public function test_cpanel_clears_config_in_a_separate_process_before_deployment(): void
+    {
+        $yaml = File::get(base_path('.cpanel.yml'));
+        $script = File::get(base_path('scripts/cpanel-deploy.sh'));
+        $this->assertStringContainsString('/bin/bash scripts/cpanel-deploy.sh', $yaml);
+        $this->assertStringNotContainsString('bash -lc', $yaml);
+        $clear = strpos($script, '"$hydrox_php_bin" artisan config:clear --no-interaction');
+        $deploy = strpos($script, '"$hydrox_php_bin" artisan hydrox:deploy --no-interaction');
+        $this->assertNotFalse($clear);
+        $this->assertNotFalse($deploy);
+        $this->assertLessThan($deploy, $clear);
+    }
 }

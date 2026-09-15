@@ -33,6 +33,9 @@ if [ -z "$hydrox_php_bin" ]; then
 fi
 echo "Using PHP - $hydrox_php_bin"
 "$hydrox_php_bin" -v
+# Clear cached configuration in a separate process, so the deployment command
+# boots with the current persistent .env rather than old in-memory values.
+"$hydrox_php_bin" artisan config:clear --no-interaction
 "$hydrox_php_bin" artisan hydrox:deploy --no-interaction
 
 # Only this explicitly selected cPanel checkout publishes the public website.
