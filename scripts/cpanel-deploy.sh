@@ -34,3 +34,33 @@ fi
 echo "Using PHP - $hydrox_php_bin"
 "$hydrox_php_bin" -v
 "$hydrox_php_bin" artisan hydrox:deploy --no-interaction
+
+# Only this explicitly selected cPanel checkout publishes the public website.
+# Other clones (including the Portal) must never alter hydrox.au.
+if [ "$(pwd -P)" = /home/hydro851/repositories/hydrox-website-sqlite ]; then
+    hydrox_public_root=/home/hydro851/public_html
+    hydrox_backup_root=/home/hydro851/persistent/hydrox-website/backups
+    test -d "$hydrox_public_root"
+    if [ -e "$hydrox_public_root/storage" ] && [ ! -L "$hydrox_public_root/storage" ]; then
+        echo 'ERROR - public_html/storage is a real file or directory; refusing to replace it'
+        exit 1
+    fi
+    mkdir -p "$hydrox_backup_root"
+    chmod 750 "$hydrox_backup_root"
+    if [ -f "$hydrox_public_root/index.php" ]; then
+        cp -p "$hydrox_public_root/index.php" "$hydrox_backup_root/public-index-$(date -u +%Y%m%dT%H%M%S)-$$.php"
+    fi
+    # Preserve cPanel's PHP handler, ACME files, and unrelated files. No --delete.
+    shopt -s dotglob nullglob
+    for hydrox_asset in public/*; do
+        case "${hydrox_asset##*/}" in
+            index.php|storage|.htaccess|.user.ini) continue ;;
+        esac
+        cp -a "$hydrox_asset" "$hydrox_public_root/"
+    done
+    ln -sfnT /home/hydro851/persistent/hydrox-website/storage/app/public "$hydrox_public_root/storage"
+    cp scripts/cpanel-public-index.php "$hydrox_public_root/.hydrox-index-next.php"
+    chmod 644 "$hydrox_public_root/.hydrox-index-next.php"
+    mv -f "$hydrox_public_root/.hydrox-index-next.php" "$hydrox_public_root/index.php"
+    echo 'Live public files published from hydrox-website-sqlite; previous index backed up.'
+fi
