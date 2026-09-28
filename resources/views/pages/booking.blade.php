@@ -58,6 +58,7 @@
                                 ['id' => 'Commercial Cleaning', 'label' => 'Commercial Cleaning', 'icon' => '🏢'],
                                 ['id' => 'Residential Cleaning', 'label' => 'Residential Cleaning', 'icon' => '🏡'],
                                 ['id' => 'Carpet Cleaning', 'label' => 'Carpet Cleaning', 'icon' => '🧼'],
+                                ['id' => 'Upholstery Cleaning', 'label' => 'Upholstery Cleaning', 'icon' => '🛋️'],
                                 ['id' => 'Pressure Washing', 'label' => 'Pressure Washing', 'icon' => '💦'],
                                 ['id' => 'Window Cleaning', 'label' => 'Window Cleaning', 'icon' => '🪟'],
                                 ['id' => 'NDIS Cleaning', 'label' => 'NDIS & DVA Cleaning', 'icon' => '🤝'],

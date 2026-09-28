@@ -158,7 +158,7 @@ class PublicBookingConversionTrackingTest extends TestCase
         $response->assertOk();
 
         // Check for sections and images
-        $response->assertSee('Carpet Cleaning & Steam Care', false);
+        $response->assertSee('Carpet & Upholstery Cleaning', false);
         $response->assertSee('Pressure Washing & Surface Cleaning', false);
         $response->assertSee('Residential Window Cleaning', false);
 
@@ -168,6 +168,7 @@ class PublicBookingConversionTrackingTest extends TestCase
 
         // Check for booking links with preselected service query parameters
         $response->assertSee('service=Carpet%20Cleaning', false);
+        $response->assertSee('service=Upholstery%20Cleaning', false);
         $response->assertSee('service=Pressure%20Washing', false);
         $response->assertSee('service=Window%20Cleaning', false);
     }
@@ -178,13 +179,14 @@ class PublicBookingConversionTrackingTest extends TestCase
         $response->assertOk();
 
         $response->assertSee('value="Carpet Cleaning"', false);
+        $response->assertSee('value="Upholstery Cleaning"', false);
         $response->assertSee('value="Pressure Washing"', false);
         $response->assertSee('value="Window Cleaning"', false);
     }
 
     public function test_booking_submission_succeeds_with_new_specialized_services(): void
     {
-        foreach (['Carpet Cleaning', 'Pressure Washing', 'Window Cleaning'] as $service) {
+        foreach (['Carpet Cleaning', 'Upholstery Cleaning', 'Pressure Washing', 'Window Cleaning'] as $service) {
             $response = $this->postJson('/booking', [
                 'customer_name' => "Customer for {$service}",
                 'email' => 'client@example.com',

@@ -101,6 +101,7 @@
                                     <option value="Commercial Cleaning">Commercial & Office Cleaning</option>
                                     <option value="Residential Cleaning">Residential & House Cleaning</option>
                                     <option value="Carpet Cleaning">Carpet Cleaning & Steam Care</option>
+                                    <option value="Upholstery Cleaning">Upholstery & Couch Cleaning</option>
                                     <option value="Pressure Washing">Pressure Washing & Surface Cleaning</option>
                                     <option value="Window Cleaning">Window Cleaning Services</option>
                                     <option value="NDIS Cleaning">NDIS & DVA Cleaning Services</option>

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Residential Cleaning Services Melbourne | Hydrox Facility Management')
-@section('meta_description', 'Trusted residential house cleaning, carpet steam cleaning, pressure washing, window cleaning, and bond back vacate cleaning across Melbourne and surrounding Victoria.')
+@section('meta_description', 'Trusted residential house cleaning, carpet & upholstery steam cleaning, pressure washing, window cleaning, and bond back vacate cleaning across Melbourne and surrounding Victoria.')
 
 @section('content')
 <section class="bg-gradient-to-b from-slate-900 to-[#061b35] text-white py-16 lg:py-24">
@@ -11,7 +11,7 @@
                 <span class="inline-block px-3.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider">Home Cleanliness</span>
                 <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Residential & Home Cleaning Services</h1>
                 <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-                    Come home to a fresh, healthy, and spotless living space. Whether you need ongoing weekly maintenance, carpet steam cleaning, high-pressure surface washing, streak-free window cleaning, or an end-of-lease bond clean, Hydrox delivers meticulous domestic care across Melbourne.
+                    Come home to a fresh, healthy, and spotless living space. Whether you need ongoing weekly maintenance, carpet and upholstery steam cleaning, high-pressure surface washing, streak-free window cleaning, or an end-of-lease bond clean, Hydrox delivers meticulous domestic care across Melbourne.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
                     <a href="{{ route('booking.create', ['service' => 'Residential Cleaning']) }}" class="px-8 py-4 rounded-xl bg-[#0082c9] text-white font-bold text-sm shadow-xl shadow-sky-600/30 hover:bg-[#006da9] transition">
@@ -36,7 +36,7 @@
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">A Fresh, Tidy Home Without the Stress</h2>
                     <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-                        Balancing busy careers, families, and personal time is challenging. Our verified residential cleaners handle the heavy lifting, deep sanitizing kitchens, scrubbing bathrooms, steam-cleaning carpets, washing windows, and leaving your floors and exterior surfaces gleaming so you can enjoy your home.
+                        Balancing busy careers, families, and personal time is challenging. Our verified residential cleaners handle the heavy lifting, deep sanitizing kitchens, scrubbing bathrooms, steam-cleaning carpets and upholstery, washing windows, and leaving your floors and exterior surfaces gleaming so you can enjoy your home.
                     </p>
                 </div>
 
@@ -65,7 +65,7 @@
                         </div>
                         <div class="flex items-start gap-2.5">
                             <span class="text-[#0082c9] font-bold">✓</span>
-                            <span>Professional carpet steam extraction & stain removal</span>
+                            <span>Professional carpet & upholstery steam extraction</span>
                         </div>
                         <div class="flex items-start gap-2.5">
                             <span class="text-[#0082c9] font-bold">✓</span>
@@ -115,31 +115,31 @@
     </div>
 </section>
 
-<!-- Dedicated Specialized Services Section: Carpet Cleaning, Pressure Washing, Window Cleaning -->
+<!-- Dedicated Specialized Services Section: Carpet & Upholstery Cleaning, Pressure Washing, Window Cleaning -->
 <section class="py-20 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="inline-block px-3.5 py-1 rounded-full bg-sky-100 text-[#0082c9] text-xs font-bold uppercase tracking-wider mb-3">Specialized Residential Services</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Carpet Cleaning, Pressure Washing & Window Cleaning</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Carpet & Upholstery Cleaning, Pressure Washing & Window Cleaning</h2>
             <p class="text-base text-slate-600 mt-4 leading-relaxed">
-                Hydrox provides advanced residential equipment and certified technicians for carpets, high-pressure surface rejuvenation, and crystal-clear windows across Melbourne homes.
+                Hydrox provides advanced residential equipment and certified technicians for carpets and furniture, high-pressure surface rejuvenation, and crystal-clear windows across Melbourne homes.
             </p>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
-            <!-- 1. Carpet Cleaning -->
+            <!-- 1. Carpet & Upholstery Cleaning -->
             <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-200 flex flex-col hover:shadow-xl transition-all duration-300 group">
                 <div class="relative overflow-hidden h-64">
-                    <img src="{{ asset('images/residential-carpet-cleaning.jpg') }}" alt="Residential Carpet Cleaning Melbourne" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <img src="{{ asset('images/residential-carpet-cleaning.jpg') }}" alt="Residential Carpet & Upholstery Cleaning Melbourne" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                        <span>🧼</span> Deep Extraction
+                        <span>🧼</span> Deep Fabric & Steam
                     </div>
                 </div>
                 <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
                     <div class="space-y-3">
-                        <h3 class="text-xl font-bold text-slate-900">Carpet Cleaning & Steam Care</h3>
+                        <h3 class="text-xl font-bold text-slate-900">Carpet & Upholstery Cleaning</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">
-                            Industrial hot water extraction that penetrates deep into carpet fibres to dissolve trapped dirt, eliminate dust mites, neutralise pet odours, and lift stubborn stains.
+                            Industrial hot water extraction and gentle fabric care that penetrates deep into carpet fibres, sofas, couches, and armchairs to dissolve trapped dirt, eliminate dust mites, neutralise pet odours, and lift stubborn stains.
                         </p>
                         <ul class="space-y-2 pt-2 text-xs sm:text-sm text-slate-700">
                             <li class="flex items-center gap-2">
@@ -148,21 +148,24 @@
                             </li>
                             <li class="flex items-center gap-2">
                                 <span class="text-[#0082c9] font-bold">✓</span>
+                                <span>Couches, sofas, dining chairs & rugs</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-[#0082c9] font-bold">✓</span>
                                 <span>Tough stain & pet odour neutralisation</span>
                             </li>
                             <li class="flex items-center gap-2">
                                 <span class="text-[#0082c9] font-bold">✓</span>
-                                <span>Fast-drying, child & pet safe solutions</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="text-[#0082c9] font-bold">✓</span>
-                                <span>Suitable for wool, nylon & blended fibres</span>
+                                <span>Fast-drying, fabric-safe eco solutions</span>
                             </li>
                         </ul>
                     </div>
-                    <div>
-                        <a href="{{ route('booking.create', ['service' => 'Carpet Cleaning']) }}" class="w-full block text-center py-3.5 px-6 rounded-xl bg-[#0082c9] text-white font-bold text-sm shadow-md hover:bg-[#006da9] transition">
-                            Book Carpet Cleaning
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{{ route('booking.create', ['service' => 'Carpet Cleaning']) }}" class="w-full text-center py-3.5 px-3 rounded-xl bg-[#0082c9] text-white font-bold text-xs sm:text-sm shadow-md hover:bg-[#006da9] transition">
+                            Book Carpet
+                        </a>
+                        <a href="{{ route('booking.create', ['service' => 'Upholstery Cleaning']) }}" class="w-full text-center py-3.5 px-3 rounded-xl bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md hover:bg-slate-700 transition">
+                            Book Upholstery
                         </a>
                     </div>
                 </div>
