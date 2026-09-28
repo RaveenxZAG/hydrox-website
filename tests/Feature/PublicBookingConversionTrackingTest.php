@@ -151,4 +151,57 @@ class PublicBookingConversionTrackingTest extends TestCase
         $confirmation->assertOk();
         $confirmation->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/b0SgCPbm6-0cENuI0NNE'})", false);
     }
+
+    public function test_residential_cleaning_page_displays_specialized_services_and_images(): void
+    {
+        $response = $this->get(route('services.residential'));
+        $response->assertOk();
+
+        // Check for sections and images
+        $response->assertSee('Carpet Cleaning & Steam Care', false);
+        $response->assertSee('Pressure Washing & Surface Cleaning', false);
+        $response->assertSee('Residential Window Cleaning', false);
+
+        $response->assertSee('images/residential-carpet-cleaning.jpg', false);
+        $response->assertSee('images/residential-pressure-washing.jpg', false);
+        $response->assertSee('images/residential-window-cleaning.jpg', false);
+
+        // Check for booking links with preselected service query parameters
+        $response->assertSee('service=Carpet%20Cleaning', false);
+        $response->assertSee('service=Pressure%20Washing', false);
+        $response->assertSee('service=Window%20Cleaning', false);
+    }
+
+    public function test_booking_form_displays_carpet_pressure_and_window_cleaning_options(): void
+    {
+        $response = $this->get(route('booking.create'));
+        $response->assertOk();
+
+        $response->assertSee('value="Carpet Cleaning"', false);
+        $response->assertSee('value="Pressure Washing"', false);
+        $response->assertSee('value="Window Cleaning"', false);
+    }
+
+    public function test_booking_submission_succeeds_with_new_specialized_services(): void
+    {
+        foreach (['Carpet Cleaning', 'Pressure Washing', 'Window Cleaning'] as $service) {
+            $response = $this->postJson('/booking', [
+                'customer_name' => "Customer for {$service}",
+                'email' => 'client@example.com',
+                'phone' => '0412 999 888',
+                'service' => $service,
+                'suburb' => 'Brighton',
+                'postcode' => '3186',
+            ]);
+
+            $response->assertOk();
+            $response->assertJsonPath('success', true);
+
+            $this->assertDatabaseHas('bookings', [
+                'customer_name' => "Customer for {$service}",
+                'service' => $service,
+            ]);
+        }
+    }
 }
+
