@@ -205,5 +205,82 @@ class PublicBookingConversionTrackingTest extends TestCase
             ]);
         }
     }
+
+    public function test_duplicate_submission_reuses_booking_and_does_not_fire_google_ads_conversion(): void
+    {
+        $payload = [
+            'customer_name' => 'Michael Scott',
+            'email' => 'michael@dundermifflin.com',
+            'phone' => '0412 111 222',
+            'service' => 'Commercial Cleaning',
+            'suburb' => 'Scranton',
+            'postcode' => '3000',
+            'address' => '1725 Slough Avenue',
+        ];
+
+        // 1. Initial submission
+        $firstResponse = $this->post('/booking', $payload);
+        $this->assertDatabaseCount(Booking::class, 1);
+
+        $booking = Booking::firstOrFail();
+        $firstUrl = route('booking.confirmation', [
+            'reference' => $booking->reference,
+            'new' => 1,
+        ]);
+        $firstResponse->assertRedirect($firstUrl);
+
+        // Follow first redirect: conversion script MUST be present
+        $firstConfirmation = $this->get($firstUrl);
+        $firstConfirmation->assertOk();
+        $firstConfirmation->assertSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/b0SgCPbm6-0cENuI0NNE'})", false);
+
+        // 2. Second rapid/duplicate submission with the same customer details
+        $secondResponse = $this->post('/booking', $payload);
+
+        // DB count must still be 1 (no duplicate booking created)
+        $this->assertDatabaseCount(Booking::class, 1);
+
+        // Redirect URL must NOT contain 'new=1'
+        $secondUrl = route('booking.confirmation', [
+            'reference' => $booking->reference,
+        ]);
+        $secondResponse->assertRedirect($secondUrl);
+
+        // Follow second redirect: conversion script MUST NOT be present
+        $secondConfirmation = $this->get($secondUrl);
+        $secondConfirmation->assertOk();
+        $secondConfirmation->assertDontSee("gtag('event', 'conversion', {'send_to': 'AW-18428986459/b0SgCPbm6-0cENuI0NNE'})", false);
+    }
+
+    public function test_duplicate_ajax_submission_returns_existing_reference_without_new_param(): void
+    {
+        $payload = [
+            'customer_name' => 'Dwight Schrute',
+            'email' => 'dwight@beetfarm.com',
+            'phone' => '0412 333 444',
+            'service' => 'Residential Cleaning',
+            'suburb' => 'Honesdale',
+            'postcode' => '3000',
+        ];
+
+        // First AJAX post
+        $res1 = $this->postJson('/booking', $payload);
+        $res1->assertOk();
+        $res1->assertJsonPath('success', true);
+        $ref1 = $res1->json('reference');
+
+        // Second AJAX post
+        $res2 = $this->postJson('/booking', $payload);
+        $res2->assertOk();
+        $res2->assertJsonPath('success', true);
+        $ref2 = $res2->json('reference');
+
+        $this->assertSame($ref1, $ref2);
+        $this->assertDatabaseCount(Booking::class, 1);
+
+        // First redirect URL had new=1, second must not
+        $this->assertStringContainsString('new=1', $res1->json('redirect'));
+        $this->assertStringNotContainsString('new=1', $res2->json('redirect'));
+    }
 }
 

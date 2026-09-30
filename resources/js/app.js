@@ -570,6 +570,10 @@ const installFormSafeguards = () => {
 
         form.addEventListener('submit', (event) => {
             if (event.defaultPrevented) return;
+            if (form.dataset.submitting === 'true') {
+                event.preventDefault();
+                return;
+            }
 
             localStorage.removeItem(key);
             dirty = false;

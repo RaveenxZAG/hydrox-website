@@ -37,8 +37,9 @@
             <form action="{{ route('booking.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8" x-data="{
                 selectedService: '{{ old('service', $selectedService ?? 'Commercial Cleaning') }}',
                 flexibleSchedule: true,
-                photoCount: 0
-            }">
+                photoCount: 0,
+                isSubmitting: false
+            }" @submit="if (isSubmitting) { $event.preventDefault(); return false; } isSubmitting = true;">
                 @csrf
                 <input type="text" name="booking_guard_field" class="hidden" tabindex="-1" autocomplete="off">
 
@@ -200,8 +201,17 @@
 
                 <!-- Submit Button -->
                 <div class="pt-4 border-t border-slate-200">
-                    <button type="submit" class="w-full py-4 px-8 rounded-2xl bg-[#0082c9] hover:bg-[#006da9] text-white font-extrabold text-base shadow-xl shadow-sky-600/30 transition transform hover:-translate-y-0.5">
-                        Get Free Quote Now
+                    <button type="submit"
+                            :disabled="isSubmitting"
+                            :class="isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:-translate-y-0.5'"
+                            class="w-full py-4 px-8 rounded-2xl bg-[#0082c9] hover:bg-[#006da9] text-white font-extrabold text-base shadow-xl shadow-sky-600/30 transition transform flex items-center justify-center gap-3">
+                        <template x-if="isSubmitting">
+                            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </template>
+                        <span x-text="isSubmitting ? 'Securing Your Quote Request...' : 'Get Free Quote Now'">Get Free Quote Now</span>
                     </button>
                     <div class="mt-3 flex items-center justify-center gap-4 text-xs text-slate-500 text-center">
                         <span>🔒 100% Secure & Confidential</span>

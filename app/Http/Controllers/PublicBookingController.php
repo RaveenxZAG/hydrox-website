@@ -55,13 +55,19 @@ class PublicBookingController extends Controller
             $photos = $request->file('photos', []);
             $booking = $action->execute($validated, is_array($photos) ? $photos : []);
 
-            // One-time conversion trigger flag stored in session
-            $request->session()->put('booking_just_submitted_' . $booking->reference, true);
+            // One-time conversion trigger flag stored in session only for genuine new bookings
+            $isGenuineNewBooking = $booking->wasRecentlyCreated && empty($booking->is_duplicate);
 
-            $confirmationUrl = route('booking.confirmation', [
-                'reference' => $booking->reference,
-                'new' => 1,
-            ]);
+            if ($isGenuineNewBooking) {
+                $request->session()->put('booking_just_submitted_' . $booking->reference, true);
+            }
+
+            $confirmationParams = ['reference' => $booking->reference];
+            if ($isGenuineNewBooking) {
+                $confirmationParams['new'] = 1;
+            }
+
+            $confirmationUrl = route('booking.confirmation', $confirmationParams);
 
             if ($request->wantsJson()) {
                 return response()->json([
