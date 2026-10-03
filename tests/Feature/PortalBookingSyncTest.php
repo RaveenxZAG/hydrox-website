@@ -361,4 +361,67 @@ class PortalBookingSyncTest extends TestCase
         // Assert customer email was NOT sent
         Mail::assertNotSent(BookingRequestReceived::class);
     }
+
+    public function test_action_skips_duplicate_internal_telegram_notification_when_portal_sync_succeeds(): void
+    {
+        Mail::fake();
+        Http::fake([
+            'https://portal.hydrox.au/api/bookings' => Http::response([
+                'message' => 'Booking request created.',
+                'reference' => 'HYD-PORTAL-SYNCED-123',
+                'status' => 'uploading',
+            ], 201),
+            'https://portal.hydrox.au/api/bookings/HYD-PORTAL-SYNCED-123/finalize' => Http::response([
+                'message' => 'Booking request finalized.',
+                'reference' => 'HYD-PORTAL-SYNCED-123',
+                'status' => 'processing',
+            ], 200),
+        ]);
+
+        $action = app(CreateBookingLeadAction::class);
+        $booking = $action->execute([
+            'customer_name' => 'Single Notification Customer',
+            'email' => 'single@example.com',
+            'phone' => '0412 888 777',
+            'service' => 'Residential Cleaning',
+            'suburb' => 'Lyndhurst',
+            'postcode' => '3975',
+            'address' => 'Lyndhurst 3975',
+        ]);
+
+        $this->assertSame('synced', $booking->fresh()->payload['portal_sync']['status']);
+
+        // Website internal notification should be skipped to prevent duplicate Telegram alerts
+        $this->assertDatabaseMissing('system_notifications', [
+            'type' => 'booking_request',
+            'subject_id' => $booking->id,
+        ]);
+    }
+
+    public function test_action_falls_back_to_internal_notification_when_portal_sync_fails(): void
+    {
+        Mail::fake();
+        Http::fake([
+            'https://portal.hydrox.au/api/bookings' => Http::response('Server Error', 500),
+        ]);
+
+        $action = app(CreateBookingLeadAction::class);
+        $booking = $action->execute([
+            'customer_name' => 'Fallback Notification Customer',
+            'email' => 'fallback@example.com',
+            'phone' => '0412 777 666',
+            'service' => 'Commercial Cleaning',
+            'suburb' => 'Richmond',
+            'postcode' => '3121',
+            'address' => '100 Bridge Rd',
+        ]);
+
+        $this->assertSame('failed', $booking->fresh()->payload['portal_sync']['status']);
+
+        // Fallback notification is created so lead is never lost
+        $this->assertDatabaseHas('system_notifications', [
+            'type' => 'booking_request',
+            'subject_id' => $booking->id,
+        ]);
+    }
 }

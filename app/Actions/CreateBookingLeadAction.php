@@ -123,32 +123,38 @@ class CreateBookingLeadAction
                 $booking->forceFill(['email_error' => $exception->getMessage()])->save();
             }
 
-            // Send admin internal system notification
+            // Sync to Hydrox Portal
+            $portalSyncResult = null;
             try {
-                $this->systemNotificationService->notify(
-                    'booking_request',
-                    "New Quote/Booking Request: {$booking->reference}",
-                    "Name: {$booking->customer_name}\n"
-                        ."Email: {$booking->email}\n"
-                        ."Phone: {$booking->phone}\n"
-                        ."Services: {$booking->service}\n"
-                        .'Frequency: '.($booking->frequency ?: 'Not specified')."\n"
-                        .'Location: '.trim(implode(', ', array_filter([$booking->address, $booking->suburb, $booking->postcode])))."\n"
-                        .'Notes: '.($booking->notes ?: 'None')."\n"
-                        .'Photos: '.$booking->photos()->count(),
-                    route('bookings.show', $booking),
-                    $booking,
-                    false
-                );
+                $portalSyncResult = $this->portalSyncService->sync($booking->fresh('photos'));
             } catch (\Throwable $exception) {
                 report($exception);
             }
 
-            // Sync to Hydrox Portal
-            try {
-                $this->portalSyncService->sync($booking->fresh('photos'));
-            } catch (\Throwable $exception) {
-                report($exception);
+            // Send admin internal system notification ONLY if Portal sync was not successful or not active.
+            // When Portal sync succeeds, the Hydrox Portal already notifies staff in Telegram with the real
+            // Portal booking URL and Portal reference. Sending a second notification from the website causes
+            // staff/admin to receive two duplicate Telegram alerts for every single customer booking.
+            if (empty($portalSyncResult['success'])) {
+                try {
+                    $this->systemNotificationService->notify(
+                        'booking_request',
+                        "New Quote/Booking Request: {$booking->reference}",
+                        "Name: {$booking->customer_name}\n"
+                            ."Email: {$booking->email}\n"
+                            ."Phone: {$booking->phone}\n"
+                            ."Services: {$booking->service}\n"
+                            .'Frequency: '.($booking->frequency ?: 'Not specified')."\n"
+                            .'Location: '.trim(implode(', ', array_filter([$booking->address, $booking->suburb, $booking->postcode])))."\n"
+                            .'Notes: '.($booking->notes ?: 'None')."\n"
+                            .'Photos: '.$booking->photos()->count(),
+                        route('bookings.show', $booking),
+                        $booking,
+                        false
+                    );
+                } catch (\Throwable $exception) {
+                    report($exception);
+                }
             }
 
             return $booking;
