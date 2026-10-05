@@ -57,9 +57,13 @@ class BookingEmailService
     private function deliver(string $recipient, string $subject, string $html, object $fallbackMail): void
     {
         if ($this->graph->configured()) {
-            $this->graph->send($recipient, $subject, $html);
+            try {
+                $this->graph->send($recipient, $subject, $html);
 
-            return;
+                return;
+            } catch (Throwable $exception) {
+                report($exception);
+            }
         }
 
         Mail::to($recipient)->send($fallbackMail);
