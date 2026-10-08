@@ -362,6 +362,40 @@ class PortalBookingSyncTest extends TestCase
         Mail::assertNotSent(BookingRequestReceived::class);
     }
 
+    public function test_retry_after_finalize_timeout_reuses_the_existing_portal_booking(): void
+    {
+        Http::fake([
+            'https://portal.hydrox.au/api/bookings' => Http::response([
+                'reference' => 'HYD-PORTAL-RETRY',
+            ], 201),
+            'https://portal.hydrox.au/api/bookings/HYD-PORTAL-RETRY/finalize' => Http::sequence()
+                ->pushFailedConnection('Finalize timed out')
+                ->push(['status' => 'processing']),
+        ]);
+
+        $booking = Booking::create([
+            'reference' => 'HYD-LOCAL-RETRY',
+            'status' => 'processing',
+            'customer_name' => 'Retry Customer',
+            'email' => 'retry@example.com',
+            'phone' => '0412345678',
+            'service' => 'Residential Cleaning',
+            'services' => ['Residential Cleaning'],
+            'address' => '10 Test Street',
+            'suburb' => 'Lyndhurst',
+            'postcode' => '3975',
+        ]);
+
+        $service = app(HydroxPortalBookingSyncService::class);
+        $this->assertFalse($service->sync($booking)['success']);
+        $this->assertSame('HYD-PORTAL-RETRY', $booking->fresh()->payload['portal_sync']['portal_reference']);
+        $this->assertTrue($service->sync($booking->fresh())['success']);
+        Http::assertSentCount(3);
+        $this->assertCount(1, Http::recorded(fn (Request $request) =>
+            $request->url() === 'https://portal.hydrox.au/api/bookings'
+        ));
+    }
+
     public function test_action_skips_duplicate_internal_telegram_notification_when_portal_sync_succeeds(): void
     {
         Mail::fake();

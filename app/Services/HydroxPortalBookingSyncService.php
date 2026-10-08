@@ -41,6 +41,8 @@ class HydroxPortalBookingSyncService
             ];
         }
 
+        $portalReference = $existingSync['portal_reference'] ?? null;
+
         try {
             // Derive valid address, suburb, and 4-digit postcode strictly from customer input
             $addressData = $this->deriveAddressDetails($booking);
@@ -60,8 +62,6 @@ class HydroxPortalBookingSyncService
                     'error' => $addressData['reason'],
                 ];
             }
-
-            $portalReference = $existingSync['portal_reference'] ?? null;
 
             // Step 1: Create booking on Portal if not already created
             if (! $portalReference) {
@@ -191,7 +191,8 @@ class HydroxPortalBookingSyncService
             Log::warning("Portal booking sync exception for {$booking->reference}: {$e->getMessage()}");
 
             $payload['portal_sync'] = [
-                'status' => 'failed',
+                'status' => $portalReference ? 'partially_synced' : 'failed',
+                'portal_reference' => $portalReference,
                 'error' => Str::limit($e->getMessage(), 200, ''),
                 'attempted_at' => now()->toIso8601String(),
             ];
@@ -199,6 +200,7 @@ class HydroxPortalBookingSyncService
 
             return [
                 'success' => false,
+                'portal_reference' => $portalReference,
                 'error' => $e->getMessage(),
             ];
         }
